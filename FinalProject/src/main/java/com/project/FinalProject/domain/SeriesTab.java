@@ -194,7 +194,7 @@ public class SeriesTab {
     @Column(name = "SERIES_INS_UID", length = 255)
     private String seriesInsUid255;
 
-    @Column(name = "SERIES_KEY", precision = 19, scale = 2)
+    @Column(name = "SERIES_KEY", precision = 19)
     private Double seriesKeyDouble;
 
     @Column(name = "SERIES_TIME", length = 255)

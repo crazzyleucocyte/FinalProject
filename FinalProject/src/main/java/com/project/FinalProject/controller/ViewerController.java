@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ViewerController {
 	
-	@Autowired
-	ViewerService viewerService;
+//	@Autowired
+//	ViewerService viewerService;
 	
-	@GetMapping("viewer/{studyKey}/{seriesKey}/{imageKey")
-	private String test(@PathVariable(name="studyKey") String studyKey ,@PathVariable)
+	@GetMapping("viewer/{studyKey}/{seriesKey}/{imageKey}")
+	private String test(@PathVariable("studyKey") String studyKey ,@PathVariable("serieseKey") String seriesKey, @PathVariable("imageKey") String imageKey) {
+		
+		return "test";
+	}
 
 }
