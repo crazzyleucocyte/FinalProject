@@ -43,16 +43,16 @@ public class StudyTab {
 	private String aiModelName;
 
 	@Column(name = "AI_NUMBER_OF_FINDINGS")
-	private int aiNumberOfFindings;
+	private Integer aiNumberOfFindings;
 
 	@Column(name = "AI_PRIORITY")
-	private int aiPriority;
+	private Integer aiPriority;
 
 	@Column(name = "AI_REPORT", length = 4000)
 	private String aiReport;
 
 	@Column(name = "AI_RESULT_CODE")
-	private int aiResultCode;
+	private Integer aiResultCode;
 
 	@Column(name = "AI_SCORE")
 	private Float aiScore;
@@ -115,7 +115,7 @@ public class StudyTab {
 	private Long examStatus;
 
 	@Column(name = "FILESIZE")
-	private int fileSize;
+	private Integer fileSize;
 
 	@Column(name = "HISADDEDINFO1", length = 256)
 	private String hisAddedInfo1;
@@ -163,10 +163,10 @@ public class StudyTab {
 	private Long movieFlag;
 
 	@Column(name = "NONIMAGECOUNT")
-	private int nonImageCount;
+	private Integer nonImageCount;
 
 	@Column(name = "NONSERIESCOUNT")
-	private int nonSeriesCount;
+	private Integer nonSeriesCount;
 
 	@Column(name = "OPENSTATUS")
 	private Long openStatus;

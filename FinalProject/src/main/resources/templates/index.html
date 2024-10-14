@@ -6,6 +6,12 @@
 </head>
 <body>
 	<h1>index</h1>
-
+	
+	<div th:each="studyTab , state: ${pageList}">
+		
+		<span th:text="${studyTab.studyKey}"></span>
+		<span th:text="${studyTab.operatorsName}"></span>
+	</div>
+	
 </body>
 </html>
