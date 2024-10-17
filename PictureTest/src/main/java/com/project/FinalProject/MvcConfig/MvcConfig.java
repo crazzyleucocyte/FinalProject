@@ -10,7 +10,7 @@ import lombok.Value;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-	private String classpath="C:/Users/TJ/Desktop/PACSStorage/";
+	private String classpath="C:/Users/alstj/Desktop/PACSStorage/";
     // 개발 시점에 사용 가능한 코드.
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
