@@ -1,6 +1,7 @@
 package com.project.FinalProject.controller;
 
-import java.util.List;import org.hibernate.query.Page;
+import java.util.List;
+import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,16 @@ public class StudyTabController {
 	StudyTabService studyTabService; 
 	
 	@RequestMapping("/")
-	private String root(Model model) {
+	private String root() {
+		return "login";
+	}
+	
+	@RequestMapping("/list")
+	private String getList(Model model) {
 		org.springframework.data.domain.Page<StudyTab> pageList =studyTabService.findAll(PageRequest.of(0, 28, Sort.by(Sort.Direction.ASC,"studyKey")));
 		model.addAttribute("pageList", pageList);
 		System.out.println("pageList : " + pageList);
-		return "index";
+		return "list";
 	}
+	
 }
