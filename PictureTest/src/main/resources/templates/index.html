@@ -1,14 +1,163 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://unpkg.com/cornerstone-core"></script>
+	<script src="https://unpkg.com/cornerstone-tools"></script>
+	<!-- dicom-parser는 dicom 사진을 파싱하는 애 -->
+	<script src="https://unpkg.com/dicom-parser"></script>
+	<!-- 사진을 가져오는 것 -->
+	<script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
 </head>
+
 <body>
 	<h1>test</h1>
 
-	<img src="PACSStorage/201610/25/MS0014/XA/1/popcorn.jpg"></img>
-	<img src="file:///C:/Users/alstj/Desktop/PACSStorage/201610/25/MS0014/XA/1/popcorn.jpg"></img>
-	<img src="img/햄버거.jpg"></img>
+	<!--<img src="PACSStorage/201610/25/MS0014/XA/1/popcorn.jpg"></img>
+	<img src="img/햄버거.jpg"></img>-->
+	<h1>
+		viewport/index.html
+	</h1>
+
+	This example demonstrates setting various viewport settings when the image is first enabled to
+	focus on a tumor in the image.
+
+	<br>
+	<br>
+
+	<button id="zoomIn" type="button" class="btn btn-default">Zoom In</button>
+	<button id="zoomOut" type="button" class="btn btn-default">Zoom Out</button>
+	<button id="invert" type="button" class="btn btn-default">Invert</button>
+	<button id="interpolation" type="button" class="btn btn-default">interpolation</button>
+	<button id="hflip" type="button" class="btn btn-default">hflip</button>
+	<button id="vflip" type="button" class="btn btn-default">vflip</button>
+	<button id="rotate" type="button" class="btn btn-default">rotate</button>
+	<button id="reset" type="button" class="btn btn-default">Reset</button>
+	<div id="dicomImage" style="width:612px;height:612px;" oncontextmenu="return false" onmousedown="return false">
+	</div>
+
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			//코너스톤 초기화
+			cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
+			cornerstoneWADOImageLoader.external.cornerstoneTools = cornerstoneTools;
+
+			// 이미지를 넣을 요소 얻어오기
+			const element = document.getElementById('dicomImage');
+
+			// 이미지 요소를 초기화
+			cornerstone.enable(element);
+
+			// 이미지 얻어오기(기본 루트는 static)
+			const imageId = 'wadouri:PACSStorage/201608/22/MS0010/MR/5/MR.1.2.392.200036.9116.4.1.6116.40033.5.3001.1.1152393810.dcm';
+
+
+			const viewportOptions = {
+				scale: 1.0,
+				translation: {
+					x: -24,
+					y: 10
+				},
+				voi: {
+					windowWidth: 89,
+					windowCenter: 150
+				},
+				invert: false,
+				pixelReplication: false
+			};
+			cornerstone.loadImage(imageId).then(function (image) {
+				cornerstone.displayImage(element, image, viewportOptions);
+			});
+			document.getElementById('zoomIn').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.scale += 0.25;
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('zoomOut').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.scale -= 0.25;
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('invert').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.invert = !viewport.invert
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('interpolation').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.pixelReplication = !viewport.pixelReplication;
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('hflip').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.hflip = !viewport.hflip;
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('vflip').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.vflip = !viewport.vflip;
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('rotate').addEventListener('click', function (e) {
+				const viewport = cornerstone.getViewport(element);
+				viewport.rotation += 90;
+				cornerstone.setViewport(element, viewport);
+			});
+			document.getElementById('reset').addEventListener('click', function (e) {
+				cornerstone.reset(element);
+			});
+
+			// add event handlers to pan image on mouse move
+			element.addEventListener('mousedown', function (e) {
+				let lastX = e.pageX;
+				let lastY = e.pageY;
+
+				function mouseMoveHandler(e) {
+					const deltaX = e.pageX - lastX;
+					const deltaY = e.pageY - lastY;
+					lastX = e.pageX;
+					lastY = e.pageY;
+
+					const viewport = cornerstone.getViewport(element);
+					viewport.translation.x += (deltaX / viewport.scale);
+					viewport.translation.y += (deltaY / viewport.scale);
+					cornerstone.setViewport(element, viewport);
+				}
+
+				function mouseUpHandler() {
+					document.removeEventListener('mousemove', mouseMoveHandler);
+					document.removeEventListener('mouseup', mouseUpHandler);
+				}
+
+				document.addEventListener('mousemove', mouseMoveHandler);
+				document.addEventListener('mouseup', mouseUpHandler);
+			});
+
+			const mouseWheelEvents = ['mousewheel', 'DOMMouseScroll'];
+			mouseWheelEvents.forEach(function (eventType) {
+				element.addEventListener(eventType, function (e) {
+					// Firefox e.detail > 0 scroll back, < 0 scroll forward
+					// chrome/safari e.wheelDelta < 0 scroll back, > 0 scroll forward
+					e.preventDefault();
+					let viewport = cornerstone.getViewport(element);
+					if (e.wheelDelta < 0 || e.detail > 0) {
+						viewport.scale -= 0.25;
+					} else {
+						viewport.scale += 0.25;
+					}
+
+					cornerstone.setViewport(element, viewport);
+
+					// Prevent page from scrolling
+					return false;
+				});
+			});
+		})
+	</script>
 </body>
+
 </html>
