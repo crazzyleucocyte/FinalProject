@@ -7,11 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import jakarta.persistence.Table;
 
+@Table (name = "STUDYTAB")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "STUDYTAB")
+@Entity
 public class StudyTab {
 
 	@Id
