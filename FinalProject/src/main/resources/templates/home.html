@@ -149,6 +149,35 @@
             border-radius: 5px;
             color: #333;
         }
+
+        /* 달력 스타일 */
+        .calendar-panel {
+            margin-bottom: 20px; /* 환자 ID 위에 위치하도록 설정 */
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendar-panel th, .calendar-panel td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .current-day {
+            background-color: #00d4ff;
+            color: white;
+        }
+
+        .highlighted-range {
+            background-color: #b3e5fc;
+        }
     </style>
 </head>
 <body>
@@ -158,6 +187,28 @@
     <div class="top-panel">
         <!-- 검색 패널 -->
         <div class="search-panel">
+
+            <!-- 달력 영역 추가 -->
+            <div class="calendar-panel">
+                <div id="calendar-title"></div>
+                <button id="prev-month">이전 달</button>
+                <button id="next-month">다음 달</button>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>일</th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                        <th>토</th>
+                    </tr>
+                    </thead>
+                    <tbody id="calendar-body"></tbody> <!-- 달력이 렌더링될 영역 -->
+                </table>
+            </div>
+
             <div class="input-section">
                 <label>환자 ID</label>
                 <input type="text" id="patient-id" placeholder="환자 ID를 입력하세요">
