@@ -1,10 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212; /* 어두운 배경 */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+            color: #00d4ff; /* 차분한 파란색 */
+        }
+        
+        form {
+            background-color: #1e1e1e; /* 어두운 회색 배경 */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 은은한 그림자 */
+            width: 320px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00d4ff; /* 깔끔한 파란색 라벨 */
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #2b2b2b; /* 중간 톤 어두운 배경 */
+            border: 1px solid #00d4ff; /* 차분한 파란 테두리 */
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box; /* padding 포함된 전체 너비 */
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #00ffff; /* 포커스 시 밝은 파란색 */
+            background-color: #333; /* 포커스 시 살짝 밝은 배경 */
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00d4ff; /* 차분한 파란색 버튼 */
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00b3cc; /* 호버 시 조금 더 어두운 파란색 */
+        }
+
+        button:active {
+            background-color: #0099aa; /* 클릭 시 더 어두운 파란색 */
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-	<a href="/list">list로 가기</a>
+
+   <form action="/login" method="POST">
+    <h2>Login Page</h2>
+
+    <label for="id">ID :</label>
+    <input type="text" id="id" name="username" placeholder="Enter your ID">
+
+    <label for="password">PassWord:</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password">
+
+    <button type="submit">Login</button>
+
+    <!-- 에러 메시지 표시 -->
+    <div class="error-message">
+        <!-- 서버에서 전달된 에러 메시지가 있다면 여기서 표시됨 -->
+        <p th:text="${error}"></p>
+    </div>
+</form>
+
 </body>
 </html>
