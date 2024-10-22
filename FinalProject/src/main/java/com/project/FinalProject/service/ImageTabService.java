@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.FinalProject.domain.ImageTab;
 import com.project.FinalProject.domain.StudyTab;
 import com.project.FinalProject.repository.ImageTabRepository;
 
@@ -18,7 +19,8 @@ public class ImageTabService {
 		return imageTabRepository.findByImageKey(studyKey, seriesKey, ImageKey);
 	}
 
+	public List<ImageTab> getImagesBySeriesKey(Long seriesKey) {
+        return imageTabRepository.findBySeriesKey(seriesKey);
 	
-	
-	
+	}
 }

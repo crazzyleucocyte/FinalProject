@@ -75,14 +75,21 @@
             </thead>
             <tbody>
                 <tr th:each="study : ${studyTabs}">
-                    <td th:text="${study.studyKey}"></td>
+					<td><a th:href="@{'/series?studyKey=' + ${study.studyKey}}" th:text="${study.studyKey}"></a></td>
+                    <!--<td th:text="${study.studyKey}"></td>-->
                     <td th:text="${study.pId}"></td>
                     <td th:text="${study.pName}"></td>
                     <td th:text="${study.modality}"></td>
                     <td th:text="${study.studyDate}"></td>
                     <td th:text="${study.studyDesc}"></td>
                     <td th:text="${study.imageCnt}"></td>
+                    
+                    
+                    
                     <td th:text="${study.seriesCnt}"></td>
+                    
+                    
+                    
                     <td th:text="${study.verifyFlag == 0 ? '미요청' : (study.verifyFlag == 1 ? '요청완료' : '알 수 없음')}"></td>
                     <td th:switch="${study.reportStatus}">
                         <span th:case="3">읽지않음</span>
