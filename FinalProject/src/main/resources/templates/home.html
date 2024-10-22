@@ -1,432 +1,555 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example Home</title>
-    <style>
-        /* 공통 스타일 */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f1f1f1;
-            font-family: 'Arial', sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-        }
+	<meta charset="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title>Example Home</title>
+	<style>
+		/* 공통 스타일 */
+		/* 공통 스타일 */
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #f1f3f4; /* 부드러운 회색으로 배경색 변경 */
+	font-family: 'Arial', sans-serif;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	color: #333;
+}
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            width: 100%;
-            padding: 20px;
-            gap: 20px;
-            box-sizing: border-box;
-        }
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	padding: 20px;
+	gap: 20px;
+	box-sizing: border-box;
+}
 
-        /* 상단 패널 (검색과 필터) */
-        .top-panel {
-            display: flex;
-            gap: 20px;
-        }
+/* 상단 패널 (검색과 필터) */
+.top-panel {
+	display: flex;
+	gap: 20px;
+}
 
-        .search-panel {
-            flex: 1;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+.search-panel {
+	flex: 1;
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 그림자를 좀 더 강조 */
+	border: 1px solid #e0e0e0; /* 테두리를 추가해 좀 더 구분되게 */
+}
 
-        /* 검색 필드 스타일 */
-        .input-section label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-        }
+/* 검색 필드 스타일 */
+.input-section label {
+	display: block;
+	margin-bottom: 6px;
+	color: #555; /* 텍스트 색을 좀 더 부드럽게 */
+	font-weight: bold;
+}
 
-        .input-section input, .input-section select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
+.input-section input,
+.input-section select {
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 15px;
+	background-color: #f7f8fa; /* 좀 더 밝고 부드러운 배경 */
+	border: 1px solid #d0d0d0;
+	border-radius: 8px;
+	box-sizing: border-box;
+	transition: border-color 0.3s ease; /* 부드러운 트랜지션 추가 */
+}
 
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
+.input-section input:focus,
+.input-section select:focus {
+	border-color: #00bcd4; /* 포커스 시 좀 더 강렬한 색상으로 */
+	outline: none;
+}
 
-        .buttons button {
-            width: 48%;
-            padding: 10px;
-            background-color: #00d4ff;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 14px;
-            cursor: pointer;
-        }
+/* 버튼 스타일 */
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
 
-        .quick-range-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
+.buttons button {
+	width: 48%;
+	padding: 12px;
+	background-color: #00bcd4;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	font-size: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
+}
 
-        .quick-range-buttons button {
-            width: 30%;
-            padding: 10px;
-            background-color: #00d4ff;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            cursor: pointer;
-        }
+.buttons button:hover {
+	background-color: #0097a7; /* 호버 시 좀 더 어두운 색상으로 */
+}
 
-        /* 검색 결과 테이블 */
-        .result-panel {
-            flex: 3;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: auto;
-        }
+.quick-range-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
 
-        .result-table table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
+.quick-range-buttons button {
+	width: 30%;
+	padding: 10px;
+	background-color: #00bcd4;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
 
-        .result-table th, .result-table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ccc;
-            color: #333;
-        }
+.quick-range-buttons button:hover {
+	background-color: #0097a7;
+}
 
-        /* 하단 패널 */
-        .bottom-panels {
-            display: flex;
-            gap: 20px;
-            flex: 1;
-        }
+/* 검색 결과 테이블 */
+.result-panel {
+	flex: 3;
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border: 1px solid #e0e0e0;
+	overflow: auto;
+}
 
-        .history-panel, .report-panel {
-            flex: 1;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: auto;
-        }
+.result-table table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #fff;
+}
 
-        .history-panel h3, .report-panel h3 {
-            margin-bottom: 20px;
-            color: #333;
-        }
+.result-table th,
+.result-table td {
+	padding: 12px;
+	text-align: left;
+	border: 1px solid #e0e0e0;
+	color: #333;
+}
 
-        .history-info-container label, .study-info-container label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-        }
+.result-table th {
+	background-color: #f1f3f4;
+	font-weight: bold;
+}
 
-        .info-item {
-            padding: 10px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            color: #333;
-        }
+/* 달력 스타일 */
+.calendar-panel {
+	margin-bottom: 20px;
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border: 1px solid #e0e0e0;
+}
 
-        /* 달력 스타일 */
-        .calendar-panel {
-            margin-bottom: 20px; /* 환자 ID 위에 위치하도록 설정 */
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+.calendar-panel table {
+	width: 100%;
+	border-collapse: collapse;
+}
 
-        .calendar-panel table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.calendar-panel th,
+.calendar-panel td {
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #e0e0e0;
+}
 
-        .calendar-panel th, .calendar-panel td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
+.current-day {
+	background-color: #00bcd4;
+	color: white;
+}
 
-        .current-day {
-            background-color: #00d4ff;
-            color: white;
-        }
+.highlighted-range {
+	background-color: #b3e5fc; /* 부드러운 파란색으로 하이라이트 */
+}
 
-        .highlighted-range {
-            background-color: #b3e5fc;
-        }
-    </style>
+/* 선택된 날짜 강조 */
+.selected-date {
+	background-color: #ff9999;
+}
+
+/* 끝 날짜 강조 */
+.end-date {
+	background-color: #ff6666;
+}
+
+/* 하단 패널 스타일 */
+.bottom-panels {
+	display: flex;
+	gap: 20px;
+	flex: 1;
+}
+
+.history-panel,
+.report-panel {
+	flex: 1;
+	background-color: #ffffff;
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border: 1px solid #e0e0e0;
+	overflow: auto;
+}
+
+.history-panel h3,
+.report-panel h3 {
+	margin-bottom: 20px;
+	color: #333;
+	font-weight: bold;
+}
+
+.history-info-container label,
+.study-info-container label {
+	display: block;
+	margin-bottom: 5px;
+	color: #666;
+}
+
+.info-item {
+	padding: 12px;
+	margin-bottom: 15px;
+	background-color: #f7f8fa;
+	border: 1px solid #d0d0d0;
+	border-radius: 8px;
+	color: #333;
+}
+
+	</style>
 </head>
+
 <body>
 
-<div class="container">
-    <!-- 상단 패널 (검색과 검색 결과) -->
-    <div class="top-panel">
-        <!-- 검색 패널 -->
-        <div class="search-panel">
+	<div class="container">
+		<!-- 상단 패널 (검색과 검색 결과) -->
+		<div class="top-panel">
+			<!-- 검색 패널 -->
+			<div class="search-panel">
 
-            <!-- 달력 영역 추가 -->
-            <div class="calendar-panel">
-                <div id="calendar-title"></div>
-                <button id="prev-month">이전 달</button>
-                <button id="next-month">다음 달</button>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>일</th>
-                        <th>월</th>
-                        <th>화</th>
-                        <th>수</th>
-                        <th>목</th>
-                        <th>금</th>
-                        <th>토</th>
-                    </tr>
-                    </thead>
-                    <tbody id="calendar-body"></tbody> <!-- 달력이 렌더링될 영역 -->
-                </table>
-            </div>
+				<!-- 달력 영역 추가 -->
+				<div class="calendar-panel">
+					<div id="calendar-title"></div>
+					<button id="prev-month">이전 달</button>
+					<button id="next-month">다음 달</button>
+					<table>
+						<thead>
+							<tr>
+								<th>일</th>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>
+							</tr>
+						</thead>
+						<tbody id="calendar-body"></tbody> <!-- 달력이 렌더링될 영역 -->
+					</table>
+				</div>
 
-            <div class="input-section">
-                <label>환자 ID</label>
-                <input type="text" id="patient-id" placeholder="환자 ID를 입력하세요">
+				<div class="input-section">
+					<label>환자 ID</label>
+					<input type="text" id="patient-id" placeholder="환자 ID를 입력하세요">
 
-                <label>환자 이름</label>
-                <input type="text" id="patient-name" placeholder="환자 이름을 입력하세요">
+					<label>환자 이름</label>
+					<input type="text" id="patient-name" placeholder="환자 이름을 입력하세요">
 
-                <label>검사일자</label>
-                <input type="date" id="start-date">
-                ~
-                <input type="date" id="end-date">
+					<label>검사일자</label>
+					<input type="date" id="start-date">
+					~
+					<input type="date" id="end-date">
 
-                <label>검사장비</label>
-                <select id="equipment-select">
-                    <option>AS</option>
-                    <option>AU</option>
-                    <option>BI</option>
-                    <!-- 추가 옵션 -->
-                </select>
+					<label>검사장비</label>
+					<select id="equipment-select">
+						<option>AS</option>
+						<option>AU</option>
+						<option>BI</option>
+						<!-- 추가 옵션 -->
+					</select>
 
-                <label>Verify</label>
-                <select id="verify-select">
-                    <option>선택해주세요</option>
-                    <option>미요청</option>
-                    <option>요청완료</option>
-                </select>
+					<label>Verify</label>
+					<select id="verify-select">
+						<option>선택해주세요</option>
+						<option>미요청</option>
+						<option>요청완료</option>
+					</select>
 
-                <div class="buttons">
-                    <button class="search-btn">조회</button>
-                    <button class="reset-btn" id="reset-btn">재설정</button>
-                </div>
+					<div class="buttons">
+						<button class="search-btn">조회</button>
+						<button class="reset-btn" id="reset-btn">재설정</button>
+					</div>
 
-                <div class="quick-range-buttons">
-                    <button id="one-day-btn">1일</button>
-                    <button id="three-day-btn">3일</button>
-                    <button id="week-btn">1주일</button>
-                </div>
-            </div>
-        </div>
+					<div class="quick-range-buttons">
+						<button id="one-day-btn">1일</button>
+						<button id="three-day-btn">3일</button>
+						<button id="week-btn">1주일</button>
+					</div>
+				</div>
+			</div>
 
-        <!-- 검색 결과 패널 -->
-        <div class="result-panel">
-            <div class="result-table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>환자 ID</th>
-                        <th>환자 이름</th>
-                        <th>검사 장비</th>
-                        <th>검사 설명</th>
-                        <th>검사 일시</th>
-                        <th>판독 상태</th>
-                        <th>시리즈</th>
-                        <th>이미지</th>
-                        <th>Verify</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 검색 결과 추가 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+			<!-- 검색 결과 패널 -->
+			<div class="result-panel">
+				<div class="result-table">
+					<table>
+						<thead>
+							<tr>
+								<th>환자 ID</th>
+								<th>환자 이름</th>
+								<th>검사 장비</th>
+								<th>검사 설명</th>
+								<th>검사 일시</th>
+								<th>판독 상태</th>
+								<th>시리즈</th>
+								<th>이미지</th>
+								<th>Verify</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 검색 결과 추가 -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 
-    <!-- 하단 패널 (과거 검사 이력 및 Study 정보) -->
-    <div class="bottom-panels">
-        <!-- 과거 검사 이력 -->
-        <div class="history-panel">
-            <h3>과거 검사 이력</h3>
-            <div class="history-info-container">
-                <label>환자 아이디: 12345</label>
-                <label>환자 이름: 홍길동</label>
-                <div class="info-item">검사 장비: CT</div>
-                <div class="info-item">검사 설명: 복부 CT</div>
-                <div class="info-item">검사 일시: 2023-01-01</div>
-                <div class="info-item">판독 상태: 완료</div>
-            </div>
-        </div>
+		<!-- 하단 패널 (과거 검사 이력 및 Study 정보) -->
+		<div class="bottom-panels">
+			<!-- 과거 검사 이력 -->
+			<div class="history-panel">
+				<h3>과거 검사 이력</h3>
+				<div class="history-info-container">
+					<label>환자 아이디: 12345</label>
+					<label>환자 이름: 홍길동</label>
+					<div class="info-item">검사 장비: CT</div>
+					<div class="info-item">검사 설명: 복부 CT</div>
+					<div class="info-item">검사 일시: 2023-01-01</div>
+					<div class="info-item">판독 상태: 완료</div>
+				</div>
+			</div>
 
-        <!-- 리포트 패널 -->
-        <div class="report-panel">
-            <h3>리포트 (Study 정보)</h3>
-            <div class="study-info-container">
-                <label>검사 설명</label>
-                <div class="info-item">복부 CT</div>
+			<!-- 리포트 패널 -->
+			<div class="report-panel">
+				<h3>리포트 (Study 정보)</h3>
+				<div class="study-info-container">
+					<label>검사 설명</label>
+					<div class="info-item">복부 CT</div>
 
-                <label>촬영 부위</label>
-                <div class="info-item">복부</div>
+					<label>촬영 부위</label>
+					<div class="info-item">복부</div>
 
-                <label>환자 번호</label>
-                <div class="info-item">12345</div>
+					<label>환자 번호</label>
+					<div class="info-item">12345</div>
 
-                <label>환자 이름</label>
-                <div class="info-item">홍길동</div>
+					<label>환자 이름</label>
+					<div class="info-item">홍길동</div>
 
-                <label>환자 성별</label>
-                <div class="info-item">남성</div>
+					<label>환자 성별</label>
+					<div class="info-item">남성</div>
 
-                <label>수술한 의사</label>
-                <div class="info-item">Dr. Kim</div>
+					<label>수술한 의사</label>
+					<div class="info-item">Dr. Kim</div>
 
-                <label>AI 진단 내용</label>
-                <div class="info-item">이상 없음</div>
+					<label>AI 진단 내용</label>
+					<div class="info-item">이상 없음</div>
 
-                <label>AI 진단 병명</label>
-                <div class="info-item">정상</div>
+					<label>AI 진단 병명</label>
+					<div class="info-item">정상</div>
 
-                <label>촬영 방향</label>
-                <div class="info-item">AP</div>
-            </div>
-        </div>
-    </div>
-</div>
+					<label>촬영 방향</label>
+					<div class="info-item">AP</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<!-- 달력 및 기타 스크립트 -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const today = new Date();
-        let currentYear = today.getFullYear();
-        let currentMonth = today.getMonth();
+	<!-- 달력 및 기타 스크립트 -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const today = new Date();
+			let currentYear = today.getFullYear();
+			let currentMonth = today.getMonth();
+			let startDate = null;
+			let endDate = null;
 
-        // 달력 업데이트
-        function updateCalendar() {
-            const monthNames = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
-            document.getElementById("calendar-title").textContent = `${currentYear}년 ${monthNames[currentMonth]}`;
+			// 범위 강조
+			function highlightRange(start, end) {
+				console.log("start : ",start);
+				console.log("end : ", end);
+				const calendarBody = document.getElementById("calendar-body");
+				const cells = calendarBody.getElementsByTagName("td");
+				for (let i = 0; i < cells.length; i++) {
+					const cellDate = parseInt(cells[i].textContent);
+					const cellFullDate = new Date(currentYear, currentMonth, cellDate);
+					if (!isNaN(cellDate) && cellFullDate >= start && cellFullDate <= end) {
+						cells[i].classList.add("highlighted-range");
+					}
+				}
+			}
 
-            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-            const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
-            const calendarBody = document.getElementById("calendar-body");
-            calendarBody.innerHTML = "";
-            let date = 1;
 
-            const isCurrentMonth = today.getFullYear() === currentYear && today.getMonth() === currentMonth;
+			// 달력 업데이트
+			function updateCalendar() {
+				const monthNames = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+				document.getElementById("calendar-title").textContent = `${currentYear}년 ${monthNames[currentMonth]}`;
 
-            for (let i = 0; i < 6; i++) {
-                const row = document.createElement("tr");
-                for (let j = 0; j < 7; j++) {
-                    const cell = document.createElement("td");
-                    if (i === 0 && j < firstDay) {
-                        cell.textContent = "";
-                    } else if (date > lastDate) {
-                        break;
-                    } else {
-                        cell.textContent = date;
+				const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+				const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+				const calendarBody = document.getElementById("calendar-body");
+				calendarBody.innerHTML = "";
+				let date = 1;
 
-                        if (isCurrentMonth && date === today.getDate()) {
-                            cell.classList.add("current-day");
-                        }
+				const isCurrentMonth = today.getFullYear() === currentYear && today.getMonth() === currentMonth;
 
-                        date++;
-                    }
-                    row.appendChild(cell);
-                }
-                calendarBody.appendChild(row);
-                if (date > lastDate) break;
-            }
-        }
+				for (let i = 0; i < 6; i++) {
+					const row = document.createElement("tr");
+					for (let j = 0; j < 7; j++) {
+						const cell = document.createElement("td");
+						if (i === 0 && j < firstDay) {
+							cell.textContent = "";
+						} else if (date > lastDate) {
+							break;
+						} else {
+							cell.textContent = date;
+							cell.dataset.date = date;
 
-        // 이전/다음 월로 이동
-        document.getElementById("prev-month").addEventListener("click", function () {
-            currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-            currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
-            updateCalendar();
-        });
+							// 클릭 이벤트 추가
+							cell.addEventListener('click', function () {
+								selectDate(cell);
+							});
 
-        document.getElementById("next-month").addEventListener("click", function () {
-            currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-            currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
-            updateCalendar();
-        });
+							// 현재 날짜 표시
+							if (isCurrentMonth && date === today.getDate()) {
+								cell.classList.add("current-day");
+							}
 
-        updateCalendar();
+							date++;
+						}
+						row.appendChild(cell);
+					}
+					calendarBody.appendChild(row);
+					if (date > lastDate) break;
+				}
 
-        // 재설정 버튼 클릭 시 필드 초기화
-        document.getElementById("reset-btn").addEventListener("click", function() {
-            document.getElementById("start-date").value = "";
-            document.getElementById("end-date").value = "";
-            document.getElementById("equipment-select").value = "선택해주세요";
-            document.getElementById("verify-select").value = "선택해주세요";
-            document.getElementById("patient-id").value = "";
-            document.getElementById("patient-name").value = "";
-        });
+				// 선택된 날짜 범위 강조
+				if (startDate && endDate) {
+					highlightRange(startDate, endDate);
+				}
+			}
 
-        // 특정 기간 버튼 (1일, 3일, 1주일) 클릭 시 날짜 범위 설정 및 색상 변경
-        function highlightRange(start, end) {
-            const calendarBody = document.getElementById("calendar-body");
-            const cells = calendarBody.getElementsByTagName("td");
-            for (let i = 0; i < cells.length; i++) {
-                cells[i].classList.remove("highlighted-range");
-                const cellDate = parseInt(cells[i].textContent);
-                if (!isNaN(cellDate) && cellDate >= start && cellDate <= end) {
-                    cells[i].classList.add("highlighted-range");
-                }
-            }
-        }
+			// 날짜 선택
+			function selectDate(cell) {
+				const selectedDate = parseInt(cell.dataset.date);
 
-        function setDateRange(days) {
-            const startDate = new Date(today);
-            startDate.setDate(today.getDate() - days + 1);  // 시작일 설정
-            document.getElementById("start-date").value = startDate.toISOString().split('T')[0];
-            document.getElementById("end-date").value = today.toISOString().split('T')[0];
-            highlightRange(startDate.getDate(), today.getDate());
-        }
+				if (!startDate) {
+					startDate = new Date(currentYear, currentMonth, selectedDate);
+					cell.classList.add('selected-date');
+				} else if (!endDate) {
+					endDate = new Date(currentYear, currentMonth, selectedDate);
 
-        document.getElementById("one-day-btn").addEventListener("click", function() {
-            setDateRange(1);
-        });
+					if (startDate > endDate) {
+						[startDate, endDate] = [endDate, startDate];  // Swap start and end if selected in reverse order
+					}
 
-        document.getElementById("three-day-btn").addEventListener("click", function() {
-            setDateRange(3);
-        });
+					highlightRange(startDate, endDate);
+					cell.classList.add('end-date'); // 끝 날짜도 빨간색으로
+				} else {
+					clearSelection();
+					startDate = new Date(currentYear, currentMonth, selectedDate);
+					cell.classList.add('selected-date');
+				}
+			}
 
-        document.getElementById("week-btn").addEventListener("click", function() {
-            setDateRange(7);
-        });
-    });
-</script>
+
+
+			// 선택 초기화
+			function clearSelection() {
+				const calendarBody = document.getElementById("calendar-body");
+				const cells = calendarBody.getElementsByTagName("td");
+				for (let i = 0; i < cells.length; i++) {
+					cells[i].classList.remove('selected-date');
+					cells[i].classList.remove('highlighted-range');
+					cells[i].classList.remove('end-date');
+				}
+				startDate = null;
+				endDate = null;
+			}
+
+			// 이전/다음 월로 이동
+			document.getElementById("prev-month").addEventListener("click", function () {
+				currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+				currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
+				updateCalendar();
+			});
+
+			document.getElementById("next-month").addEventListener("click", function () {
+				currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+				currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
+				updateCalendar();
+			});
+
+			updateCalendar();
+
+			// 날짜 범위를 설정하는 함수
+			function setDateRange(days) {
+				const startDateObj = new Date(today);
+				startDateObj.setDate(today.getDate() - days);  // 시작일 설정
+				start = startDateObj;  // 시작일 저장
+				end = today;  // 끝일 저장
+
+				document.getElementById("start-date").value = startDateObj.toISOString().split('T')[0];
+				document.getElementById("end-date").value = today.toISOString().split('T')[0];
+
+				clearSelection();  // 이전 선택 초기화
+				highlightRange(start, end);  // 새로 설정된 범위 강조
+			}
+
+			// 1일, 3일, 1주일 버튼 클릭 이벤트
+			document.getElementById("one-day-btn").addEventListener("click", function () {
+				setDateRange(2);  // 1일 범위 설정
+				//updateCalendar();  // 달력 업데이트
+				//highlightRange(start, end);  // 범위 하이라이트
+			});
+
+			document.getElementById("three-day-btn").addEventListener("click", function () {
+				setDateRange(4);  // 3일 범위 설정
+				//updateCalendar();  // 달력 업데이트
+				//highlightRange(start, end);  // 범위 하이라이트
+			});
+
+			document.getElementById("week-btn").addEventListener("click", function () {
+				setDateRange(8);  // 1주일 범위 설정
+				//updateCalendar();  // 달력 업데이트
+				//highlightRange(start, end);  // 범위 하이라이트
+			});
+
+			// 재설정 버튼 클릭 시 필드 초기화
+			document.getElementById("reset-btn").addEventListener("click", function () {
+				document.getElementById("start-date").value = "";
+				document.getElementById("end-date").value = "";
+				document.getElementById("equipment-select").value = "선택해주세요";
+				document.getElementById("verify-select").value = "선택해주세요";
+				document.getElementById("patient-id").value = "";
+				document.getElementById("patient-name").value = "";
+				clearSelection();
+			});
+		});
+	</script>
+
+
+
 
 </body>
+
 </html>
