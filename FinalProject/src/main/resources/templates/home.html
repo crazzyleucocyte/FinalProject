@@ -8,225 +8,234 @@
 	<style>
 		/* 공통 스타일 */
 		/* 공통 스타일 */
-body {
-	margin: 0;
-	padding: 0;
-	background-color: #f1f3f4; /* 부드러운 회색으로 배경색 변경 */
-	font-family: 'Arial', sans-serif;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	box-sizing: border-box;
-	color: #333;
-}
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #f1f3f4;
+			/* 부드러운 회색으로 배경색 변경 */
+			font-family: 'Arial', sans-serif;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			box-sizing: border-box;
+			color: #333;
+		}
 
-.container {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width: 100%;
-	padding: 20px;
-	gap: 20px;
-	box-sizing: border-box;
-}
+		.container {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			width: 100%;
+			padding: 20px;
+			gap: 20px;
+			box-sizing: border-box;
+		}
 
-/* 상단 패널 (검색과 필터) */
-.top-panel {
-	display: flex;
-	gap: 20px;
-}
+		/* 상단 패널 (검색과 필터) */
+		.top-panel {
+			display: flex;
+			gap: 20px;
+		}
 
-.search-panel {
-	flex: 1;
-	background-color: #ffffff;
-	padding: 20px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 그림자를 좀 더 강조 */
-	border: 1px solid #e0e0e0; /* 테두리를 추가해 좀 더 구분되게 */
-}
+		.search-panel {
+			flex: 1;
+			background-color: #ffffff;
+			padding: 20px;
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			/* 그림자를 좀 더 강조 */
+			border: 1px solid #e0e0e0;
+			/* 테두리를 추가해 좀 더 구분되게 */
+		}
 
-/* 검색 필드 스타일 */
-.input-section label {
-	display: block;
-	margin-bottom: 6px;
-	color: #555; /* 텍스트 색을 좀 더 부드럽게 */
-	font-weight: bold;
-}
+		/* 검색 필드 스타일 */
+		.input-section label {
+			display: block;
+			margin-bottom: 6px;
+			color: #555;
+			/* 텍스트 색을 좀 더 부드럽게 */
+			font-weight: bold;
+		}
 
-.input-section input,
-.input-section select {
-	width: 100%;
-	padding: 12px;
-	margin-bottom: 15px;
-	background-color: #f7f8fa; /* 좀 더 밝고 부드러운 배경 */
-	border: 1px solid #d0d0d0;
-	border-radius: 8px;
-	box-sizing: border-box;
-	transition: border-color 0.3s ease; /* 부드러운 트랜지션 추가 */
-}
+		.input-section input,
+		.input-section select {
+			width: 100%;
+			padding: 12px;
+			margin-bottom: 15px;
+			background-color: #f7f8fa;
+			/* 좀 더 밝고 부드러운 배경 */
+			border: 1px solid #d0d0d0;
+			border-radius: 8px;
+			box-sizing: border-box;
+			transition: border-color 0.3s ease;
+			/* 부드러운 트랜지션 추가 */
+		}
 
-.input-section input:focus,
-.input-section select:focus {
-	border-color: #00bcd4; /* 포커스 시 좀 더 강렬한 색상으로 */
-	outline: none;
-}
+		.input-section input:focus,
+		.input-section select:focus {
+			border-color: #00bcd4;
+			/* 포커스 시 좀 더 강렬한 색상으로 */
+			outline: none;
+		}
 
-/* 버튼 스타일 */
-.buttons {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 20px;
-}
+		/* 버튼 스타일 */
+		.buttons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 20px;
+		}
 
-.buttons button {
-	width: 48%;
-	padding: 12px;
-	background-color: #00bcd4;
-	border: none;
-	border-radius: 8px;
-	color: #fff;
-	font-size: 15px;
-	cursor: pointer;
-	transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
-}
+		.buttons button {
+			width: 48%;
+			padding: 12px;
+			background-color: #00bcd4;
+			border: none;
+			border-radius: 8px;
+			color: #fff;
+			font-size: 15px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			/* 부드러운 색상 변화 */
+		}
 
-.buttons button:hover {
-	background-color: #0097a7; /* 호버 시 좀 더 어두운 색상으로 */
-}
+		.buttons button:hover {
+			background-color: #0097a7;
+			/* 호버 시 좀 더 어두운 색상으로 */
+		}
 
-.quick-range-buttons {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
-}
+		.quick-range-buttons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 10px;
+		}
 
-.quick-range-buttons button {
-	width: 30%;
-	padding: 10px;
-	background-color: #00bcd4;
-	border: none;
-	border-radius: 8px;
-	color: #fff;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-}
+		.quick-range-buttons button {
+			width: 30%;
+			padding: 10px;
+			background-color: #00bcd4;
+			border: none;
+			border-radius: 8px;
+			color: #fff;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
 
-.quick-range-buttons button:hover {
-	background-color: #0097a7;
-}
+		.quick-range-buttons button:hover {
+			background-color: #0097a7;
+		}
 
-/* 검색 결과 테이블 */
-.result-panel {
-	flex: 3;
-	background-color: #ffffff;
-	padding: 20px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	border: 1px solid #e0e0e0;
-	overflow: auto;
-}
+		/* 검색 결과 테이블 */
+		.result-panel {
+			flex: 3;
+			background-color: #ffffff;
+			padding: 20px;
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			border: 1px solid #e0e0e0;
+			overflow: auto;
+		}
 
-.result-table table {
-	width: 100%;
-	border-collapse: collapse;
-	background-color: #fff;
-}
+		.result-table table {
+			width: 100%;
+			border-collapse: collapse;
+			background-color: #fff;
+		}
 
-.result-table th,
-.result-table td {
-	padding: 12px;
-	text-align: left;
-	border: 1px solid #e0e0e0;
-	color: #333;
-}
+		.result-table th,
+		.result-table td {
+			padding: 12px;
+			text-align: left;
+			border: 1px solid #e0e0e0;
+			color: #333;
+		}
 
-.result-table th {
-	background-color: #f1f3f4;
-	font-weight: bold;
-}
+		.result-table th {
+			background-color: #f1f3f4;
+			font-weight: bold;
+		}
 
-/* 달력 스타일 */
-.calendar-panel {
-	margin-bottom: 20px;
-	background-color: #ffffff;
-	padding: 20px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	border: 1px solid #e0e0e0;
-}
+		/* 달력 스타일 */
+		.calendar-panel {
+			margin-bottom: 20px;
+			background-color: #ffffff;
+			padding: 20px;
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			border: 1px solid #e0e0e0;
+		}
 
-.calendar-panel table {
-	width: 100%;
-	border-collapse: collapse;
-}
+		.calendar-panel table {
+			width: 100%;
+			border-collapse: collapse;
+		}
 
-.calendar-panel th,
-.calendar-panel td {
-	padding: 10px;
-	text-align: center;
-	border: 1px solid #e0e0e0;
-}
+		.calendar-panel th,
+		.calendar-panel td {
+			padding: 10px;
+			text-align: center;
+			border: 1px solid #e0e0e0;
+		}
 
-.current-day {
-	background-color: #00bcd4;
-	color: white;
-}
+		.current-day {
+			background-color: #00bcd4;
+			color: white;
+		}
 
-.highlighted-range {
-	background-color: #b3e5fc; /* 부드러운 파란색으로 하이라이트 */
-}
+		.highlighted-range {
+			background-color: #b3e5fc;
+			/* 부드러운 파란색으로 하이라이트 */
+		}
 
-/* 선택된 날짜 강조 */
-.selected-date {
-	background-color: #ff9999;
-}
+		/* 선택된 날짜 강조 */
+		.selected-date {
+			background-color: #ff9999;
+		}
 
-/* 끝 날짜 강조 */
-.end-date {
-	background-color: #ff6666;
-}
+		/* 끝 날짜 강조 */
+		.end-date {
+			background-color: #ff6666;
+		}
 
-/* 하단 패널 스타일 */
-.bottom-panels {
-	display: flex;
-	gap: 20px;
-	flex: 1;
-}
+		/* 하단 패널 스타일 */
+		.bottom-panels {
+			display: flex;
+			gap: 20px;
+			flex: 1;
+		}
 
-.history-panel,
-.report-panel {
-	flex: 1;
-	background-color: #ffffff;
-	border-radius: 12px;
-	padding: 20px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	border: 1px solid #e0e0e0;
-	overflow: auto;
-}
+		.history-panel,
+		.report-panel {
+			flex: 1;
+			background-color: #ffffff;
+			border-radius: 12px;
+			padding: 20px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			border: 1px solid #e0e0e0;
+			overflow: auto;
+		}
 
-.history-panel h3,
-.report-panel h3 {
-	margin-bottom: 20px;
-	color: #333;
-	font-weight: bold;
-}
+		.history-panel h3,
+		.report-panel h3 {
+			margin-bottom: 20px;
+			color: #333;
+			font-weight: bold;
+		}
 
-.history-info-container label,
-.study-info-container label {
-	display: block;
-	margin-bottom: 5px;
-	color: #666;
-}
+		.history-info-container label,
+		.study-info-container label {
+			display: block;
+			margin-bottom: 5px;
+			color: #666;
+		}
 
-.info-item {
-	padding: 12px;
-	margin-bottom: 15px;
-	background-color: #f7f8fa;
-	border: 1px solid #d0d0d0;
-	border-radius: 8px;
-	color: #333;
-}
-
+		.info-item {
+			padding: 12px;
+			margin-bottom: 15px;
+			background-color: #f7f8fa;
+			border: 1px solid #d0d0d0;
+			border-radius: 8px;
+			color: #333;
+		}
 	</style>
 </head>
 
@@ -273,9 +282,42 @@ body {
 
 					<label>검사장비</label>
 					<select id="equipment-select">
+						<option>선택해주세요</option>
 						<option>AS</option>
 						<option>AU</option>
 						<option>BI</option>
+						<option>CD</option>
+						<option>CF</option>
+						<option>CP</option>
+						<option>CR</option>
+						<option>CS</option>
+						<option>CT</option>
+						<option>DD</option>
+						<option>DF</option>
+						<option>DG</option>
+						<option>DM</option>
+						<option>DR</option>
+						<option>DS</option>
+						<option>DX</option>
+						<option>EC</option>
+						<option>ES</option>
+						<option>FA</option>
+						<option>FS</option>
+						<option>LS</option>
+						<option>LP</option>
+						<option>MA</option>
+						<option>MR</option>
+						<option>MS</option>
+						<option>NM</option>
+						<option>OT</option>
+						<option>PT</option>
+						<option>RF</option>
+						<option>RG</option>
+						<option>ST</option>
+						<option>TG</option>
+						<option>US</option>
+						<option>VF</option>
+						<option>XA</option>
 						<!-- 추가 옵션 -->
 					</select>
 
@@ -385,7 +427,7 @@ body {
 
 			// 범위 강조
 			function highlightRange(start, end) {
-				console.log("start : ",start);
+				console.log("start : ", start);
 				console.log("end : ", end);
 				const calendarBody = document.getElementById("calendar-body");
 				const cells = calendarBody.getElementsByTagName("td");
@@ -394,10 +436,11 @@ body {
 					const cellFullDate = new Date(currentYear, currentMonth, cellDate);
 					if (!isNaN(cellDate) && cellFullDate >= start && cellFullDate <= end) {
 						cells[i].classList.add("highlighted-range");
+					} else {
+						cells[i].classList.remove("highlighted-range");  // 이전 강조 제거
 					}
 				}
 			}
-
 
 			// 달력 업데이트
 			function updateCalendar() {
@@ -409,8 +452,6 @@ body {
 				const calendarBody = document.getElementById("calendar-body");
 				calendarBody.innerHTML = "";
 				let date = 1;
-
-				const isCurrentMonth = today.getFullYear() === currentYear && today.getMonth() === currentMonth;
 
 				for (let i = 0; i < 6; i++) {
 					const row = document.createElement("tr");
@@ -430,8 +471,16 @@ body {
 							});
 
 							// 현재 날짜 표시
-							if (isCurrentMonth && date === today.getDate()) {
+							if (currentYear === today.getFullYear() && currentMonth === today.getMonth() && date === today.getDate()) {
 								cell.classList.add("current-day");
+							}
+
+							// 이전에 선택된 날짜 복원
+							if (startDate && new Date(currentYear, currentMonth, date).getTime() === startDate.getTime()) {
+								cell.classList.add('selected-date');
+							}
+							if (endDate && new Date(currentYear, currentMonth, date).getTime() === endDate.getTime()) {
+								cell.classList.add('end-date');
 							}
 
 							date++;
@@ -439,7 +488,6 @@ body {
 						row.appendChild(cell);
 					}
 					calendarBody.appendChild(row);
-					if (date > lastDate) break;
 				}
 
 				// 선택된 날짜 범위 강조
@@ -450,6 +498,7 @@ body {
 
 			// 날짜 선택
 			function selectDate(cell) {
+				console.log("cell:", cell)
 				const selectedDate = parseInt(cell.dataset.date);
 
 				if (!startDate) {
@@ -459,19 +508,24 @@ body {
 					endDate = new Date(currentYear, currentMonth, selectedDate);
 
 					if (startDate > endDate) {
-						[startDate, endDate] = [endDate, startDate];  // Swap start and end if selected in reverse order
+						[startDate, endDate] = [endDate, startDate];  // 시작일과 끝일이 반대면 교환
 					}
 
 					highlightRange(startDate, endDate);
 					cell.classList.add('end-date'); // 끝 날짜도 빨간색으로
+
+					// 날짜 선택 후 검사일자 입력 필드에 설정
+					const formattedStartDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}`;
+					const formattedEndDate = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, '0')}-${String(endDate.getDate()).padStart(2, '0')}`;
+
+					document.getElementById("start-date").value = formattedStartDate;
+					document.getElementById("end-date").value = formattedEndDate;
 				} else {
 					clearSelection();
 					startDate = new Date(currentYear, currentMonth, selectedDate);
 					cell.classList.add('selected-date');
 				}
 			}
-
-
 
 			// 선택 초기화
 			function clearSelection() {
@@ -486,53 +540,72 @@ body {
 				endDate = null;
 			}
 
-			// 이전/다음 월로 이동
+			// 이전/다음 달로 이동 시 선택된 날짜 유지
 			document.getElementById("prev-month").addEventListener("click", function () {
 				currentMonth = currentMonth === 0 ? 11 : currentMonth - 1;
 				currentYear = currentMonth === 11 ? currentYear - 1 : currentYear;
-				updateCalendar();
+				updateCalendar(); // 달력 업데이트 시 선택된 날짜 유지
 			});
 
 			document.getElementById("next-month").addEventListener("click", function () {
 				currentMonth = currentMonth === 11 ? 0 : currentMonth + 1;
 				currentYear = currentMonth === 0 ? currentYear + 1 : currentYear;
-				updateCalendar();
+				updateCalendar(); // 달력 업데이트 시 선택된 날짜 유지
 			});
 
 			updateCalendar();
 
 			// 날짜 범위를 설정하는 함수
 			function setDateRange(days) {
-				const startDateObj = new Date(today);
-				startDateObj.setDate(today.getDate() - days);  // 시작일 설정
-				start = startDateObj;  // 시작일 저장
-				end = today;  // 끝일 저장
-
-				document.getElementById("start-date").value = startDateObj.toISOString().split('T')[0];
-				document.getElementById("end-date").value = today.toISOString().split('T')[0];
-
 				clearSelection();  // 이전 선택 초기화
-				highlightRange(start, end);  // 새로 설정된 범위 강조
+				const startDateObj = new Date(today);
+				const startDateObj2 = new Date(today);
+				startDateObj.setDate(today.getDate() - days);  // 시작일 설정
+				startDateObj2.setDate(today.getDate() - days + 1);  // 시작일 설정
+				startDate = startDateObj;  // 시작일 저장
+				endDate = today;  // 끝일 저장
+
+				highlightRange(startDate, endDate);  // 새로 설정된 범위 강조
+				document.getElementById("start-date").value = startDateObj2.toISOString().split('T')[0];
+				document.getElementById("end-date").value = today.toISOString().split('T')[0];
 			}
 
 			// 1일, 3일, 1주일 버튼 클릭 이벤트
 			document.getElementById("one-day-btn").addEventListener("click", function () {
 				setDateRange(2);  // 1일 범위 설정
-				//updateCalendar();  // 달력 업데이트
-				//highlightRange(start, end);  // 범위 하이라이트
 			});
 
 			document.getElementById("three-day-btn").addEventListener("click", function () {
 				setDateRange(4);  // 3일 범위 설정
-				//updateCalendar();  // 달력 업데이트
-				//highlightRange(start, end);  // 범위 하이라이트
 			});
 
 			document.getElementById("week-btn").addEventListener("click", function () {
 				setDateRange(8);  // 1주일 범위 설정
-				//updateCalendar();  // 달력 업데이트
-				//highlightRange(start, end);  // 범위 하이라이트
 			});
+
+			// 날짜 입력 필드에 이벤트 리스너 추가
+			document.getElementById("start-date").addEventListener("input", function () {
+				const startInputValue = this.value;
+				if (startInputValue) {
+					startDate = new Date(startInputValue);
+					startDate.setHours(0, 0, 0, 0); // 시간 제거
+					if (endDate) {
+						highlightRange(startDate, endDate);
+					}
+				}
+			});
+
+			document.getElementById("end-date").addEventListener("input", function () {
+				const endInputValue = this.value;
+				if (endInputValue) {
+					endDate = new Date(endInputValue);
+					endDate.setHours(0, 0, 0, 0); // 시간 제거
+					if (startDate) {
+						highlightRange(startDate, endDate);
+					}
+				}
+			});
+
 
 			// 재설정 버튼 클릭 시 필드 초기화
 			document.getElementById("reset-btn").addEventListener("click", function () {
@@ -546,8 +619,6 @@ body {
 			});
 		});
 	</script>
-
-
 
 
 </body>
