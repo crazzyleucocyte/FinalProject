@@ -20,7 +20,7 @@ public class StudyTabService {
 	public Page<StudyTab> findAll(PageRequest page){
 		return studyTabRepository.findAll(page);	
 	}
-	
+/*	
 	//pId로 검색
     public List<StudyTab> findByPId(String pId) {
         return studyTabRepository.findByPId(pId);
@@ -50,4 +50,8 @@ public class StudyTabService {
     public List<StudyTab> findByVerifyFlag(Long verifyFlag) {
         return studyTabRepository.findByVerifyFlag(verifyFlag);
         }
+*/
+	public List<StudyTab> searchStudies(String pId, String pName, String modality, String startDate, String endDate, Long reportStatus, Long verifyFlag) {
+        return studyTabRepository.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag);
+    }
 }
