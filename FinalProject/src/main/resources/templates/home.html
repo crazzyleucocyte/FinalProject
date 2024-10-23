@@ -32,29 +32,111 @@
         /* 상단 패널 (검색과 필터) */
         .top-panel {
             display: flex;
-            gap: 20px;
+            gap: 20px;  /* search-panel과 right-panel 사이의 간격 */
             width: 100%;
+            margin-bottom: 20px; /* top-panel과 inspections-panel 사이의 간격 */
         }
 
         .search-panel {
-        flex: 0 0 300px;    /* 너비를 300px로 고정하고 늘어나지 않도록 설정 */
-        display: flex;
-        flex-direction: column;
+            flex: 0 0 300px;    /* 너비를 300px로 고정하고 늘어나지 않도록 설정 */
+            display: flex;
+            flex-direction: column;
+            background-color: #3D5C5C;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .right-panel {
             flex: 1;    /* 남은 공간을 모두 차지하도록 설정 */
             display: flex;
             flex-direction: column;
+            gap: 20px; /* right-panel 내부 요소들 사이의 간격 */
         }
 
-        .verify-panel {
-            flex: 0 0 auto;    /* 내용물 크기만큼만 차지하도록 설정 */
+        /* .verify-panel {
+            flex: 0 0 auto;     내용물 크기만큼만 차지하도록 설정
             background-color: #3D5C5C;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px; /* verify-panel과 result-panel 사이의 간격 */
+            margin-bottom: 20px;  verify-panel과 result-panel 사이의 간격 
+        } */
+        
+        .verify-panel, .inspections-panel, .result-panel {
+            background-color: #3D5C5C;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .inspections-panel {
+            background-color: #3D5C5C;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .inspections-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px; /* 각 패널 사이의 간격 */
+        }
+
+        .inspections-item {
+            flex: 1; /* 각 패널이 동일한 너비를 가지도록 설정 */
+            min-width: 0; /* 내용이 넘칠 때 줄바꿈 허용 */
+        }
+        
+        .right-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .download-panel .download-btn,
+        .download-panel .download-btn button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #406b6b;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .download-panel .download-btn:hover,
+        .download-panel .download-btn button:hover {
+            background-color: #25403C;
+        }
+
+        .download-panel .download-btn:active,
+        .download-panel .download-btn button:active {
+            background-color: #1e3330;
+        }
+
+        /* 버튼이 비활성화된 경우의 스타일 */
+        .download-panel .download-btn:disabled,
+        .download-panel .download-btn button:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        .select-panel2 select {
+            width: 100%;
+            padding: 10px;
+            background-color: #2F4F4F;
+            /* border: 1px solid #ccc; */
+            border: 1px solid #2A3F33;
+            border-radius: 5px;
+            box-sizing: border-box;
+            color: white;
         }
 
         .result-panel {
@@ -104,6 +186,22 @@
                 flex-direction: column;
             }
 
+            .inspections-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .right-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .download-panel,
+            .select-panel {
+                width: 100%;
+                margin-top: 10px;
+            }
+
             .search-panel {
                 flex: none;
                 width: 100%;
@@ -115,6 +213,14 @@
 
             .verify-item {
                 margin-bottom: 15px;
+            }
+
+            .history-name {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .history-name > div {
+                width: 100%;
             }
         }
 
@@ -255,10 +361,34 @@
             color: white;
         }
 
-        .history-info-container label, .study-info-container label {
+        .study-info-container label {
             display: block;
             margin-bottom: 5px;
             /* color: #ccc; */
+            color: white;
+        }
+
+        .history-name {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* div 사이의 간격 */
+        }
+
+        .history-name > div {
+            flex: 1; /* 두 div가 동일한 너비를 가지도록 설정 */
+        }
+
+        .history-info-container table {
+            width: 100%;
+            border-collapse: collapse;
+            /* background-color: #3D5C5C; */
+            background-color: #2F4F4F;
+        }
+
+        .history-info-container th, .history-info-container td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #2A3F33;
             color: white;
         }
 
@@ -270,6 +400,23 @@
             border: 1px solid #2A3F33;
             border-radius: 5px;
             color: white;
+        }
+
+        .study-info-container {
+            display: flex;
+			flex-direction: column;
+			height: 100%;
+			width: 100%;
+			padding: 20px;
+			gap: 20px;
+			box-sizing: border-box;
+        }
+
+        .patient-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
         }
 
         /* .info-item label {
@@ -300,7 +447,7 @@
             /* border: 1px solid #8d8c8c; */
             border-bottom: 1px solid #2A3F33;
             /* border: none; */
-            border-radius: 100px;
+            border-radius: 50%;
             color: white;
         }
 
@@ -327,7 +474,7 @@
 
         .current-day {
             background-color: #497c7c !important;
-            color: #2F4F4F !important;
+            color: #fff !important;
         }
 
         /* 선택된 날짜 강조 */
@@ -442,42 +589,41 @@
                         <label for="equipment-select">검사장비</label>
                         <select id="equipment-select">
                             <option>선택해주세요</option>
-                            <option>AS</option>
-                            <option>AU</option>
-                            <option>BI</option>
-                            <option>CD</option>
-                            <option>CF</option>
-                            <option>CP</option>
-                            <option>CR</option>
-                            <option>CS</option>
-                            <option>CT</option>
-                            <option>DD</option>
-                            <option>DF</option>
-                            <option>DG</option>
-                            <option>DM</option>
-                            <option>DR</option>
-                            <option>DS</option>
-                            <option>DX</option>
-                            <option>EC</option>
-                            <option>ES</option>
-                            <option>FA</option>
-                            <option>FS</option>
-                            <option>LS</option>
-                            <option>LP</option>
-                            <option>MA</option>
-                            <option>MR</option>
-                            <option>MS</option>
-                            <option>NM</option>
-                            <option>OT</option>
-                            <option>PT</option>
-                            <option>RF</option>
-                            <option>RG</option>
-                            <option>ST</option>
-                            <option>TG</option>
-                            <option>US</option>
-                            <option>VF</option>
-                            <option>XA</option>
-                            <!-- 추가 옵션 -->
+                            <option value="AS">AS</option>
+                            <option value="AU">AU</option>
+                            <option value="BI">BI</option>
+                            <option value="CD">CD</option>
+                            <option value="CF">CF</option>
+                            <option value="CP">CP</option>
+                            <option value="CR">CR</option>
+                            <option value="CS">CS</option>
+                            <option value="CT">CT</option>
+                            <option value="DD">DD</option>
+                            <option value="DF">DF</option>
+                            <option value="DG">DG</option>
+                            <option value="DM">DM</option>
+                            <option value="DR">DR</option>
+                            <option value="DS">DS</option>
+                            <option value="DX">DX</option>
+                            <option value="EC">EC</option>
+                            <option value="ES">ES</option>
+                            <option value="FA">FA</option>
+                            <option value="FS">FS</option>
+                            <option value="LS">LS</option>
+                            <option value="LP">LP</option>
+                            <option value="MA">MA</option>
+                            <option value="MR">MR</option>
+                            <option value="MS">MS</option>
+                            <option value="NM">NM</option>
+                            <option value="OT">OT</option>
+                            <option value="PT">PT</option>
+                            <option value="RF">RF</option>
+                            <option value="RG">RG</option>
+                            <option value="ST">ST</option>
+                            <option value="TG">TG</option>
+                            <option value="US">US</option>
+                            <option value="VF">VF</option>
+                            <option value="XA">XA</option>
                         </select>
                     </div>
                     <div class="verify-item">
@@ -494,7 +640,30 @@
                     </div>
                 </div>
             </div>
-    
+
+            <div class="inspections-panel">
+                <div class="inspections-row">
+                    <div class="inspections-item">
+                        <span>총 검사 건수: </span>
+                    <span id="inspections">0</span>
+                    </div>
+                    <div class="right-controls">
+                        <div class="download-panel">
+                            <button class="download-btn" id="dicom-download-btn">DICOM 다운로드</button>
+                            <button class="download-btn" id="image-download-btn">이미지 다운로드</button>
+                            <button class="download-btn" id="delete-btn">검사 삭제</button>
+                        </div>
+                        <div class="select-panel2">
+                            <select id="view-select">
+                                <option value="all">보기 선택</option>
+                                <option value="20">20개씩 보기</option>
+                                <option value="50">50개씩 보기</option>
+                                <option value="100">100개씩 보기</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- 검색 결과 패널 -->
             <div class="result-panel">
@@ -527,15 +696,27 @@
         <!-- 과거 검사 이력 -->
         <div class="history-panel">
             <h3>과거 검사 이력</h3>
-            <div class="history-info-container">
-                <!-- <label>환자 아이디: 12345</label>
-                <label>환자 이름: 홍길동</label> -->
+            <div class="history-name">
                 <div class="info-item">환자 ID: 12345</div>
                 <div class="info-item">환자 이름: 홍길동</div>
-                <div class="info-item">검사 장비: CT</div>
-                <div class="info-item">검사 설명: 복부 CT</div>
-                <div class="info-item">검사 일시: 2023-01-01</div>
-                <div class="info-item">판독 상태: 완료</div>
+            </div>
+            <div class="history-info-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>검사 장비</th>
+                            <th>검사 설명</th>
+                            <th>검사 일시</th>
+                            <th>판독 상태</th>
+                            <th>시리즈</th>
+                            <th>이미지</th>
+                            <th>Verify</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 과거 검사 이력 추가 -->
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -543,32 +724,42 @@
         <div class="report-panel">
             <h3>리포트 (Study 정보)</h3>
             <div class="study-info-container">
-                <label>검사 설명</label>
-                <div class="info-item">복부 CT</div>
+                <div class="patient-info">
+                    <div class="patient-number">
+                        <label>환자 번호</label>
+                        <div class="info-item">12345</div>
+                    </div>
+                    <div class="patient-name">
+                        <label>환자 이름</label>
+                        <div class="info-item">홍길동</div>
+                    </div>
+                    <div class="patient-gender">
+                        <label>환자 성별</label>
+                        <div class="info-item">남성</div>
+                    </div>
+                </div>
 
-                <label>촬영 부위</label>
-                <div class="info-item">복부</div>
+                <div class="ai-content">
+                    <label>AI 진단 내용</label>
+                    <div class="info-item">이상 없음</div>
+    
+                    <label>AI 진단 병명</label>
+                    <div class="info-item">정상</div>
+                </div>
 
-                <label>환자 번호</label>
-                <div class="info-item">12345</div>
-
-                <label>환자 이름</label>
-                <div class="info-item">홍길동</div>
-
-                <label>환자 성별</label>
-                <div class="info-item">남성</div>
-
-                <label>수술한 의사</label>
-                <div class="info-item">Dr. Kim</div>
-
-                <label>AI 진단 내용</label>
-                <div class="info-item">이상 없음</div>
-
-                <label>AI 진단 병명</label>
-                <div class="info-item">정상</div>
-
-                <label>촬영 방향</label>
-                <div class="info-item">AP</div>
+                <div class="filming-info">
+                    <label>수술한 의사</label>
+                    <div class="info-item">Dr. Kim</div>
+    
+                    <label>촬영 방향</label>
+                    <div class="info-item">AP</div>
+    
+                    <label>촬영 부위</label>
+                    <div class="info-item">복부</div>
+    
+                    <label>검사 설명</label>
+                    <div class="info-item">복부 CT</div>
+                </div>
             </div>
         </div>
 	</div>
