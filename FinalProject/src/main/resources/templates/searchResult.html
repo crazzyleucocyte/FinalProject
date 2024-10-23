@@ -1,112 +1,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Study Search Result</title>
+	<meta charset="UTF-8">
+	<title>Study Search Result</title>
 </head>
+
 <body>
-    <h1>검색</h1>
 
-    <!-- 검색 폼 -->
-    <form action="/search" method="get">
-        <label for="pId">ID 검색:</label>
-        <input type="text" id="pId" name="pId" placeholder="Enter Patient ID">
-        <button type="submit">Search</button>
-        
-        <label for="pName">이름 검색:</label>
-    	<input type="text" id="pName" name="pName" placeholder="Enter Patient Name">
-        <button type="submit">Search</button>
-        
-        <!-- 시작 날짜 입력 -->
-	    <label for="startDate">시작 날짜:</label>
-	    <input type="date" id="startDate" name="startDate" placeholder="Select Start Date">
-	
-	    <!-- 끝 날짜 입력 -->
-	    <label for="endDate">끝 날짜:</label>
-	    <input type="date" id="endDate" name="endDate" placeholder="Select End Date">
-	    <button type="submit">Search</button>
-        
-        <label for="reportStatus">판독 상태:</label>
-    	<select id="reportStatus" name="reportStatus">
-        <option value="">선택하세요</option> <!-- 선택하지 않음 -->
-        <option value="3">읽지 않음</option>
-        <option value="5">예비 판독</option>
-        <option value="6">판독</option></select>
-    	<button type="submit">Search</button>
-    	
-    	<label for="modality">검사 장비:</label>
-    	<select id="modality" name="modality">
-		<option value="">선택하세요</option>
-        <option value="CR">CR</option>
-        <option value="CT">CT</option>
-        <option value="DR">DR</option>
-        <option value="ES">ES</option>
-        <option value="MR">MR</option>
-        <option value="SC">SC</option>
-        <option value="US">US</option>
-        <option value="XA">XA</option></select>
-    	<button type="submit">Search</button>
-    	
-    	<label for="verifyFlag">Verify:</label>
-    	<select id="verifyFlag" name="verifyFlag">
-        <option value="">-- 선택 --</option> <!-- 선택되지 않음 -->
-        <option value="0">미요청</option>
-        <option value="1">요청완료</option></select>
-    	<button type="submit">Search</button>
-    </form>
-
-    <!-- 검색된 스터디 환자 정보 표시 -->
-    <div th:if="${studyTabs != null}">
-        <h2>검색 값 출력</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>스터디 키</th>
-                    <th>환자 아이디</th>
-                    <th>환자 이름</th>
-                    <th>검사 장비</th>
-                    <th>검사 일시</th>
-                    <th>검사 설명</th>
-                    <th>이미지 갯수</th>
-                    <th>시리즈 갯수</th>
-                    <th>Verify</th>
-                    <th>판독 상태</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="study : ${studyTabs}">
-					<td><a th:href="@{'/series?studyKey=' + ${study.studyKey}}" th:text="${study.studyKey}"></a></td>
-                    <!--<td th:text="${study.studyKey}"></td>-->
-                    <td th:text="${study.pId}"></td>
-                    <td th:text="${study.pName}"></td>
-                    <td th:text="${study.modality}"></td>
-                    <td th:text="${study.studyDate}"></td>
-                    <td th:text="${study.studyDesc}"></td>
-                    <td th:text="${study.imageCnt}"></td>
-                    
-                    
-                    
-                    <td th:text="${study.seriesCnt}"></td>
-                    
-                    
-                    
-                    <td th:text="${study.verifyFlag == 0 ? '미요청' : (study.verifyFlag == 1 ? '요청완료' : '알 수 없음')}"></td>
-                    <td th:switch="${study.reportStatus}">
-                        <span th:case="3">읽지않음</span>
-                        <span th:case="5">예비판독</span>
-                        <span th:case="6">판독</span>
-                        <span th:case="*">알수없음</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<h1>검색</h1>
 
 
-    <!-- 스터디를 찾지 못했을 때 -->
-    <div th:if="${error != null}">
-        <p th:text="${error}"></p>
-    </div>
+
+	<!-- 검색 폼 -->
+	<form action="/search" method="get">
+		<label for="pId">ID 검색:</label>
+		<input type="text" id="pId" name="pId" placeholder="Enter Patient ID">
+		<button type="submit">Search</button>
+
+
+		<label for="pName">이름 검색:</label>
+		<input type="text" id="pName" name="pName" placeholder="Enter Patient Name">
+		<button type="submit">Search</button>
+
+		<!-- 시작 날짜 입력 -->
+		<label for="startDate">시작 날짜:</label>
+		<input type="date" id="startDate" name="startDate" placeholder="Select Start Date">
+
+		<!-- 끝 날짜 입력 -->
+		<label for="endDate">끝 날짜:</label>
+		<input type="date" id="endDate" name="endDate" placeholder="Select End Date">
+		<button type="submit">Search</button>
+
+		<label for="reportStatus">판독 상태:</label>
+		<select id="reportStatus" name="reportStatus">
+			<option value="">선택하세요</option> <!-- 선택하지 않음 -->
+			<option value="3">읽지 않음</option>
+			<option value="5">예비 판독</option>
+			<option value="6">판독</option>
+		</select>
+		<button type="submit">Search</button>
+
+		<label for="modality">검사 장비:</label>
+		<select id="modality" name="modality">
+			<option value="">선택하세요</option>
+			<option value="CR">CR</option>
+			<option value="CT">CT</option>
+			<option value="DR">DR</option>
+			<option value="ES">ES</option>
+			<option value="MR">MR</option>
+			<option value="SC">SC</option>
+			<option value="US">US</option>
+			<option value="XA">XA</option>
+		</select>
+		<button type="submit">Search</button>
+
+		<label for="verifyFlag">요청 상태:</label>
+		<select id="verifyFlag" name="verifyFlag">
+			<option value="">-- 선택 --</option> <!-- 선택되지 않음 -->
+			<option value="0">미요청</option>
+			<option value="1">요청완료</option>
+		</select>
+		<button type="submit">Search</button>
+	</form>
+
+	<!-- 검색된 스터디 환자 정보 표시 -->
+	<div th:if="${studyTabs != null}">
+		<h2>검색 값 출력</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>스터디 키</th>
+					<th>환자 아이디</th>
+					<th>환자 이름</th>
+					<th>검사 장비</th>
+					<th>검사 일시</th>
+					<th>검사 설명</th>
+					<th>이미지 갯수</th>
+					<th>시리즈 갯수</th>
+					<th>Verify</th>
+					<th>판독 상태</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="study : ${studyTabs}">
+					<td th:text="${study.studyKey}"></td>
+					<td th:text="${study.pId}"></td>
+					<td th:text="${study.pName}"></td>
+					<td th:text="${study.modality}"></td>
+					<td th:text="${study.studyDate}"></td>
+					<td th:text="${study.studyDesc}"></td>
+					<td th:text="${study.imageCnt}"></td>
+					<td th:text="${study.seriesCnt}"></td>
+					<td th:text="${study.verifyFlag == 0 ? '미요청' : (study.verifyFlag == 1 ? '요청완료' : '알 수 없음')}"></td>
+					<td th:switch="${study.reportStatus}">
+						<span th:case="3">읽지않음</span>
+						<span th:case="5">예비판독</span>
+						<span th:case="6">판독</span>
+						<span th:case="*">알수없음</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<!-- 스터디를 찾지 못했을 때 -->
+	<div th:if="${error != null}">
+		<p th:text="${error}"></p>
+	</div>
 
 </body>
+
 </html>
