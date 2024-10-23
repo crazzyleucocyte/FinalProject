@@ -15,6 +15,10 @@ public interface ImageTabRepository extends JpaRepository<ImageTab, Long> {
 
 	@Query(value="select * from IMAGETAB where STUDY_KEY = :studyKey and SERIES_KEY = :seriesKey and IMAGE_KEY = :imageKey", nativeQuery=true)
 	String findByImageKey(@Param("studyKey")String studyKey,@Param("seriesKey") String seriesKey, @Param("imageKey")String imageKey);
+	
+	// 시리즈 키로 이미지를 조회하는 쿼리
+    @Query("SELECT i FROM ImageTab i WHERE i.seriesKey = :seriesKey")
+    List<ImageTab> findBySeriesKey(@Param("seriesKey") Long seriesKey);
 
 	
 	

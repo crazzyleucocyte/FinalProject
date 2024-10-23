@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.FinalProject.domain.ImageTab;
 import com.project.FinalProject.domain.StudyTab;
 import com.project.FinalProject.service.ImageTabService;
 import com.project.FinalProject.service.StudyTabService;
@@ -26,6 +27,14 @@ public class ImageTabController {
 		imageTabService.findByImageKey(studyKey, seriesKey, imageKey);
 		
 		return "test";
+	}
+	
+	//이미지 불러오기
+	@GetMapping("/series/{seriesKey}/images")
+	    public String getImagesBySeriesKey(@PathVariable Long seriesKey, Model model) {
+	        List<ImageTab> images = imageTabService.getImagesBySeriesKey(seriesKey);
+	        model.addAttribute("images", images);
+	        return "imageList";  
 	}
 
 }
