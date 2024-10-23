@@ -179,18 +179,13 @@
             background-color: #1e3330;
         }
 
-		.buttons button {
-			width: 48%;
-			padding: 12px;
-			background-color: #00bcd4;
-			border: none;
-			border-radius: 8px;
-			color: #fff;
-			font-size: 15px;
-			cursor: pointer;
-			transition: background-color 0.3s ease;
-			/* 부드러운 색상 변화 */
-		}
+        .quick-range-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
 
         .quick-range-buttons button {
             width: 30%;
@@ -239,16 +234,12 @@
             color: white;
         }
 
-		/* 검색 결과 테이블 */
-		.result-panel {
-			flex: 3;
-			background-color: #ffffff;
-			padding: 20px;
-			border-radius: 12px;
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-			border: 1px solid #e0e0e0;
-			overflow: auto;
-		}
+        /* 하단 패널 */
+        .bottom-panels {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
 
         .history-panel, .report-panel {
             flex: 1;
@@ -309,7 +300,7 @@
             /* border: 1px solid #8d8c8c; */
             border-bottom: 1px solid #2A3F33;
             /* border: none; */
-            border-radius: 10px;
+            border-radius: 100px;
             color: white;
         }
 
@@ -339,11 +330,11 @@
             color: #2F4F4F;
         }
 
+        /* 선택된 날짜 강조 */
         .highlighted-range {
-            background-color: #4A6F6F;
+            background-color: #436464;
         }
 
-        /* 선택된 날짜 강조 */
 		.selected-date {
 			background-color: #ff9999;
 		}
@@ -434,6 +425,8 @@
                     <button id="three-day-btn">3일</button>
                     <button id="week-btn">1주일</button>
                 </div>
+
+                <br>
 
                 <div class="buttons">
                     <button class="search-btn">조회</button>
@@ -663,7 +656,7 @@
 
 			// 날짜 선택
 			function selectDate(cell) {
-				console.log("cell:", cell)
+				
 				const selectedDate = parseInt(cell.dataset.date);
 
 				if (!startDate) {
@@ -787,81 +780,12 @@
                 setDateRange(7);
             });
     
-            // 날짜 선택을 위한 변수
-            // let startDate = null;
-            // let endDate = null;
-    
-            // 달력 클릭 이벤트 처리
-            document.getElementById("calendar-body").addEventListener("click", function(e) {
-                if (e.target.tagName === "TD" && e.target.textContent !== "") {
-                    const selectedDate = new Date(currentYear, currentMonth, parseInt(e.target.textContent));
-                    
-                    if (!startDate || (startDate && endDate)) {
-                        // 새로운 범위 시작
-                        startDate = selectedDate;
-                        endDate = null;
-                        highlightRange(startDate.getDate(), startDate.getDate());
-                        document.getElementById("start-date").value = formatDate(startDate);
-                        document.getElementById("end-date").value = "";
-                    } else {
-                        // 범위 끝 선택
-                        endDate = selectedDate;
-                        if (endDate < startDate) {
-                            // 시작일이 종료일보다 늦으면 교체
-                            [startDate, endDate] = [endDate, startDate];
-                        }
-                        highlightRange(startDate.getDate(), endDate.getDate());
-                        document.getElementById("start-date").value = formatDate(startDate);
-                        document.getElementById("end-date").value = formatDate(endDate);
-                    }
-                }
-            });
-    
             // 날짜 포맷 함수
             function formatDate(date) {
                 const year = date.getFullYear();
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
                 return `${year}-${month}-${day}`;
-            }
-    
-            // 날짜 범위 하이라이트 함수 수정
-            function highlightRange(start, end) {
-                const calendarBody = document.getElementById("calendar-body");
-                const cells = calendarBody.getElementsByTagName("td");
-                for (let i = 0; i < cells.length; i++) {
-                    cells[i].classList.remove("highlighted-range");
-                    const cellDate = parseInt(cells[i].textContent);
-                    if (!isNaN(cellDate) && cellDate >= start && cellDate <= end) {
-                        cells[i].classList.add("highlighted-range");
-                    }
-                }
-            }
-    
-            // 재설정 버튼 클릭 시 필드 초기화 및 달력 하이라이트 제거
-            document.getElementById("reset-btn").addEventListener("click", function() {
-            document.getElementById("start-date").value = "";
-            document.getElementById("end-date").value = "";
-            document.getElementById("equipment-select").value = "선택해주세요";
-            document.getElementById("verify-select").value = "선택해주세요";
-            document.getElementById("patient-id").value = "";
-            document.getElementById("patient-name").value = "";
-            
-            // 달력 하이라이트 제거
-            resetCalendarHighlight();
-            
-            // 날짜 선택 변수 초기화
-            startDate = null;
-            endDate = null;
-            });
-    
-            // 달력 하이라이트 제거 함수
-            function resetCalendarHighlight() {
-                const calendarBody = document.getElementById("calendar-body");
-                const cells = calendarBody.getElementsByTagName("td");
-                for (let i = 0; i < cells.length; i++) {
-                    cells[i].classList.remove("highlighted-range");
-                }
             }
 		});
     </script>
