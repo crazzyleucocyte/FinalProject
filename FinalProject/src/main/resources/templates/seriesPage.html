@@ -7,7 +7,11 @@
 <body>
     <h1>시리즈 목록</h1>
     <ul>
-        <li th:each="series : ${seriesList}" th:text="${series.seriesNum}"></li>
-    </ul>
+    <li th:each="series : ${seriesList}">
+        <a th:href="@{'/images?seriesNum=' + ${series.seriesNum}}">
+            Series Number: <span th:text="${series.seriesNum}"></span>
+        </a>
+    </li>
+</ul>
 </body>
 </html>

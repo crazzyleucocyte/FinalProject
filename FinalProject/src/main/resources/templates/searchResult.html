@@ -84,7 +84,8 @@
 			</thead>
 			<tbody>
 				<tr th:each="study : ${studyTabs}">
-					<td th:text="${study.studyKey}"></td>
+					<td><a th:href="@{'/series?studyKey=' + ${study.studyKey}}" th:text="${study.studyKey}"></a></td>
+                    <!--<td th:text="${study.studyKey}"></td>-->
 					<td th:text="${study.pId}"></td>
 					<td th:text="${study.pName}"></td>
 					<td th:text="${study.modality}"></td>
