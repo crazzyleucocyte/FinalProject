@@ -28,13 +28,16 @@ public class StudyTabController {
 
 	@RequestMapping("/")
 	private String root() {
+
 		return "login";
 	}
 
 	@PostMapping("/home")
 	private String login() {
+
 		return "home";
 	}
+
 
 	@RequestMapping("/list")
 	private String getList(Model model) {

@@ -103,9 +103,8 @@
     <button type="submit">Login</button>
 
     <!-- 에러 메시지 표시 -->
-    <div class="error-message">
-        <!-- 서버에서 전달된 에러 메시지가 있다면 여기서 표시됨 -->
-        <p th:text="${error}"></p>
+    <div class="error-message" th:if="${param.error}">
+        <p>아이디 또는 비밀번호가 잘못되었습니다.</p>
     </div>
 </form>
 
