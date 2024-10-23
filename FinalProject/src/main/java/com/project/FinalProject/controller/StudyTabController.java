@@ -31,7 +31,7 @@ public class StudyTabController {
 		return "login";
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/home")
 	private String login() {
 		return "home";
 	}

@@ -8,7 +8,7 @@
     <style>
         /* 공통 스타일 */
         body {
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
             background-color: #2F4F4F;
             font-family: 'Arial', sans-serif;
@@ -23,7 +23,7 @@
 			display: flex;
 			flex-direction: column;
 			height: 100%;
-			width: 100%;
+			width: 95%;
 			padding: 20px;
 			gap: 20px;
 			box-sizing: border-box;
@@ -412,13 +412,6 @@
 			box-sizing: border-box;
         }
 
-        .patient-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
         /* .info-item label {
             display: block;
             margin-bottom: 5px;
@@ -689,8 +682,8 @@
                 </div>
             </div>
         </div>
+        
     </div>
-
     <!-- 하단 패널 (과거 검사 이력 및 Study 정보) -->
     <div class="bottom-panels">
         <!-- 과거 검사 이력 -->
@@ -724,21 +717,6 @@
         <div class="report-panel">
             <h3>리포트 (Study 정보)</h3>
             <div class="study-info-container">
-                <div class="patient-info">
-                    <div class="patient-number">
-                        <label>환자 번호</label>
-                        <div class="info-item">12345</div>
-                    </div>
-                    <div class="patient-name">
-                        <label>환자 이름</label>
-                        <div class="info-item">홍길동</div>
-                    </div>
-                    <div class="patient-gender">
-                        <label>환자 성별</label>
-                        <div class="info-item">남성</div>
-                    </div>
-                </div>
-
                 <div class="ai-content">
                     <label>AI 진단 내용</label>
                     <div class="info-item">이상 없음</div>
