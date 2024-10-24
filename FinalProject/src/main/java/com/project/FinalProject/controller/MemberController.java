@@ -35,12 +35,12 @@ public class MemberController {
 
 	}
 
-	@GetMapping("/signup")
+	@PostMapping("/signup")
 	public String memberInsert(Member m) {
 		System.out.println("Member : "+m);
 		m.setPassword(passwordEncoder.encode(m.getPassword()));		//암호화하는 부분
 		memberService.memberInsert(m);
-		return "home";
+		return "login";
 	}
 	
 }
