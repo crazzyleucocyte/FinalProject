@@ -18,6 +18,6 @@ public class SeriesTabService {
 	// studyKey를 기준으로 시리즈 목록을 반환하는 메서드
 	public List<SeriesTab> findByStudyKey(String studyKey) {
 	    return seriesTabRepository.findByStudyKey(studyKey);
-    }
-}
+	    }
+	}
 
