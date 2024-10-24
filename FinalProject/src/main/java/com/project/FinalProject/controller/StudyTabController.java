@@ -24,29 +24,38 @@ public class StudyTabController {
 	@Autowired
 	StudyTabService studyTabService;
 
-	
-	
 	@RequestMapping("/list")
 	private String getList(Model model) {
-		org.springframework.data.domain.Page<StudyTab> pageList =studyTabService.findAll(PageRequest.of(0, 28, Sort.by(Sort.Direction.ASC,"studyKey")));
+		org.springframework.data.domain.Page<StudyTab> pageList = studyTabService
+				.findAll(PageRequest.of(0, 28, Sort.by(Sort.Direction.ASC, "studyKey")));
 		model.addAttribute("pageList", pageList);
 		return "list";
 	}
-	
+
 	// 중첩된 검색 가능
 	@GetMapping("/search")
-    public String searchStudies(@RequestParam(value = "pId", required = false) String pId,
-                                @RequestParam(value = "pName", required = false) String pName,
-                                @RequestParam(value = "modality", required = false) String modality,
-                                @RequestParam(value = "startDate", required = false) String startDate,
-                                @RequestParam(value = "endDate", required = false) String endDate,
-                                @RequestParam(value = "reportStatus", required = false) Long reportStatus,
-                                @RequestParam(value = "verifyFlag", required = false) Long verifyFlag,
-                                Model model) {
+	public String searchStudies(@RequestParam(value = "pId", required = false) String pId,
+			@RequestParam(value = "pName", required = false) String pName,
+			@RequestParam(value = "modality", required = false) String modality,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			@RequestParam(value = "reportStatus", required = false) Long reportStatus,
+			@RequestParam(value = "verifyFlag", required = false) Long verifyFlag, Model model) {
 
-        
-		List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag);
-        model.addAttribute("studyTabs", studies);
-        return "searchResult";
-        }
+		List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus,
+				verifyFlag);
+		model.addAttribute("studyTabs", studies);
+
+		// 검색 후에도 값 유지
+		model.addAttribute("pId", pId);
+		model.addAttribute("pName", pName);
+		model.addAttribute("modality", modality);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		model.addAttribute("reportStatus", reportStatus);
+		model.addAttribute("verifyFlag", verifyFlag);
+
+		return "searchResult";
+
 	}
+}

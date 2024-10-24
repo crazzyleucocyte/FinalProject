@@ -15,6 +15,7 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -31,6 +32,7 @@ public class MemberController {
 	@GetMapping("/tosignup")
 	public String toSingup(Member m) {
 		return "signUp";
+
 	}
 
 	@GetMapping("/signup")
