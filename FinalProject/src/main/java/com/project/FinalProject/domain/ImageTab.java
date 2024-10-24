@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@Table (name = "STUDYTAB")
+@Table (name = "IMAGETAB")
 @Entity
 @Data
 @NoArgsConstructor

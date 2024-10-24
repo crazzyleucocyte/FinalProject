@@ -14,10 +14,8 @@ import org.springframework.data.domain.Sort;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Controller
@@ -26,27 +24,11 @@ public class StudyTabController {
 	@Autowired
 	StudyTabService studyTabService;
 
-	@RequestMapping("/")
-	private String root() {
-		return "login";
-	}
-	
-	@RequestMapping("/home")
-	private String root1() {
-		return "home";
-	}
-
-//	@PostMapping("/login")
-//	private String login() {
-//		return "home";
-//	}
-
 	@RequestMapping("/list")
 	private String getList(Model model) {
 		org.springframework.data.domain.Page<StudyTab> pageList = studyTabService
 				.findAll(PageRequest.of(0, 28, Sort.by(Sort.Direction.ASC, "studyKey")));
 		model.addAttribute("pageList", pageList);
-		System.out.println("pageList : " + pageList);
 		return "list";
 	}
 
@@ -63,31 +45,17 @@ public class StudyTabController {
 		List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus,
 				verifyFlag);
 		model.addAttribute("studyTabs", studies);
-		
-		//검색 후에도 값 유지
-	    model.addAttribute("pId", pId);
-	    model.addAttribute("pName", pName);
-	    model.addAttribute("modality", modality);
-	    model.addAttribute("startDate", startDate);
-	    model.addAttribute("endDate", endDate);
-	    model.addAttribute("reportStatus", reportStatus);
-	    model.addAttribute("verifyFlag", verifyFlag);
-		
-		return "searchResult";
-	}
 
-	//ajax로 과거 검사 이력 가져오기
-	@GetMapping("/search/patient/{pId}")
-	private @ResponseBody List<StudyTab> patientHistory(@PathVariable("pId") String pId){
-		List<StudyTab> result = studyTabService.findByPId(pId);
-		
-		return result;
+		// 검색 후에도 값 유지
+		model.addAttribute("pId", pId);
+		model.addAttribute("pName", pName);
+		model.addAttribute("modality", modality);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		model.addAttribute("reportStatus", reportStatus);
+		model.addAttribute("verifyFlag", verifyFlag);
+
+		return "searchResult";
+
 	}
-	
-	
-	
-	
-	
-	
-	
 }
