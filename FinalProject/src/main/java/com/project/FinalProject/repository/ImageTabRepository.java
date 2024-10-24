@@ -14,15 +14,7 @@ import com.project.FinalProject.domain.StudyTab;
 @Repository
 public interface ImageTabRepository extends JpaRepository<ImageTab, Long> {
 	
-	
-	// 시리즈 키로 이미지를 조회하는 쿼리
-	@Query("SELECT i FROM ImageTab i WHERE i.seriesKey = :seriesKey")
-    List<ImageTab> findBySeriesKey(@Param("seriesKey") Long seriesKey);
-
- 
- 
-    
-    
-    
-
-}
+	// 스터디 키와 시리즈 키로 이미지를 조회하는 쿼리
+    @Query("SELECT i FROM ImageTab i WHERE i.studyKey = :studyKey AND i.seriesKey = :seriesKey ORDER BY i.studyKey, i.seriesKey")
+    List<ImageTab> findByStudyKeyAndSeriesKey(@Param("studyKey") Long studyKey, @Param("seriesKey") Long seriesKey);
+    }
