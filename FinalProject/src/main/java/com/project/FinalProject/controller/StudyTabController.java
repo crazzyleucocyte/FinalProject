@@ -26,7 +26,7 @@ public class StudyTabController {
 	@Autowired
 	StudyTabService studyTabService;
 
-	@RequestMapping("/")
+	@RequestMapping("/login")
 	private String root() {
 
 		return "login";
