@@ -11,9 +11,9 @@ public class MemberController {
 		return "/login";
 	}
 	
-	 @GetMapping("/")
-	 public String home() {
-	     return "/home"; // 로그인 성공 시 home.html로 이동
-	    }
+//	 @GetMapping("/")
+//	 public String home() {
+//	     return "/home"; // 로그인 성공 시 home.html로 이동
+//	    }
 	}
 
