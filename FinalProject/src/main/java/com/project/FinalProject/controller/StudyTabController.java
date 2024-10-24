@@ -24,16 +24,7 @@ public class StudyTabController {
 	@Autowired
 	StudyTabService studyTabService;
 
-	@RequestMapping("/login")
-
-	private String root() {
-		return "login";
-	}
 	
-	@PostMapping("/login")
-	private String login() {
-		return "home";
-	}
 	
 	@RequestMapping("/list")
 	private String getList(Model model) {

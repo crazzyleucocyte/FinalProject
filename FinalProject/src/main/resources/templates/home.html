@@ -8,8 +8,9 @@
     <style>
         /* 공통 스타일 */
         body {
-            margin: 0 auto;
-            padding: 0;
+            height: 100%;
+            margin: 0;
+            /* padding: 0; */
             background-color: #2F4F4F;
             font-family: 'Arial', sans-serif;
             height: 100vh;
@@ -19,14 +20,30 @@
             color: white;
         }
 
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 세로 중앙 정렬 */
+            align-items: center; /* 가로 중앙 정렬 */
+            padding: 20px; /* 필요에 따라 조정 */
+            width: 93%;
+            margin: 0 auto;
+        }
+
+        .main-container > div {
+            width: 100%; /* 또는 원하는 최대 너비 (예: max-width: 1200px;) */
+            margin-bottom: 20px; /* div 요소들 사이의 간격 */
+        }
+
+        .main-container > div:first-child {
+            margin-bottom: 0;
+        }
+
 		.container {
 			display: flex;
 			flex-direction: column;
-			height: 100%;
-			width: 95%;
-			padding: 20px;
-			gap: 20px;
-			box-sizing: border-box;
+			min-height: 100vh;
 		}
 
         /* 상단 패널 (검색과 필터) */
@@ -44,7 +61,7 @@
             background-color: #3D5C5C;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
         }
 
         .right-panel {
@@ -53,15 +70,6 @@
             flex-direction: column;
             gap: 20px; /* right-panel 내부 요소들 사이의 간격 */
         }
-
-        /* .verify-panel {
-            flex: 0 0 auto;     내용물 크기만큼만 차지하도록 설정
-            background-color: #3D5C5C;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;  verify-panel과 result-panel 사이의 간격 
-        } */
         
         .verify-panel, .inspections-panel, .result-panel {
             background-color: #3D5C5C;
@@ -72,7 +80,7 @@
 
         .inspections-panel {
             background-color: #3D5C5C;
-            padding: 15px;
+            padding: 8px 10px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
@@ -98,7 +106,8 @@
         .download-panel .download-btn,
         .download-panel .download-btn button {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 5px 10px;
+            font-size: 0.9em;
             background-color: #406b6b;
             color: white;
             text-align: center;
@@ -148,37 +157,61 @@
             overflow: auto; /* 내용이 많을 경우 스크롤 생성 */
         }
 
-        /* verify-panel 내부 요소 스타일 */
+        /* verify-panel */
+        .verify-panel {
+            display: flex; /* Flexbox로 수평 배치 */
+            justify-content: space-between; /* 자식 요소들 사이의 간격을 동일하게 설정 */
+            gap: 20px; /* 요소들 사이에 간격 추가 */
+            padding: 10px;
+        }
+
         .verify-row {
             display: flex;
+            flex: 1; /* 전체적으로 요소들이 동일한 넓이를 가짐 */
             justify-content: space-between;
-            gap: 20px; /* 항목 간 간격 */
+            gap: 20px;
         }
 
-        .verify-item {
-            flex: 1 1 0; /* flex-grow: 1, flex-shrink: 1, flex-basis: 0 */
-            min-width: 0; /* 내용이 넘칠 때 줄바꿈 허용 */
-        }
-
-        .verify-panel label {
-            display: block;
-            margin-bottom: 8px;
-            color: white;
-            white-space: nowrap; /* 라벨 텍스트가 줄바꿈되지 않도록 설정 */
-            overflow: hidden;
-            text-overflow: ellipsis; /* 라벨이 너무 길 경우 말줄임표 표시 */
-        }
-
-        .verify-panel select {
-            width: 100%;
-            padding: 10px;
-            background-color: #2F4F4F;
+        .verify-item, .patient-info {
+            flex: 1; /* 각 요소가 동등한 넓이로 배치되도록 설정 */
+            /* padding: 10px; */
+            box-sizing: border-box; /* 패딩과 테두리가 포함된 넓이 계산 */
             /* border: 1px solid #ccc; */
+            padding-top: 10px;
+            border-radius: 5px;
+        }
+
+        .patient-info {
+            display: flex;
+            flex-direction: column; /* 안에 있는 요소들을 수직으로 배치 */
+            gap: 10px; /* 정보 항목 간에 간격 추가 */
+        }
+
+        .patient-info div {
+            background-color: #2F4F4F;
+            border: 1px solid #2A3F33;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%; /* 선택 박스가 부모 요소의 너비에 맞게 확장되도록 */
+            padding: 5px;
+            margin-top: 5px;
+            background-color: #2F4F4F;
             border: 1px solid #2A3F33;
             border-radius: 5px;
-            box-sizing: border-box;
             color: white;
+            box-sizing: border-box;
         }
+
+
+
 
         /* 반응형 디자인을 위한 미디어 쿼리 */
         @media (max-width: 768px) {
@@ -222,14 +255,23 @@
             .history-name > div {
                 width: 100%;
             }
+
+            .study-info-container {
+                flex-direction: column;
+            }
+
+            .ai-content,
+            .filming-info {
+                width: 100%;
+            }
         }
 
         /* 검색 필드 스타일 */
         .input-section {
             background-color: #3D5C5C;
-            padding: 15px;
+            /* padding: 15px; */
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
         }
 
         .input-section label {
@@ -243,7 +285,6 @@
             padding: 10px;
             margin-bottom: 10px;
             background-color: #2F4F4F;
-            /* border: 1px solid #ccc; */
             border: 1px solid #2A3F33;
             border-radius: 5px;
             box-sizing: border-box;
@@ -257,21 +298,25 @@
 		.input-section input:focus,
 		.input-section select:focus {
 			border-color: #00bcd4;
-			/* 포커스 시 좀 더 강렬한 색상으로 */
 			outline: none;
 		}
 
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
         .buttons button {
             width: 48%;
-            padding: 10px;
-            /* background-color: #2F4F4F; */
+            padding: 5px 10px;
+            font-size: 0.9em;
             background-color: #406b6b;
             border: none;
-            /* border: 1px solid #ccc; */
-            /* border: 1px solid #8d8c8c; */
             border-radius: 5px;
             color: #fff;
             font-size: 14px;
+            gap: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -295,12 +340,10 @@
 
         .quick-range-buttons button {
             width: 30%;
-            padding: 10px;
-            /* background-color: #2F4F4F; */
+            padding: 5px 10px;
+            font-size: 0.9em;
             background-color: #406b6b;
             border: none;
-            /* border: 1px solid #ccc; */
-            /* border: 1px solid #8d8c8c; */
             border-radius: 5px;
             color: #fff;
             cursor: pointer;
@@ -351,31 +394,32 @@
             flex: 1;
             background-color: #3D5C5C;
             border-radius: 10px;
-            padding: 15px;
+            padding: 0 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: auto;
         }
         
         .history-panel h3, .report-panel h3 {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: white;
         }
 
-        .study-info-container label {
-            display: block;
-            margin-bottom: 5px;
-            /* color: #ccc; */
-            color: white;
-        }
-
+        
         .history-name {
             display: flex;
             align-items: center;
             gap: 10px; /* div 사이의 간격 */
+            /* padding: 10px; */
+            margin-bottom: 15px;
         }
 
         .history-name > div {
             flex: 1; /* 두 div가 동일한 너비를 가지도록 설정 */
+            background-color: #2F4F4F;
+            border: 1px solid #2A3F33;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .history-info-container table {
@@ -384,7 +428,7 @@
             /* background-color: #3D5C5C; */
             background-color: #2F4F4F;
         }
-
+        
         .history-info-container th, .history-info-container td {
             padding: 10px;
             text-align: center;
@@ -394,6 +438,7 @@
 
         .info-item {
             padding: 10px;
+            margin-top: 5px;
             margin-bottom: 15px;
             background-color: #2F4F4F;
             /* border: 1px solid #ccc; */
@@ -404,12 +449,28 @@
 
         .study-info-container {
             display: flex;
-			flex-direction: column;
-			height: 100%;
-			width: 100%;
-			padding: 20px;
-			gap: 20px;
+			gap: 20px; /* ai-content와 filming-info 사이의 간격 */
+            align-items: flex-start; /* 상단 정렬 */
 			box-sizing: border-box;
+        }
+        
+        .study-info-container label {
+            display: block;
+            margin-bottom: 5px;
+            /* color: #ccc; */
+            color: white;
+        }
+
+        .ai-content,
+        .filming-info {
+            flex: 1; /* 두 요소가 동등한 너비를 가지도록 설정 */
+            min-width: 0; /* flex item의 내용이 넘칠 때 줄바꿈을 허용 */
+        }
+
+        /* 내부 요소들의 여백 조정 (필요한 경우) */
+        .ai-content > *,
+        .filming-info > * {
+            margin-bottom: 10px;
         }
 
         /* .info-item label {
@@ -420,11 +481,11 @@
 
         /* 달력 스타일 */
         .calendar-panel {
-            margin-bottom: 20px;    /* 환자 ID 위에 위치하도록 설정 */
+            margin-bottom: 20px;
             background-color: #3D5C5C;
-            padding: 15px;
+            /* padding: 15px; */
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
         }
 
         .calendar-panel table {
@@ -516,6 +577,7 @@
 </head>
 
 <body>
+<div class="main-container">
 
 	<div class="container">
 		<!-- 상단 패널 (검색과 검색 결과) -->
@@ -565,8 +627,6 @@
                     <button id="three-day-btn">3일</button>
                     <button id="week-btn">1주일</button>
                 </div>
-
-                <br>
 
                 <div class="buttons">
                     <button class="search-btn">조회</button>
@@ -627,9 +687,15 @@
                             <option>요청완료</option>
                         </select>
                     </div>
-                    <div class="verify-item">
-                        <div id="patient-id">환자 ID</div><br>
-                        <div id="patient-name">이름</div>
+                    <div class="patient-info">
+                        <div class="patient-id">
+                            <label>환자 ID : </label>
+                            <span id="patient-id-item"></span>
+                        </div>
+                        <div class="patient-name">
+                            <label>환자 이름 : </label>
+                            <span id="patient-name-item"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -637,8 +703,8 @@
             <div class="inspections-panel">
                 <div class="inspections-row">
                     <div class="inspections-item">
-                        <span>총 검사 건수: </span>
-                    <span id="inspections">0</span>
+                        <label>총 검사 건수 : </label>
+                        <span id="inspections">0</span>
                     </div>
                     <div class="right-controls">
                         <div class="download-panel">
@@ -682,16 +748,23 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
+
     <!-- 하단 패널 (과거 검사 이력 및 Study 정보) -->
     <div class="bottom-panels">
         <!-- 과거 검사 이력 -->
         <div class="history-panel">
             <h3>과거 검사 이력</h3>
             <div class="history-name">
-                <div class="info-item">환자 ID: 12345</div>
-                <div class="info-item">환자 이름: 홍길동</div>
+                <div class="history-id">
+                    <label>환자 ID : </label>
+                    <span id="history-patient-id">12345</span>
+                </div>
+                <div class="history-name-item">
+                    <label>환자 이름 : </label>
+                    <span id="history-patient-name">홍길동</span>
+                </div>
             </div>
             <div class="history-info-container">
                 <table>
@@ -702,7 +775,6 @@
                             <th>검사 일시</th>
                             <th>판독 상태</th>
                             <th>시리즈</th>
-                            <th>이미지</th>
                             <th>Verify</th>
                         </tr>
                     </thead>
@@ -718,11 +790,11 @@
             <h3>리포트 (Study 정보)</h3>
             <div class="study-info-container">
                 <div class="ai-content">
-                    <label>AI 진단 내용</label>
-                    <div class="info-item">이상 없음</div>
-    
                     <label>AI 진단 병명</label>
                     <div class="info-item">정상</div>
+
+                    <label>AI 진단 내용</label>
+                    <div class="info-item">이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음</div>
                 </div>
 
                 <div class="filming-info">
