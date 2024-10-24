@@ -18,6 +18,6 @@ public class MvcConfig implements WebMvcConfigurer {
     	  
         registry
           .addResourceHandler("/PACSStorage/**")
-          .addResourceLocations("file:///" + classpath);	
-    }
+				.addResourceLocations("file:///" + classpath);
+	}
 }

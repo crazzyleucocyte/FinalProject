@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Form</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Signup Form</title>
 </head>
+
 <body>
-    <h2>Sign Up</h2>
-    <form action="/signup" method="post">
-        <!-- Username Field -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-        <br><br>
+	<h2>Sign Up</h2>
+	<form action="/signup" method="post">
+		<!-- Username Field -->
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" placeholder="Enter your username" required>
+		<br><br>
 
-        <!-- Password Field -->
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        <br><br>
+		<!-- Password Field -->
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" placeholder="Enter your password" required>
+		<br><br>
 
-        <!-- Role Field -->
-        <label for="role">Role:</label>
-        <select id="role" name="role" required>
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-        </select>
-        <br><br>
+		<!-- Role Field -->
+		<label for="role">Role:</label>
+		<select id="role" name="role" required>
+			<option value="USER">User</option>
+			<option value="ADMIN">Admin</option>
+		</select>
+		<br><br>
 
-        <!-- Submit Button -->
-        <button type="submit">Sign Up</button>
-    </form>
+		<!-- Submit Button -->
+		<button type="submit">Sign Up</button>
+	</form>
 </body>
+
 </html>

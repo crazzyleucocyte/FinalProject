@@ -43,7 +43,8 @@ public class SecurityConfig {
                 		.requestMatchers("/search/**").permitAll()
                 		.requestMatchers("/series").permitAll()
                 		.requestMatchers("/search").permitAll()
-                		.requestMatchers("/tosignup").permitAll()
+						.requestMatchers(
+								"/tosignup").permitAll()
                 		.requestMatchers("/signup").permitAll()
                 		.requestMatchers("/home").hasRole("ADMIN")
                         .anyRequest().authenticated()
