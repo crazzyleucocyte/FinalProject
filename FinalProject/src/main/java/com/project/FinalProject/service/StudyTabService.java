@@ -20,12 +20,12 @@ public class StudyTabService {
 	public Page<StudyTab> findAll(PageRequest page){
 		return studyTabRepository.findAll(page);	
 	}
-/*	
 	//pId로 검색
     public List<StudyTab> findByPId(String pId) {
         return studyTabRepository.findByPId(pId);
         }
     
+    /*	
     //pName으로 검색
     public List<StudyTab> findByPName(String pName) {
         return studyTabRepository.findByPName(pName);
