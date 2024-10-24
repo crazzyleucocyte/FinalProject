@@ -1,6 +1,9 @@
-package com.project.FinalProject.security;
+package com.project.FinalProject.config;
 
 import com.project.FinalProject.service.MemberService;
+
+import jakarta.servlet.DispatcherType;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,13 +35,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf().disable()
+        		.csrf((csrf) -> csrf.disable())
+				.cors((cors) -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
+                		.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                		.requestMatchers("/series/**").permitAll()
+                		.requestMatchers("/search/**").permitAll()
+                		.requestMatchers("/series").permitAll()
+                		.requestMatchers("/search").permitAll()
+                		.requestMatchers("/tosignup").permitAll()
+                		.requestMatchers("/signup").permitAll()
+                		.requestMatchers("/home").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/home")
                         .defaultSuccessUrl("/home", true)
+                        .usernameParameter("username")
+                        .passwordParameter("password") 	
                         .permitAll()
                 )
                 .logout(logout -> logout
