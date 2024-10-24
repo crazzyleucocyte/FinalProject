@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 
 <head>
@@ -577,7 +578,7 @@
 
                 <div class="buttons">
                     <button class="search-btn">조회</button>
-                    <button class="reset-btn" id="reset-btn">재설정</button>
+                    <button class="reset-btn" id="reset-btn"  onclick="location.href='/search'">재설정</button>
                 </div>
             </div>
         </div>
@@ -587,7 +588,7 @@
                 <div class="verify-row">
                     <div class="verify-item">
                         <label for="equipment-select">검사장비</label>
-                        <select id="equipment-select">
+                        <select id="equipment-select" th:value="${modality}">
                             <option>선택해주세요</option>
                             <option value="AS">AS</option>
                             <option value="AU">AU</option>
@@ -628,7 +629,7 @@
                     </div>
                     <div class="verify-item">
                         <label for="verify-select">Verify</label>
-                        <select id="verify-select">
+                        <select id="verify-select" th:value="${verifyFlag}">
                             <option>선택해주세요</option>
                             <option>미요청</option>
                             <option>요청완료</option>

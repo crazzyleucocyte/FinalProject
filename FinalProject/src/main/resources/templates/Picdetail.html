@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Detail</title>
+    <link rel="stylesheet" href="/path/to/your/css/style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 100px;
+            background-color: #333;
+            padding: 20px;
+            box-sizing: border-box;
+            border-right: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar button {
+            margin: 10px 0;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #444;
+            background-color: #555;
+            color: #fff;
+            cursor: pointer;
+        }
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+        .tool-bar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+        .tool-bar button {
+            background-color: #555;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .content {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        .study-info, .past-info, .series-info {
+            display: none;
+            width: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            flex-direction: column;
+            background-color: #333;
+            padding: 10px;
+            border: 1px solid #444;
+            margin-right: 0;
+        }
+        .study-info.show, .past-info.show, .series-info.show {
+            display: flex;
+            width: 300px;
+        }
+        .image-viewer {
+            flex-grow: 1;
+            background-color: #000;
+            border: 1px solid #444;
+            transition: all 0.3s ease;
+        }
+        .image-viewer.shifted {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <button id="toggle-info-btn">정보</button>
+        <button id="toggle-past-btn">과거 내역</button>
+        <button id="toggle-series-btn">시리즈</button>
+    </div>
+
+    <div class="main-content">
+        <div class="tool-bar">
+            <button>이전</button>
+            <button>다음</button>
+            <button>윈도우 레벨</button>
+            <button>확대</button>
+            <button>도구1</button>
+            <button>도구2</button>
+        </div>
+
+        <div class="content">
+            <div id="study-info" class="study-info">
+                <span>Study 정보</span>
+                <div>studydesc: 검사 설명</div>
+                <div>bodypart: 촬영 부위</div>
+                <div>patientkey: 환자 번호</div>
+                <div>pname: 환자 이름</div>
+                <div>psex: 환자 성별</div>
+                <div>operatorsname: 수술한 의사 이름</div>
+                <div>ai_report: AI 진단 내용</div>
+                <div>ai_finding: AI가 진단한 병명</div>
+                <div>viewposition: 촬영한 방향</div>
+            </div>
+           
+            <div id="past-info" class="past-info">
+                <span>과거 검사 내역</span>
+                <label>환자 아이디: 12345</label>
+                <label>환자 이름: 홍길동</label>
+                <div class="info-item">검사 장비: CT</div>
+                <div class="info-item">검사 설명: 복부 CT</div>
+                <div class="info-item">검사 일시: 2023-01-01</div>
+                <div class="info-item">판독 상태: 완료</div>
+            </div>
+           
+            <div id="series-info" class="series-info">
+                <span>시리즈 정보</span>
+                <div>시리즈 정보 내용</div>
+            </div>
+
+            <div id="image-viewer" class="image-viewer"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSection(buttonId, sectionId) {
+        const button = document.getElementById(buttonId);
+        const section = document.getElementById(sectionId);
+        const allSections = document.querySelectorAll('.study-info, .past-info, .series-info');
+        const imageViewer = document.getElementById('image-viewer');
+
+        button.addEventListener('click', () => {
+            // 모든 섹션을 숨기고 이미지 뷰어의 'shifted' 클래스를 제거
+            allSections.forEach(sec => {
+                if (sec !== section) {
+                    sec.classList.remove('show');
+                }
+            });
+            
+            // 현재 섹션 토글
+            section.classList.toggle('show');
+
+            // 이미지 뷰어도 각 섹션 상태에 따라 이동
+            const anySectionShown = Array.from(allSections).some(sec => sec.classList.contains('show'));
+            if (anySectionShown) {
+                imageViewer.classList.add('shifted');
+            } else {
+                imageViewer.classList.remove('shifted');
+            }
+        });
+    }
+
+    // 각 버튼과 섹션 연결
+    toggleSection('toggle-info-btn', 'study-info');
+    toggleSection('toggle-past-btn', 'past-info');
+    toggleSection('toggle-series-btn', 'series-info');
+</script>
+
+
+</body>
+</html>

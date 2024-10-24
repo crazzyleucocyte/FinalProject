@@ -58,6 +58,16 @@ public class StudyTabController {
 		List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus,
 				verifyFlag);
 		model.addAttribute("studyTabs", studies);
+		
+		//검색 후에도 값 유지
+	    model.addAttribute("pId", pId);
+	    model.addAttribute("pName", pName);
+	    model.addAttribute("modality", modality);
+	    model.addAttribute("startDate", startDate);
+	    model.addAttribute("endDate", endDate);
+	    model.addAttribute("reportStatus", reportStatus);
+	    model.addAttribute("verifyFlag", verifyFlag);
+		
 		return "searchResult";
 	}
 
