@@ -34,7 +34,8 @@ public class StudyTabController {
 
 	// 중첩된 검색 가능
 	@GetMapping("/search")
-	public String searchStudies(@RequestParam(value = "pId", required = false) String pId,
+	public String searchStudies(
+			@RequestParam(value = "pId", required = false) String pId,
 			@RequestParam(value = "pName", required = false) String pName,
 			@RequestParam(value = "modality", required = false) String modality,
 			@RequestParam(value = "startDate", required = false) String startDate,

@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1091,12 +1092,12 @@
 				}
 			});
 		</script>
-		
+
 		<script>
-			 axios.post('/api/addmenu', {restaurant:'왓쇼이켄', name : '아카라멘', price:11000, type:'JP', taste:'HOT'})
-             .then(result =>{
-              console.log(result);
-             })
+			axios.get(`search?pId=&pName=&startDate=&endDate=&reportStatus=5&modality=&verifyFlag=`)
+				.then(result => {
+					console.log(result);
+				})
 		</script>
 
 </body>
