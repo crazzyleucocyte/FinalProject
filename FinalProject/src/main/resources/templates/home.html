@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +70,7 @@
 			background-color: #3D5C5C;
 			padding: 15px;
 			border-radius: 10px;
-			/* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 		}
 
 		.right-panel {
@@ -201,8 +201,10 @@
 			box-sizing: border-box;
 			/* 패딩과 테두리가 포함된 넓이 계산 */
 			/* border: 1px solid #ccc; */
-			padding-top: 10px;
 			border-radius: 5px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 		}
 
 		.patient-info {
@@ -235,6 +237,7 @@
 			border-radius: 5px;
 			color: white;
 			box-sizing: border-box;
+
 		}
 
 
@@ -324,9 +327,11 @@
 			color: #A0A0A0;
 		}
 
-		.input-section input:focus,
-		.input-section select:focus {
-			border-color: #00bcd4;
+		input:focus,
+		select:focus {
+			/* border-color: #527a64; */
+			padding: 9px;
+			border: 2px solid #1f2e25;
 			outline: none;
 		}
 
@@ -334,6 +339,7 @@
 			display: flex;
 			gap: 10px;
 			margin-top: 10px;
+			justify-content: space-between;
 		}
 
 		.buttons button {
@@ -361,7 +367,7 @@
 
 		.quick-range-buttons {
 			display: flex;
-			justify-content: center;
+			justify-content: space-around;
 			flex-wrap: wrap;
 			gap: 10px;
 			margin-top: 15px;
@@ -581,7 +587,7 @@
 		}
 
 		/* 끝 날짜 강조 */
-		.end-date {
+		.endDate {
 			background-color: #ff6666;
 		}
 
@@ -649,17 +655,17 @@
 					</div>
 
 					<div class="input-section">
-						<label>환자 ID</label>
-						<input type="text" id="patient-id" placeholder="환자 ID를 입력하세요">
+						<label for="pId">환자 ID</label>
+						<input type="text" id="pId" name="pId" placeholder="환자 ID를 입력하세요">
 
-						<label>환자 이름</label>
-						<input type="text" id="patient-name" placeholder="환자 이름을 입력하세요">
+						<label for="pName">환자 이름</label>
+						<input type="text" id="pName" name="pName" placeholder="환자 이름을 입력하세요">
 
 						<div class="date-range-container">
-							<label for="start-date">검사일자</label>
-							<input type="date" id="start-date">
+							<label for="startDate">검사일자</label>
+							<input type="date" id="startDate">
 							<span>~</span>
-							<input type="date" id="end-date">
+							<input type="date" id="endDate">
 						</div>
 
 						<div class="quick-range-buttons">
@@ -679,9 +685,9 @@
 					<div class="verify-panel">
 						<div class="verify-row">
 							<div class="verify-item">
-								<label for="equipment-select">검사장비</label>
-								<select id="equipment-select" th:value="${modality}">
-									<option>선택해주세요</option>
+								<label for="modality">검사장비</label>
+								<select id="modality" name="modality" th:value="${modality != null ? modality : ''}">
+									<option value="">선택해주세요</option>
 									<option value="AS">AS</option>
 									<option value="AU">AU</option>
 									<option value="BI">BI</option>
@@ -720,11 +726,21 @@
 								</select>
 							</div>
 							<div class="verify-item">
-								<label for="verify-select">Verify</label>
-								<select id="verify-select" th:value="${verifyFlag}">
-									<option>선택해주세요</option>
-									<option>미요청</option>
-									<option>요청완료</option>
+								<label for="verifyFlag">Verify</label>
+								<select id="verifyFlag" th:value="${verifyFlag != null ? verifyFlag : ''}">
+									<option value="">선택하세요</option> <!-- 선택되지 않음 -->
+									<option value="0">미요청</option>
+									<option value="1">요청완료</option>
+								</select>
+							</div>
+							<div class="verify-item">
+								<label for="reportStatus">판독 상태</label>
+								<select id="reportStatus" name="reportStatus"
+									th:value="${reportStatus != null ? reportStatus : ''}">
+									<option value="">선택하세요</option> <!-- 선택하지 않음 -->
+									<option value="3">읽지 않음</option>
+									<option value="5">예비 판독</option>
+									<option value="6">판독</option>
 								</select>
 							</div>
 							<div class="patient-info">
@@ -922,7 +938,7 @@
 									cell.classList.add('selected-date');
 								}
 								if (endDate && new Date(currentYear, currentMonth, date).getTime() === endDate.getTime()) {
-									cell.classList.add('end-date');
+									cell.classList.add('endDate');
 								}
 
 								date++;
@@ -954,14 +970,14 @@
 						}
 
 						highlightRange(startDate, endDate);
-						cell.classList.add('end-date'); // 끝 날짜도 빨간색으로
+						cell.classList.add('endDate'); // 끝 날짜도 빨간색으로
 
 						// 날짜 선택 후 검사일자 입력 필드에 설정
 						const formattedStartDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}`;
 						const formattedEndDate = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, '0')}-${String(endDate.getDate()).padStart(2, '0')}`;
 
-						document.getElementById("start-date").value = formattedStartDate;
-						document.getElementById("end-date").value = formattedEndDate;
+						document.getElementById("startDate").value = formattedStartDate;
+						document.getElementById("endDate").value = formattedEndDate;
 					} else {
 						clearSelection();
 						startDate = new Date(currentYear, currentMonth, selectedDate);
@@ -973,10 +989,11 @@
 				function clearSelection() {
 					const calendarBody = document.getElementById("calendar-body");
 					const cells = calendarBody.getElementsByTagName("td");
+					console.log("cells", cells)
 					for (let i = 0; i < cells.length; i++) {
 						cells[i].classList.remove('selected-date');
 						cells[i].classList.remove('highlighted-range');
-						cells[i].classList.remove('end-date');
+						cells[i].classList.remove('endDate');
 					}
 					startDate = null;
 					endDate = null;
@@ -1008,8 +1025,8 @@
 					endDate = today;  // 끝일 저장
 
 					highlightRange(startDate, endDate);  // 새로 설정된 범위 강조
-					document.getElementById("start-date").value = startDateObj2.toISOString().split('T')[0];
-					document.getElementById("end-date").value = today.toISOString().split('T')[0];
+					document.getElementById("startDate").value = startDateObj2.toISOString().split('T')[0];
+					document.getElementById("endDate").value = today.toISOString().split('T')[0];
 				}
 
 				// 1일, 3일, 1주일 버튼 클릭 이벤트
@@ -1026,7 +1043,7 @@
 				});
 
 				// 날짜 입력 필드에 이벤트 리스너 추가
-				document.getElementById("start-date").addEventListener("input", function () {
+				document.getElementById("startDate").addEventListener("input", function () {
 					const startInputValue = this.value;
 					if (startInputValue) {
 						startDate = new Date(startInputValue);
@@ -1037,7 +1054,7 @@
 					}
 				});
 
-				document.getElementById("end-date").addEventListener("input", function () {
+				document.getElementById("endDate").addEventListener("input", function () {
 					const endInputValue = this.value;
 					if (endInputValue) {
 						endDate = new Date(endInputValue);
@@ -1051,12 +1068,13 @@
 
 				// 재설정 버튼 클릭 시 필드 초기화
 				document.getElementById("reset-btn").addEventListener("click", function () {
-					document.getElementById("start-date").value = "";
-					document.getElementById("end-date").value = "";
-					document.getElementById("equipment-select").value = "선택해주세요";
-					document.getElementById("verify-select").value = "선택해주세요";
-					document.getElementById("patient-id").value = "";
-					document.getElementById("patient-name").value = "";
+					document.getElementById("startDate").value = "";
+					document.getElementById("endDate").value = "";
+					document.getElementById("modality").value = "";
+					document.getElementById("verifyFlag").value = "";
+					document.getElementById("reportStatus").value = "";
+					document.getElementById("pId").value = "";
+					document.getElementById("pName").value = "";
 					clearSelection();
 				});
 
@@ -1072,6 +1090,13 @@
 					return `${year}-${month}-${day}`;
 				}
 			});
+		</script>
+		
+		<script>
+			 axios.post('/api/addmenu', {restaurant:'왓쇼이켄', name : '아카라멘', price:11000, type:'JP', taste:'HOT'})
+             .then(result =>{
+              console.log(result);
+             })
 		</script>
 
 </body>
