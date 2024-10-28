@@ -26,4 +26,9 @@ public interface StudyTabRepository extends JpaRepository<StudyTab, Long> {
 		                         @Param("endDate") String endDate,
 		                         @Param("reportStatus") Long reportStatus,
 		                         @Param("verifyFlag") Long verifyFlag);
+	
+	@Query(value = "select * from STUDYTAB where PID = :pId order by STUDYDATE desc", nativeQuery = true)
+	List<StudyTab> findByPIdOrderByStudyDateDesc(@Param("pId") String pId);
+
+	List<StudyTab> findByPatientKey(Long patientKey);
 	}
