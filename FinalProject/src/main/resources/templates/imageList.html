@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Image List</title>
-</head>
-<body>
-    <h1>Image List</h1>
 
-    <ul>
-        <!-- 이미지 목록 반복 출력 -->
-        <c:forEach var="image" items="${images}">
-            <li>
-                <!-- 이미지 클릭 시 viewer 페이지로 이동 -->
-                <a href="/viewer/${image.studyKey}/${image.seriesKey}/${image.imageKey}">
-                    View Image: ${image.fname}
-                </a>
-            </li>
-        </c:forEach>
-    </ul>
+<head>
+	<title>Image List</title>
+</head>
+
+<body>
+	<h1>Image List</h1>
+
+	<ul>
+		<!-- 이미지 목록 반복 출력 -->
+		<c:forEach var="image" items="${images}">
+			<li>
+				<!-- 이미지 클릭 시 viewer 페이지로 이동 -->
+				<a href="/viewer/${image.studyKey}/${image.seriesKey}/${image.imageKey}">
+					View Image: ${image.fname}
+				</a>
+			</li>
+		</c:forEach>
+	</ul>
 </body>
+
 </html>

@@ -21,25 +21,19 @@ public class ImageTabController {
 
 	@Autowired
 	private ImageTabService imageTabService;
-	
-	// 특정 스터디키, 시리어스키, 이미지키에 해당하는 다이콤이미지 파일을 보여주기
+
+	// 스터디 키와 시리즈 키로 이미지 목록을 조회하는 컨트롤러 메소드
 	@GetMapping("/images")
-	public String getImagesBySeriesKey(@RequestParam(name = "seriesNum") Long seriesKey, Model model) {
-	    if (seriesKey == null) {
-	        System.out.println("seriesKey is missing");
-	        return "errorPage"; // 파라미터가 없을 때 보여줄 페이지
-	    } else {
-	        System.out.println("Received seriesKey: " + seriesKey);
-	    }
+	public String getImagesByStudyKeyAndSeriesKey(@RequestParam(name = "studyKey") Long studyKey,
+			@RequestParam(name = "seriesKey") Long seriesKey, Model model) {
+		System.out.println("스터디 키: " + studyKey);
+		System.out.println("시리즈 키: " + seriesKey);
 
-	    // 시리즈 키로 이미지 목록을 가져옴
-	    List<ImageTab> images = imageTabService.getImagesBySeriesKey(seriesKey);
+		// 스터디 키와 시리즈 키로 이미지 목록을 가져옴
+		List<ImageTab> images = imageTabService.getImagesByStudyKeyAndSeriesKey(studyKey, seriesKey);
 
-	    if (images.isEmpty()) {
-	        System.out.println("No images found for seriesKey: " + seriesKey);
-	    }
-
-	    model.addAttribute("images", images);
-	    return "imagePage"; // 이미지를 보여줄 HTML 페이지 이름
+		// 모델에 이미지 목록 추가
+		model.addAttribute("images", images);
+		return "imagePage"; // 이미지 목록을 보여줄 HTML 페이지
 	}
 }

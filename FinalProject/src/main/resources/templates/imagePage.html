@@ -1,50 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>DICOM 이미지 보기</title>
-    <script src="https://unpkg.com/cornerstone-core"></script>
-    <script src="https://unpkg.com/cornerstone-tools"></script>
-    <script src="https://unpkg.com/dicom-parser"></script>
-    <script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+	<meta charset="UTF-8">
+	<title>Image List</title>
 </head>
+
 <body>
-    <h1>DICOM 이미지 보기</h1>
-
-    <!-- 이미지가 표시될 요소 -->
-    <div id="dicomImage" style="width:512px;height:512px;border:1px solid black;"></div>
-
-    <!-- 확대/축소 버튼 -->
-    <button id="zoomIn" type="button">Zoom In</button>
-    <button id="zoomOut" type="button">Zoom Out</button>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 코너스톤 초기화
-            cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
-            cornerstoneWADOImageLoader.external.cornerstoneTools = cornerstoneTools;
-
-            const element = document.getElementById('dicomImage');
-            cornerstone.enable(element);
-
-            // 서버에서 전달받은 이미지 경로로 이미지 로드
-            const imageId = 'wadouri:/PACSStorage/{{path}}/{{fname}}'; // 서버에서 전달받은 이미지 경로로 변경
-            cornerstone.loadImage(imageId).then(function(image) {
-                cornerstone.displayImage(element, image);
-            });
-
-            document.getElementById('zoomIn').addEventListener('click', function() {
-                const viewport = cornerstone.getViewport(element);
-                viewport.scale += 0.1;
-                cornerstone.setViewport(element, viewport);
-            });
-
-            document.getElementById('zoomOut').addEventListener('click', function() {
-                const viewport = cornerstone.getViewport(element);
-                viewport.scale -= 0.1;
-                cornerstone.setViewport(element, viewport);
-            });
-        });
-    </script>
+	<h1>해당 시리즈키에 담긴 이미지키</h1>
+	<ul>
+		<li th:each="image : ${images}">
+			이미지 키: <span th:text="${image.imageKey}"></span> <br>
+			이미지 경로: <span th:text="${image.path}"></span> <br>
+			이미지 네임: <span th:text="${image.fName}"></span> <br>
+		</li>
+	</ul>
 </body>
+
 </html>

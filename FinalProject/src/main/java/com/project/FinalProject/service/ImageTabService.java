@@ -16,11 +16,8 @@ public class ImageTabService {
 	@Autowired
 	private ImageTabRepository imageTabRepository;
 	
-	public List<ImageTab> getImagesBySeriesKey(Long seriesKey) {
-	    return imageTabRepository.findBySeriesKey(seriesKey);
-	
+	// 시리즈 키로 이미지 목록을 조회하는 서비스 메소드
+	public List<ImageTab> getImagesByStudyKeyAndSeriesKey(Long studyKey, Long seriesKey) {
+        return imageTabRepository.findByStudyKeyAndSeriesKey(studyKey, seriesKey);
+        }
 	}
-	
-
-    
-}

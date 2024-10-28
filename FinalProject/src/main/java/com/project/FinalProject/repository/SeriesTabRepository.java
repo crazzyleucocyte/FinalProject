@@ -16,4 +16,4 @@ public interface SeriesTabRepository extends JpaRepository<SeriesTab, Long>{
 	// studyKey를 기준으로 시리즈 번호를 조회하는 쿼리
 	@Query("SELECT s FROM SeriesTab s WHERE s.studyKey = :studyKey")
 	List<SeriesTab> findByStudyKey(@Param("studyKey") String studyKey);
-}
+	}
