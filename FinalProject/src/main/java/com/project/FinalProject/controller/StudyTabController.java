@@ -1,22 +1,19 @@
 package com.project.FinalProject.controller;
 
 import java.util.List;
-import org.hibernate.query.Page;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.FinalProject.domain.StudyTab;
 import com.project.FinalProject.service.StudyTabService;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Controller
 public class StudyTabController {
@@ -58,5 +55,17 @@ public class StudyTabController {
 
 		return "searchResult";
 
+	}
+	
+	@GetMapping("/study/{studykey}")
+	public String getStudeyKey(@PathVariable("studykey") Long studyKey, Model model) {
+		StudyTab studyTab = studyTabService.getStudyByStudyKey(studyKey);
+		model.addAttribute("study", studyTab);
+		// 과거 검사 내역 가져오기 (patientKey 기준)
+		if (studyTab != null && studyTab.getPatientKey() != null) {
+			List<StudyTab> pastStudies = studyTabService.getPastStudies(studyTab.getPatientKey());
+			model.addAttribute("pastStudies", pastStudies);
+		}
+		return "Picdetail";
 	}
 }

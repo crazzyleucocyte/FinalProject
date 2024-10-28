@@ -24,4 +24,12 @@ public class StudyTabService {
 	public List<StudyTab> searchStudies(String pId, String pName, String modality, String startDate, String endDate, Long reportStatus, Long verifyFlag) {
         return studyTabRepository.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag);
         }
+	
+	public StudyTab getStudyByStudyKey(Long studyKey) {
+		return studyTabRepository.findById(studyKey).orElse(null);
+	}
+
+	public List<StudyTab> getPastStudies(Long patientKey) {
+		return studyTabRepository.findByPatientKey(patientKey);
+	}
 	}
