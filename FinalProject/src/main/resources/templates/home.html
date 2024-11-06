@@ -1094,6 +1094,16 @@
 		</script>
 
 		<script>
+			
+			// 더블클릭시 detail페이지로 이동
+		// 	$(() => {
+		// 	$('.studyTabData').dblclick(function (e) {
+		// 		console.log(e.target.parentElement.id)
+		// 		location.href = "test?studyKey=" + e.target.parentElement.id
+		// 	})
+		// })
+			
+		// 	검색 기능
 			axios.get(`search?pId=&pName=&startDate=&endDate=&reportStatus=5&modality=&verifyFlag=`)
 				.then(result => {
 					console.log(result);
