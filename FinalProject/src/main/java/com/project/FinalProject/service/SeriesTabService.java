@@ -12,12 +12,15 @@ import com.project.FinalProject.repository.SeriesTabRepository;
 @Service
 public class SeriesTabService {
 
-	@Autowired
-	private SeriesTabRepository seriesTabRepository;
+	private final SeriesTabRepository seriesTabRepository;
 	
-	// studyKey를 기준으로 시리즈 목록을 반환하는 메서드
-	public List<SeriesTab> findByStudyKey(String studyKey) {
-	    return seriesTabRepository.findByStudyKey(studyKey);
-	    }
-	}
-
+	@Autowired
+	public SeriesTabService(SeriesTabRepository seriesTabRepository) {
+        this.seriesTabRepository = seriesTabRepository;
+    }
+	
+	// 스터디키를 기준으로 시리즈 목록을 반환하는 메서드
+	public List<SeriesTab> getSeriesByStudyKey(Long studyKey) {
+        return seriesTabRepository.findByStudyKey(studyKey);
+    }
+}

@@ -1,20 +1,67 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Series List</title>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Series Page</title>
 </head>
-
 <body>
-	<h1>시리즈 목록</h1>
-	<ul>
-		<li th:each="series : ${seriesList}">
-			<a th:href="@{'/images?studyKey=' + ${series.studyKey} + '&seriesKey=' + ${series.seriesKey}}">
-				<span th:text="${series.seriesNum + '번 시리즈_' + series.imageCount + '개'}"></span>
-			</a>
-		</li>
-	</ul>
-</body>
+<div class="container">
+    <h1>Series Page</h1>
+    <p>DICOM 이미지를 표시합니다.</p>
 
+    <div>
+        <h2>시리즈 정보</h2>
+        <ul>
+            <!-- 시리즈별로 각 이미지 경로와 정보를 표시 -->
+            <li th:each="series : ${seriesList}" th:if="${series.imageCount > 0}">
+                <!-- a 태그로 감싸서 전체 div가 링크로 작동하게 함 -->
+                <a th:href="@{/series/images(studyKey=${series.studyKey}, seriesKey=${series.seriesKey})}">
+                    <div class="dicomImage" style="width:512px;height:512px;" data-index="[[${seriesList.indexOf(series)}]]">
+                        <!-- 시리즈 번호와 이미지 개수 정보 표시 -->
+                        <span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 코너스톤 라이브러리 및 추가 스크립트 -->
+    <script src="https://unpkg.com/cornerstone-core"></script>
+    <script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+    <script src="https://unpkg.com/dicom-parser"></script>
+
+	<!-- imagePaths 데이터를 JavaScript 변수로 설정 -->
+    <script th:inline="javascript">
+        /* [[${imagePaths}]] 변수를 JSON 형태로 변환하여 사용 */
+        const imagePaths = /*[[${imagePaths}]]*/ [];
+        console.log("이미지 정보: ", imagePaths);
+
+        cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
+        cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
+
+        cornerstoneWADOImageLoader.configure({
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Accept', 'application/dicom');
+            }
+        });
+
+        document.querySelectorAll(".dicomImage").forEach((element, index) => {
+            const imagePath = imagePaths[index].imagePath;
+            if (imagePath && imagePath.startsWith("wadouri:")) {
+                cornerstone.enable(element);
+                cornerstone.loadImage(imagePath)
+                    .then(image => {
+                        cornerstone.displayImage(element, image);
+                        console.log("이미지 로드 성공: " + imagePath);
+                    })
+                    .catch(error => {
+                        console.error("이미지 로드 에러:", error);
+                    });
+            } else {
+                console.error("잘못된 이미지 경로 형식:", imagePath);
+            }
+        });
+    </script>
+</div>
+</body>
 </html>

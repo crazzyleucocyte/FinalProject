@@ -21,14 +21,6 @@ public class StudyTabController {
 	@Autowired
 	StudyTabService studyTabService;
 
-	@RequestMapping("/list")
-	private String getList(Model model) {
-		org.springframework.data.domain.Page<StudyTab> pageList = studyTabService
-				.findAll(PageRequest.of(0, 28, Sort.by(Sort.Direction.ASC, "studyKey")));
-		model.addAttribute("pageList", pageList);
-		return "list";
-	}
-
 	// 중첩된 검색 가능
 	@GetMapping("/search")
 	public String searchStudies(
