@@ -413,12 +413,50 @@
 
 		.result-table th,
 		.result-table td {
-			padding: 10px;
-			text-align: center;
 			/* border: 1px solid #ccc; */
-			border: 1px solid #2A3F33;
 			color: white;
 		}
+		
+		/* 검색 결과 head */
+		.result-table-thead{
+			background-color: #355050;
+			display: grid;
+			grid-template-columns: minmax(11%, auto) minmax(18%, auto) minmax(9%, auto) minmax(20%, auto) repeat(2, minmax(9%, auto)) repeat(2, minmax(7%, auto)) minmax(10%, auto);
+			border-bottom: 1px solid #2A3F33;
+			border-top: 1px solid #2A3F33;
+			height: 65px;
+			font-size: larger;
+			font-weight: 600;
+		}
+		.result-table-thead span{
+			/* border: 1px solid; */
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			padding: 10px;
+		}
+		.odd{
+			background-color: hsl(180, 20%, 28%);
+		}
+		.result-table-tbody{
+			cursor: pointer;
+			border-bottom: 1px solid #2A3F33;
+			display: grid;
+			grid-template-columns: minmax(11%, auto) minmax(18%, auto) minmax(9%, auto) minmax(20%, auto) repeat(2, minmax(9%, auto)) repeat(2, minmax(7%, auto)) minmax(10%, auto);
+		}
+		.result-table-tbody span{
+			/* border: 1px solid #2A3F33; */
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			padding: 10px;
+			/* border: 1px solid; */
+		}
+		.result-table-tbody:hover{
+			background-color: #2F4F4F;
+			
+		}
+
 
 		/* 하단 패널 */
 		.bottom-panels {
@@ -784,24 +822,20 @@
 					<!-- 검색 결과 패널 -->
 					<div class="result-panel">
 						<div class="result-table">
-							<table>
-								<thead>
-									<tr>
-										<th>환자 ID</th>
-										<th>환자 이름</th>
-										<th>검사 장비</th>
-										<th>검사 설명</th>
-										<th>검사 일시</th>
-										<th>판독 상태</th>
-										<th>시리즈</th>
-										<th>이미지</th>
-										<th>Verify</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!-- 검색 결과 추가 -->
-								</tbody>
-							</table>
+							<div class="result-table-thead">
+								<span>환자 ID</span>
+								<span>환자 이름</span>
+								<span>검사 장비</span>
+								<span>검사 설명</span>
+								<span>검사 일시</span>
+								<span>판독 상태</span>
+								<span>시리즈</span>
+								<span>이미지</span>
+								<span>Verify</span>
+							</div>
+							<div class="result-table-result">
+								
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1094,20 +1128,71 @@
 		</script>
 
 		<script>
-			
+
 			// 더블클릭시 detail페이지로 이동
-		// 	$(() => {
-		// 	$('.studyTabData').dblclick(function (e) {
-		// 		console.log(e.target.parentElement.id)
-		// 		location.href = "test?studyKey=" + e.target.parentElement.id
-		// 	})
-		// })
-			
-		// 	검색 기능
-			axios.get(`search?pId=&pName=&startDate=&endDate=&reportStatus=5&modality=&verifyFlag=`)
-				.then(result => {
-					console.log(result);
+			// 	$(() => {
+			// 	$('.studyTabData').dblclick(function (e) {
+			// 		console.log(e.target.parentElement.id)
+			// 		location.href = "test?studyKey=" + e.target.parentElement.id
+			// 	})
+			// })
+
+			// 	검색 기능
+			document.querySelector(".search-btn").addEventListener("click", function () {
+				const startDate = document.getElementById("startDate").value;
+				const endDate = document.getElementById("endDate").value;
+				const modality = document.getElementById("modality").value;
+				const verifyFlag = document.getElementById("verifyFlag").value;
+				const reportStatus = document.getElementById("reportStatus").value;
+				const pId = document.getElementById("pId").value;
+				const pName = document.getElementById("pName").value;
+
+				axios.post(`/search`, {
+					pId: pId,
+					pName: pName,
+					modality: modality,
+					startDate: startDate,
+					endDate: endDate,
+					reportStatus: reportStatus,
+					verifyFlag: verifyFlag
 				})
+					.then(result => {
+						console.log(result);
+						console.log(result.data); // 서버에서 받은 데이터 확인
+						const studies = result.data; // 서버에서 받은 studyTabs 데이터
+
+						const studyResultContainer = document.querySelector(".result-table-result");
+						studyResultContainer.innerHTML = ""; // 이전 검색 결과 초기화
+
+						studies.map((study,i) => {
+							const row = document.createElement("div");
+							row.classList.add('result-table-tbody');
+							if(i%2==0){
+								row.classList.add('even');
+							}else{
+								row.classList.add('odd');
+
+							}
+							row.innerHTML = `
+							                <span>${study.pid}</span>
+							                <span>${study.pname}</span>
+							                <span>${study.modality}</span>
+							                <span>${study.studyDesc}</span>
+							                <span>${study.studyDate}</span>
+							                <span>${study.reportStatus == 3 ? '읽지않음' : (study.reportStatus == 5 ? '예비판독' : (study.reportStatus == 6 ? '판독' : '알수없음'))}</span>
+							                <span>${study.seriesCnt}</span>
+							                <span>${study.imageCnt}</span>
+							                <span>${study.verifyFlag == 0 ? '미요청' : (study.verifyFlag == 1 ? '요청완료' : '알 수 없음')}</span>
+							            `;
+							row.addEventListener('dblclick',function(){
+								location.href=`/series?studyKey=${study.studyKey}`
+							})
+							studyResultContainer.appendChild(row);
+						});
+					})
+					.catch(error => console.log(error));
+			});
+
 		</script>
 
 </body>
