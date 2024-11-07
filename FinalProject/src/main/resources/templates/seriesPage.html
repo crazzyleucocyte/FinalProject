@@ -1,20 +1,87 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Series List</title>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Series Page</title>
+    
+    <script src="https://unpkg.com/cornerstone-core"></script>
+    <script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+    <script src="https://unpkg.com/dicom-parser"></script>
+    
+    <script th:inline="javascript"> 
+		/*<![CDATA[*/
+		const studyKey = /*[[${studyKey}]]*/ "";
+		const imagePaths = /*[[${imagePaths}]]*/ []; 
+		const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 
+		/*]]>*/
+		console.log("studyKey 초기화 확인:", studyKey);
+		console.log("imagePaths 초기화 확인:", imagePaths);
+    	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
+	</script>
+	
+	<script src="/js/seriesPage.js"></script>
+
+<style>
+        /* 기본 레이아웃 및 썸네일 스타일 */
+        .thumbnail-list {
+            width: 120px;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border: none; /* 배경 회색 박스 제거 */
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+		/* 텍스트 스타일 */
+        .thumbnail span {
+            font-size: 10px; /* 텍스트 크기 줄임 */
+            display: block;
+            margin-bottom: 5px; /* 텍스트와 이미지 사이의 간격 */
+            white-space: nowrap; /* 텍스트가 한 줄에 들어오도록 */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* 큰 이미지 뷰어 영역 */
+        .viewer {
+            width: 512px;
+            height: 512px;
+            border: 1px solid black;
+            margin: auto;
+            text-align: center;
+            float: left;
+        }
+    </style>
 </head>
 
 <body>
-	<h1>시리즈 목록</h1>
-	<ul>
-		<li th:each="series : ${seriesList}">
-			<a th:href="@{'/images?studyKey=' + ${series.studyKey} + '&seriesKey=' + ${series.seriesKey}}">
-				<span th:text="${series.seriesNum + '번 시리즈_' + series.imageCount + '개'}"></span>
-			</a>
-		</li>
-	</ul>
-</body>
+	
+<div>
+    <h2>시리즈 썸네일</h2>
 
+    <!-- 썸네일 목록을 좌측에 배치 -->
+    <div class="thumbnail-list">
+    <ul style="list-style-type: none; padding: 0;"> <!-- 불필요한 점 제거 -->
+        <li th:each="series : ${seriesList}" th:if="${series.imageCount > 0}">
+            <div class="thumbnail dicomImage" 
+                 style="cursor:pointer;"
+                 th:data-series-key="${series.seriesKey}">
+                 
+                <span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+    <!-- 오른쪽에 큰 이미지 뷰어가 나올 위치 -->
+    <div class="viewer" id="dicomViewer"></div>
+</div>
+</body>
 </html>
