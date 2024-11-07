@@ -404,24 +404,44 @@
 			padding: 15px;
 			border-radius: 10px;
 			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			overflow: auto;
+			/* overflow: auto; */
+			text-shadow: 0px 0px 10px #0000004f;
 		}
 
-		.result-table table {
-			width: 100%;
-			border-collapse: collapse;
-			/* background-color: #3D5C5C; */
-			background-color: #2F4F4F;
-			overflow-y: scroll;
-		}
-
-		.result-table th,
-		.result-table td {
-			/* border: 1px solid #ccc; */
-			color: white;
-		}
 
 		/* 검색 결과 head */
+		.result-table-container {
+			overflow-y: scroll;
+			height: 379px;
+		}
+
+		/* 스크롤 바 */
+		.result-table-container::-webkit-scrollbar {
+			width: 15px;
+			/* 세로축 스크롤바 폭 너비 */
+
+		}
+
+		.result-table-container::-webkit-scrollbar-thumb {
+			background: #213939;
+			border: 2px solid #2a3f33;
+			border-radius: 12px 12px 12px 12px;
+		}
+
+		.result-table-container::-webkit-scrollbar-thumb:hover {
+			background-color: #a0a0a5;
+		}
+
+		/* 스크롤이 움직이는 뒷 배경 */
+		.result-table-container::-webkit-scrollbar-track {
+			background: #0303033d;
+			border-radius: 10px;
+		}
+
+		.selected{
+			background-color: #243737 !important;
+		}
+
 		.result-table-thead {
 			background-color: #355050;
 			display: grid;
@@ -442,7 +462,7 @@
 		}
 
 		.odd {
-			background-color: hsl(180, 20%, 28%);
+			background-color: #395656;
 		}
 
 		.result-table-tbody {
@@ -876,21 +896,23 @@
 					<!-- 검색 결과 패널 -->
 					<div class="result-panel">
 						<div class="result-table">
-							<div class="result-table-thead">
-								<span>환자 ID</span>
-								<span>환자 이름</span>
-								<span>검사 장비</span>
-								<span>검사 설명</span>
-								<span>검사 일시</span>
-								<span>판독 상태</span>
-								<span>시리즈</span>
-								<span>이미지</span>
-								<span>Verify</span>
+							<div class="result-table-container">
+								<div class="result-table-thead">
+									<span>환자 ID</span>
+									<span>환자 이름</span>
+									<span>검사 장비</span>
+									<span>검사 설명</span>
+									<span>검사 일시</span>
+									<span>판독 상태</span>
+									<span>시리즈</span>
+									<span>이미지</span>
+									<span>Verify</span>
+								</div>
+								<div class="result-table-result">
+									<!-- 검색 결과 출력 -->
+								</div>
+								<button> 더보기 </button>
 							</div>
-							<div class="result-table-result">
-								<!-- 검색 결과 출력 -->
-							</div>
-							<button> 더보기 </button>
 						</div>
 					</div>
 				</div>
@@ -905,11 +927,11 @@
 					<div class="history-name">
 						<div class="history-id">
 							<label>환자 ID : </label>
-							<span id="history-patient-id">12345</span>
+							<span id="history-patient-id"></span>
 						</div>
 						<div class="history-name-item">
 							<label>환자 이름 : </label>
-							<span id="history-patient-name">홍길동</span>
+							<span id="history-patient-name"></span>
 						</div>
 					</div>
 					<div class="history-info-container">
@@ -940,28 +962,24 @@
 					<div class="study-info-container">
 						<div class="ai-content">
 							<label>AI 진단 병명</label>
-							<div id="aiFinding" class="info-item">정상</div>
+							<div id="aiFinding" class="info-item"></div>
 
 							<label>AI 진단 내용</label>
-							<div id="aiReport" class="info-item">이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음</div>
+							<div id="aiReport" class="info-item"></div>
 						</div>
 
 						<div class="filming-info">
 							<label>수술한 의사</label>
-							<div id="operatorsName" class="info-item">Dr. Kim</div>
+							<div id="operatorsName" class="info-item"></div>
 
 							<label>촬영 방향</label>
-							<div id="viewPosition" class="info-item">AP</div>
+							<div id="viewPosition" class="info-item"></div>
 
 							<label>촬영 부위</label>
-							<div id="bodyPart" class="info-item">복부</div>
+							<div id="bodyPart" class="info-item"></div>
 
 							<label>검사 설명</label>
-							<div id="studyDesc" class="info-item">복부 CT</div>
+							<div id="studyDesc" class="info-item"></div>
 						</div>
 					</div>
 				</div>
@@ -1187,6 +1205,7 @@
 		</script>
 
 		<script>
+			let selectIndex=-1;
 
 
 			// 	검색 기능
@@ -1232,6 +1251,7 @@
 						studies.map((study, i) => {
 							const row = document.createElement("div");
 							row.classList.add('result-table-tbody');
+							row.classList.add(`selected${i}`);
 							if (i % 2 == 1) {
 								row.classList.add('odd');
 							}
@@ -1250,6 +1270,15 @@
 								location.href = `/study/${study.studyKey}`
 							})
 							row.addEventListener('click', function () {
+								if(selectIndex === -1){
+									document.querySelector(`.selected${i}`).classList.add("selected")
+									selectIndex=i;
+								}else if(selectIndex !== i){
+									document.querySelector(`.selected${selectIndex}`).classList.remove("selected")
+									document.querySelector(`.selected${i}`).classList.add("selected")
+									selectIndex=i;
+
+								}
 
 								//클릭 시 study 정보 출력
 								console.log("study", study);
@@ -1259,6 +1288,11 @@
 								document.getElementById("viewPosition").innerHTML = study.viewPosition;
 								document.getElementById("bodyPart").innerHTML = study.bodyPart;
 								document.getElementById("studyDesc").innerHTML = study.studyDesc;
+								
+								//클릭시 환자 정보 출력
+								document.getElementById("history-patient-id").innerHTML = study.pid;
+								document.getElementById("history-patient-name").innerHTML = study.pname;
+
 
 								//클릭시 과거 검사 이력 출력
 								axios.get(`/study/history/${study.patientKey}`)

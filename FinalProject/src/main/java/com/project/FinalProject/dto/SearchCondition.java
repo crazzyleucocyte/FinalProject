@@ -16,4 +16,16 @@ public class SearchCondition {
 	String endDate;
 	Long reportStatus;
 	Long verifyFlag;
+	
+	void setStartDate(String startDate) {
+		if(startDate != null) {
+			this.startDate = startDate.replace("-", "");
+		}
+	}
+	void setEndDate(String endDate) {
+		if(endDate != null) {
+			this.endDate = endDate.replace("-", "");
+		}
+	}
+	
 }
