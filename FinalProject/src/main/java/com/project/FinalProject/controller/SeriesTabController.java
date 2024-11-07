@@ -24,10 +24,12 @@ public class SeriesTabController {
 	// studyKey를 기준으로 시리즈 목록을 조회하여 모델에 추가하고 페이지로 전달
 	@GetMapping("/series")
 	public String getSeriesByStudyKey(@RequestParam(name = "studyKey", required = true) String studyKey, Model model) {
-		if (studyKey == null || studyKey.isEmpty()) {
-		} else {
+	if (studyKey == null || studyKey.isEmpty()) {
+			return "errorPage";
 		}
+		
 		List<SeriesTab> seriesList = seriesTabService.findByStudyKey(studyKey);
+		System.out.println("Series List: " + seriesList);
 		model.addAttribute("seriesList", seriesList);
 		return "seriesPage";
 	}
