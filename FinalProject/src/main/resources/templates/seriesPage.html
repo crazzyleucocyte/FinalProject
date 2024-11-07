@@ -3,65 +3,85 @@
 <head>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <title>Series Page</title>
-</head>
-<body>
-<div class="container">
-    <h1>Series Page</h1>
-    <p>DICOM 이미지를 표시합니다.</p>
-
-    <div>
-        <h2>시리즈 정보</h2>
-        <ul>
-            <!-- 시리즈별로 각 이미지 경로와 정보를 표시 -->
-            <li th:each="series : ${seriesList}" th:if="${series.imageCount > 0}">
-                <!-- a 태그로 감싸서 전체 div가 링크로 작동하게 함 -->
-                <a th:href="@{/series/images(studyKey=${series.studyKey}, seriesKey=${series.seriesKey})}">
-                    <div class="dicomImage" style="width:512px;height:512px;" data-index="[[${seriesList.indexOf(series)}]]">
-                        <!-- 시리즈 번호와 이미지 개수 정보 표시 -->
-                        <span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 코너스톤 라이브러리 및 추가 스크립트 -->
+    
     <script src="https://unpkg.com/cornerstone-core"></script>
     <script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
     <script src="https://unpkg.com/dicom-parser"></script>
+    
+    <script th:inline="javascript"> 
+		/*<![CDATA[*/
+		const studyKey = /*[[${studyKey}]]*/ "";
+		const imagePaths = /*[[${imagePaths}]]*/ []; 
+		const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 
+		/*]]>*/
+		console.log("studyKey 초기화 확인:", studyKey);
+		console.log("imagePaths 초기화 확인:", imagePaths);
+    	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
+	</script>
+	
+	<script src="/js/seriesPage.js"></script>
 
-	<!-- imagePaths 데이터를 JavaScript 변수로 설정 -->
-    <script th:inline="javascript">
-        /* [[${imagePaths}]] 변수를 JSON 형태로 변환하여 사용 */
-        const imagePaths = /*[[${imagePaths}]]*/ [];
-        console.log("이미지 정보: ", imagePaths);
+<style>
+        /* 기본 레이아웃 및 썸네일 스타일 */
+        .thumbnail-list {
+            width: 120px;
+            float: left;
+            margin-right: 20px;
+        }
 
-        cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
-        cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border: none; /* 배경 회색 박스 제거 */
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
 
-        cornerstoneWADOImageLoader.configure({
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('Accept', 'application/dicom');
-            }
-        });
+		/* 텍스트 스타일 */
+        .thumbnail span {
+            font-size: 10px; /* 텍스트 크기 줄임 */
+            display: block;
+            margin-bottom: 5px; /* 텍스트와 이미지 사이의 간격 */
+            white-space: nowrap; /* 텍스트가 한 줄에 들어오도록 */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* 큰 이미지 뷰어 영역 */
+        .viewer {
+            width: 512px;
+            height: 512px;
+            border: 1px solid black;
+            margin: auto;
+            text-align: center;
+            float: left;
+        }
+    </style>
+</head>
 
-        document.querySelectorAll(".dicomImage").forEach((element, index) => {
-            const imagePath = imagePaths[index].imagePath;
-            if (imagePath && imagePath.startsWith("wadouri:")) {
-                cornerstone.enable(element);
-                cornerstone.loadImage(imagePath)
-                    .then(image => {
-                        cornerstone.displayImage(element, image);
-                        console.log("이미지 로드 성공: " + imagePath);
-                    })
-                    .catch(error => {
-                        console.error("이미지 로드 에러:", error);
-                    });
-            } else {
-                console.error("잘못된 이미지 경로 형식:", imagePath);
-            }
-        });
-    </script>
+<body>
+	
+<div>
+    <h2>시리즈 썸네일</h2>
+
+    <!-- 썸네일 목록을 좌측에 배치 -->
+    <div class="thumbnail-list">
+    <ul style="list-style-type: none; padding: 0;"> <!-- 불필요한 점 제거 -->
+        <li th:each="series : ${seriesList}" th:if="${series.imageCount > 0}">
+            <div class="thumbnail dicomImage" 
+                 style="cursor:pointer;"
+                 th:data-series-key="${series.seriesKey}">
+                 
+                <span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+    <!-- 오른쪽에 큰 이미지 뷰어가 나올 위치 -->
+    <div class="viewer" id="dicomViewer"></div>
 </div>
 </body>
 </html>

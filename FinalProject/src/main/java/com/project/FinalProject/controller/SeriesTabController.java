@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.FinalProject.domain.ImageTab;
 import com.project.FinalProject.domain.SeriesTab;
@@ -50,26 +51,44 @@ public class SeriesTabController {
                 imagePaths.add(imageInfo);
             }
         }
-
+        model.addAttribute("studyKey", studyKey);
         model.addAttribute("seriesList", seriesList);
         model.addAttribute("imagePaths", imagePaths); // `imagePaths` 모델에 추가
         
         return "seriesPage";
 	}
 	
+/*
 	@GetMapping("/series/images")
     public String getSeriesImagesPage(@RequestParam(name = "studyKey") Long studyKey,
                                       @RequestParam(name = "seriesKey") Long seriesKey, Model model) {
         // 선택된 시리즈의 모든 이미지를 가져와 모델에 추가
         List<ImageTab> imageList = imageTabService.getAllImagesBySeries(studyKey, seriesKey);
-        List<String> imagePaths = new ArrayList<>();
+        List<String> seriesImagePaths = new ArrayList<>();
 
         for (ImageTab image : imageList) {
         	String imagePath = "wadouri:http://localhost:8080/PACSStorage/" + image.getPath() + image.getFName();
-            imagePaths.add(imagePath.replace("\\", "/"));
+        	seriesImagePaths.add(imagePath.replace("\\", "/"));
         }
+        System.out.println("시리즈 이미지: " + seriesImagePaths);
+        model.addAttribute("seriesImagePaths", seriesImagePaths);
+        return "seriesPage";
+    }*/
+	
+	@GetMapping("/series/images")
+	@ResponseBody // JSON 형식으로 반환
+	public List<String> getSeriesImages(
+			@RequestParam(name = "studyKey") Long studyKey,
+			@RequestParam(name = "seriesKey") Long seriesKey) {
+		
+		List<ImageTab> imageList = imageTabService.getAllImagesBySeries(studyKey, seriesKey);
+	    List<String> seriesImagePaths = new ArrayList<>();
+	    
+	    for (ImageTab image : imageList) {
+	    	String imagePath = "wadouri:http://localhost:8080/PACSStorage/" + image.getPath() + image.getFName();
+	        seriesImagePaths.add(imagePath.replace("\\", "/"));
+	    }
 
-        model.addAttribute("imagePaths", imagePaths);
-        return "seriesImage";
-    }
+	    return seriesImagePaths; // JSON 형식으로 반환됨
+	}
 }
