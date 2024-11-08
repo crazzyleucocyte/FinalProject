@@ -22,19 +22,24 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 public class ReportTab {
+	
 	@Id
 	@Column(name = "STUDYKEY")
 	private Long studyKey;
 	
-	@Column(name = "REPORT_Comment ")
-	private String reportComment; //코멘트
-	
-	@Column(name = "REPORT_TIME")
-	private LocalDateTime reportTime; //판독날짜
+	//코멘트
+	@Column(name = "REPORT_Comment")
+	private String reportComment; 
+	 
+	//판독날짜
+	@CreatedDate
+	@Column(name = "REPORT_TIME", updatable=false)
+	private LocalDateTime reportTime; 
 
 	
-	@Column(name = "USERNAME")
-	private String userName; //판독의
+	//판독의
+	@Column(name = "USER_NAME")
+	private String userName; 
 	
 	
 }

@@ -79,6 +79,7 @@ public class StudyTabController {
 	public String getStudeyKey(@PathVariable("studykey") Long studyKey, Model model) {
 		StudyTab studyTab = studyTabService.getStudyByStudyKey(studyKey);
 		model.addAttribute("study", studyTab);
+		model.addAttribute("studyKey", studyTab.getStudyKey());
 		// 과거 검사 내역 가져오기 (patientKey 기준)
 		if (studyTab != null && studyTab.getPatientKey() != null) {
 			List<StudyTab> pastStudies = studyTabService.getPastStudies(studyTab.getPatientKey());

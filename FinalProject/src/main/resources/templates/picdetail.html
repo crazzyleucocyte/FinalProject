@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="/css/picdetail.css">
+	<!-- <link rel="stylesheet" href="/css/picdetail.css"> -->
 
 <title>Study Detail</title>
 
@@ -26,7 +26,7 @@
 	console.log("imagePaths 초기화 확인:", imagePaths);
 	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
 </script>
-<script src="/js/seriesPage.js"></script>
+<!-- <script src="/js/seriesPage.js"></script> -->
 </head>
 
 	
@@ -359,10 +359,10 @@
 				<button id="toggle-series-btn">시리즈</button>
 				<button id="toggle-report-btn">리포트</button>
 			</div>
-			<!-- <div class="sidebar-down-item">
-				<button id="setting">설정</button>
+			<div class="sidebar-down-item">
+				<!-- <button id="setting">설정</button> -->
 				<button>로그아웃</button>
-			</div> -->
+			</div>
 		</div>
 
 		<div class="main-content">
@@ -461,7 +461,7 @@
 
 				<div id="series-info" class="series-info">
 
-					<div class="thumbnail-list">
+					<div class="thumbnail-list ">
 				    	<div th:each="series : ${seriesList}" 
 				         	th:if="${series.imageCount > 0}" 
 				         	class="thumbnail dicomImage"
@@ -508,12 +508,6 @@
 		</div>
 	</div>
 
-	<script th:inline="javascript">
-		
-
-
-	</script>
-
 	<script>
 		console.log("studyKey", studyKey);
 
@@ -534,33 +528,31 @@
 			})
 			.catch(error => console.error('헤헤 에러났다', error));
 
-		// 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
-		document.getElementById('save-report').addEventListener('click', function () {
-			const now = new Date();
-			const reportTime = now.getFullYear() + "-" +
-				String(now.getMonth() + 1).padStart(2, '0') + "-" +
-				String(now.getDate()).padStart(2, '0') + "T" +
-				String(now.getHours()).padStart(2, '0') + ":" +
-				String(now.getMinutes()).padStart(2, '0') + ":" +
-				String(now.getSeconds()).padStart(2, '0');
-
-			const reportData = {
-				studyKey: studyKey, // 실제 studyKey 값으로 변경하세요.
-				reportComment: document.getElementById('comment').value,
-				userName: document.getElementById('radiologist1').value,
-				reportTime: reportTime // 포맷팅된 문자열
-			};
-
-			axios.post('/report/save', reportData)
-				.then(response => {
-					console.log('Report saved:', response.data);
-					alert('저장되었습니다!');
-				})
-				.catch(error => {
-					console.error('Error:', error);
-					alert('저장에 실패했습니다.');
-				});
-		});
+		 // 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
+    document.getElementById('save-report').addEventListener('click', function () {
+       const now = new Date();
+       const reportTime = now.getFullYear() + "-" +
+          String(now.getMonth() + 1).padStart(2, '0') + "-" +
+          String(now.getDate()).padStart(2, '0') + "T" +
+          String(now.getHours()).padStart(2, '0') + ":" +
+          String(now.getMinutes()).padStart(2, '0') + ":" +
+          String(now.getSeconds()).padStart(2, '0');
+       const reportData = {
+          studyKey: studyKey, // 실제 studyKey 값으로 변경하세요.
+          reportComment: document.getElementById('comment').value,
+          userName: document.getElementById('radiologist1').value,
+          reportTime: reportTime // 포맷팅된 문자열
+       };
+       axios.post('/report/save', reportData)
+          .then(response => {
+             console.log('Report saved:', response.data);
+             alert('저장되었습니다!');
+          })
+          .catch(error => {
+             console.error('Error:', error);
+             alert('저장에 실패했습니다.');
+          });
+    });
 
 		// study 데이터 가져오기
 		axios.get(`/study/${studyKey}`)
