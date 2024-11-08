@@ -2,10 +2,12 @@ package com.project.FinalProject.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.project.FinalProject.domain.StudyTab;
 
@@ -19,13 +21,14 @@ public interface StudyTabRepository extends JpaRepository<StudyTab, Long> {
 		   "(:endDate IS NULL OR s.studyDate <= :endDate) AND " +
 		   "(:reportStatus IS NULL OR s.reportStatus = :reportStatus) AND " +
 		   "(:verifyFlag IS NULL OR s.verifyFlag = :verifyFlag)")
-	List<StudyTab> searchStudies(@Param("pId") String pId,
+	Page<StudyTab> searchStudies(@Param("pId") String pId,
 		                         @Param("pName") String pName,
 		                         @Param("modality") String modality,
 		                         @Param("startDate") String startDate,
 		                         @Param("endDate") String endDate,
 		                         @Param("reportStatus") Long reportStatus,
-		                         @Param("verifyFlag") Long verifyFlag);
+		                         @Param("verifyFlag") Long verifyFlag,
+								 Pageable pageable);
 	
 	
 	

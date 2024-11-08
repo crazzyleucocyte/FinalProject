@@ -29,8 +29,7 @@ public class ReportTab {
 	@Column(name = "REPORT_Comment ")
 	private String reportComment; //코멘트
 	
-	@CreatedDate
-	@Column(name = "REPORT_TIME", updatable = false)
+	@Column(name = "REPORT_TIME")
 	private LocalDateTime reportTime; //판독날짜
 
 	

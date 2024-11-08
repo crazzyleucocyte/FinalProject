@@ -3,16 +3,16 @@ package com.project.FinalProject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.FinalProject.domain.StudyTab;
@@ -26,6 +26,7 @@ public class StudyTabController {
 	StudyTabService studyTabService;
 	
 	// 중첩된 검색 가능
+
 	@PostMapping("/search")
 	@ResponseBody
 	public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
@@ -34,7 +35,7 @@ public class StudyTabController {
 	    return studies;
 	}
 
-	// 중첩된 검색 가능
+		// 중첩된 검색 가능
 //		@PostMapping("/search")
 //		@ResponseBody
 //		public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
@@ -74,5 +75,13 @@ public class StudyTabController {
 			model.addAttribute("pastStudies", pastStudies);
 		}
 		return "Picdetail";
+	}
+
+	@GetMapping("/study/history/{patientKey}")
+	@ResponseBody
+	public List<StudyTab> getPatientHistory(@PathVariable("patientKey") Long patientKey, Model model) {
+	
+			List<StudyTab> pastStudies = studyTabService.getPastStudies(patientKey);
+		return pastStudies;
 	}
 }
