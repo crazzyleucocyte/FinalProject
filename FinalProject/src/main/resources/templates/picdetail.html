@@ -2,263 +2,323 @@
 <html lang="ko">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Detail</title>
-<style>
-body {
-	margin: 0;
-	font-family: 'Helvetica Neue', Arial, sans-serif;
-	background-color: #2F4F4F;
-	color: #fff;
-	line-height: 1.6;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Study Detail</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Helvetica Neue', Arial, sans-serif;
+			background-color: #2F4F4F;
+			color: #fff;
+			line-height: 1.6;
+		}
 
-.container {
-	display: flex;
-	height: 100vh;
-	width: 93%;
-	margin: 0 auto;
-}
+		.container {
+			display: flex;
+			height: 100vh;
+			width: 93%;
+			margin: 0 auto;
+		}
 
-.sidebar {
-	width: 80px;
-	background-color: #3D5C5C;
-	margin: 20px;
-	padding: 20px 15px 10px;
-	box-sizing: border-box;
-	border-right: 1px solid #444;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-	gap: 300px;
-	border-radius: 20px;
-}
+		.sidebar {
+			width: 80px;
+			background-color: #3D5C5C;
+			margin: 20px;
+			padding: 20px 15px 10px;
+			box-sizing: border-box;
+			border-right: 1px solid #444;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+			gap: 300px;
+			border-radius: 20px;
+		}
 
-.sidebar button {
-	margin: 15px 0;
-	width: 50px;
-	height: 50px;
-	border: none;
-	border-radius: 12px;
-	background-color: #406b6b;
-	color: #fff;
-	cursor: pointer;
-	font-size: 14px;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+		.sidebar button {
+			margin: 15px 0;
+			width: 50px;
+			height: 50px;
+			border: none;
+			border-radius: 12px;
+			background-color: #406b6b;
+			color: #fff;
+			cursor: pointer;
+			font-size: 14px;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
 
-.sidebar button:hover {
-	background-color: #25403C;
-	transform: translateY(-3px);
-}
+		.sidebar button:hover {
+			background-color: #25403C;
+			transform: translateY(-3px);
+		}
 
-.sidebar button:active {
-	background-color: #1e3330;
-}
+		.sidebar button:active {
+			background-color: #1e3330;
+		}
 
-.logo-img {
-	width: 100%;
-	height: auto;
-	margin-bottom: 10px;
-	cursor: pointer;
-}
+		.logo-img {
+			width: 100%;
+			height: auto;
+			margin-bottom: 10px;
+			cursor: pointer;
+		}
 
-.main-content {
-	display: flex;
-	flex-grow: 1;
-	flex-direction: column;
-	background-color: #2F4F4F;
-}
+		.main-content {
+			display: flex;
+			flex-grow: 1;
+			flex-direction: column;
+			background-color: #2F4F4F;
+		}
 
-.tool-bar {
-	display: flex;
-	justify-content: flex-start;
-	gap: 10px;
-	background-color: #3D5C5C;
-	padding: 15px;
-	margin: 10px;
-	border-bottom: 1px solid #444;
-	border-radius: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+		.tool-bar {
+			display: flex;
+			justify-content: flex-start;
+			gap: 10px;
+			background-color: #3D5C5C;
+			padding: 15px;
+			margin: 10px;
+			border-bottom: 1px solid #444;
+			border-radius: 20px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
 
-.tool-bar .prev-next {
-	display: flex;
-	margin-right: auto;
-}
+		.tool-bar .prev-next {
+			display: flex;
+			margin-right: auto;
+		}
 
-.tool-bar button {
-	background-color: #406b6b;
-	color: #fff;
-	margin: auto 5px;
-	border: none;
-	border-radius: 8px;
-	padding: 10px 20px;
-	cursor: pointer;
-	font-size: 14px;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+		.tool-bar button {
+			background-color: #406b6b;
+			color: #fff;
+			margin: auto 5px;
+			border: none;
+			border-radius: 8px;
+			padding: 10px 20px;
+			cursor: pointer;
+			font-size: 14px;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
 
-.tool-bar button:hover {
-	background-color: #25403C;
-	transform: translateY(-3px);
-}
+		.tool-bar button:hover {
+			background-color: #25403C;
+			transform: translateY(-3px);
+		}
 
-.tool-bar button:active {
-	background-color: #1e3330;
-}
+		.tool-bar button:active {
+			background-color: #1e3330;
+		}
 
-.content {
-	display: flex;
-	flex-grow: 1;
-	background-color: #3D5C5C;
-	padding: 20px;
-	margin: 10px;
-	box-sizing: border-box;
-	transition: all 0.3s ease;
-	overflow: hidden;
-	border-radius: 20px;
-	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-	border: 2px solid aliceblue;
-}
+		.content {
+			display: flex;
+			flex-grow: 1;
+			background-color: #3D5C5C;
+			padding: 20px;
+			margin: 10px;
+			box-sizing: border-box;
+			transition: all 0.3s ease;
+			overflow: hidden;
+			border-radius: 20px;
+			box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+			border: 2px solid aliceblue;
+		}
 
-.past-info-table {
-	margin-top: 10px;
-	width: 100%;
-	border-collapse: collapse;
-	font-size: small;
-}
+		.past-info-table {
+			margin-top: 10px;
+			width: 100%;
+			border-collapse: collapse;
+			font-size: small;
+		}
 
-.past-info-table th, .past-info-table td {
-	border: 1px solid #ccc;
-	padding: 8px;
-	text-align: left;
-}
+		.past-info-table th,
+		.past-info-table td {
+			border: 1px solid #ccc;
+			padding: 8px;
+			text-align: left;
+		}
 
-.past-info-table th {
-	background-color: #3D5C5C;
-	color: #fff;
-}
+		.past-info-table th {
+			background-color: #3D5C5C;
+			color: #fff;
+		}
 
-.study-info, .past-info, .series-info, .report-info {
-	display: none;
-	width: 0;
-	overflow: hidden;
-	flex-direction: column;
-	background-color: #2E4B4B;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	transition: all 1s ease;
-}
+		.study-info,
+		.past-info,
+		.series-info,
+		.report-info {
+			display: none;
+			width: 0;
+			overflow: hidden;
+			flex-direction: column;
+			background-color: #2E4B4B;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			transition: all 1s ease;
+		}
 
-.study-info.show, .past-info.show, .series-info.show, .report-info.show
-	{
-	display: flex;
-	width: auto;
-}
+		.study-info.show,
+		.past-info.show,
+		.series-info.show,
+		.report-info.show {
+			display: flex;
+			width: auto;
+		}
 
-.report-info.show {
-	display: flex;
-	width: 500px;
-}
+		.report-info.show {
+			display: flex;
+			width: 500px;
+		}
 
-.study-info span, .past-info span, .series-info span, .report-info span
-	{
-	font-weight: bold;
-	margin-bottom: 10px;
-	font-size: 18px;
-}
+		.study-info span,
+		.past-info span,
+		.series-info span,
+		.report-info span {
+			font-weight: bold;
+			margin-bottom: 10px;
+			font-size: 18px;
+		}
 
-.study-info div, .past-info div, .series-info div, .report-info div {
-	margin-bottom: 8px;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #ccc;
-}
+		.study-info div,
+		.past-info div,
+		.series-info div,
+		.report-info div {
+			margin-bottom: 8px;
+			font-size: 14px;
+			line-height: 1.5;
+			color: #ccc;
+		}
 
-.image-viewer {
-	flex-grow: 1;
-	background-color: #173232;
-	border-radius: 10px;
-	border: 1px solid #444;
-	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-	transition: all 0.3s ease;
-}
+		.image-viewer {
+			flex-grow: 1;
+			background-color: #173232;
+			border-radius: 10px;
+			border: 1px solid #444;
+			box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+			transition: all 0.3s ease;
+		}
 
-.image-viewer.shifted {
-	margin-left: 30px;
-	transition: margin-left 0.3s ease;
-}
+		.image-viewer.shifted {
+			margin-left: 30px;
+			transition: margin-left 0.3s ease;
+		}
 
-.report-info label {
-	font-weight: bold;
-	color: #fff;
-	margin-bottom: 5px;
-	display: block;
-}
+		.report-info label {
+			font-weight: bold;
+			color: #fff;
+			margin-bottom: 5px;
+			display: block;
+		}
 
-.comment, .reading-doc {
-	margin-right: 15px;
-}
+		.comment,
+		.reading-doc {
+			margin-right: 15px;
+		}
 
-.report-info textarea, .report-info input {
-	width: 100%;
-	background-color: #1E2F2F;
-	color: #fff;
-	border: 1px solid #444;
-	border-radius: 4px;
-	padding: 8px;
-	margin-bottom: 15px;
-}
+		.report-info textarea,
+		.report-info input {
+			width: 100%;
+			background-color: #1E2F2F;
+			color: #fff;
+			border: 1px solid #444;
+			border-radius: 4px;
+			padding: 8px;
+			margin-bottom: 15px;
+		}
 
-.report-info textarea {
-	resize: both;
-	overflow: auto;
-}
+		.report-info textarea {
+			resize: both;
+			overflow: auto;
+		}
 
-.report-info button {
-	background-color: #406b6b;
-	color: #fff;
-	border: none;
-	padding: 10px 20px;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-}
+		.report-info button {
+			background-color: #406b6b;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.2s ease;
+		}
 
-.report-info button:hover {
-	background-color: #25403C;
-	transform: translateY(-3px);
-}
+		.report-info button:hover {
+			background-color: #25403C;
+			transform: translateY(-3px);
+		}
 
-.report-info button:active {
-	background-color: #1e3330;
-}
+		.report-info button:active {
+			background-color: #1e3330;
+		}
 
-#delete-report {
-	background-color: #ff5c5c;
-}
+		#delete-report {
+			background-color: #ff5c5c;
+		}
 
-#delete-report:hover {
-	background-color: #ff3c3c;
-}
+		#delete-report:hover {
+			background-color: #ff3c3c;
+		}
 
-#delete-report:active {
-	background-color: #fd3636;
-}
+		#delete-report:active {
+			background-color: #fd3636;
+		}
 
-.report-info div.buttons {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 20px;
-}
-</style>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+		.report-info div.buttons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 20px;
+		}
+
+
+
+		#delete-report:hover {
+			background-color: #ff3c3c;
+		}
+
+		#delete-report:active {
+			background-color: #fd3636;
+		}
+
+		.report-info div.buttons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 20px;
+		}
+
+		.past-info-div {
+			display: table;
+			width: 100%;
+		}
+
+		.past-info-header {
+			display: table-row;
+			font-weight: bold;
+		}
+
+		.past-info-header span {
+			display: table-cell;
+			padding: 8px;
+			font-size: 12px;
+			border-bottom: 1px solid #2A3F33;
+			border-top: 1px solid #2A3F33;
+		}
+
+		.past-info-body {
+			display: table-row;
+		}
+
+		.past-info-body span {
+			display: table-cell;
+			padding: 8px;
+			font-size: 12px;
+			border-bottom: 1px solid #2A3F33;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -267,16 +327,15 @@ body {
 		<div class="sidebar">
 			<div class="sidebar-up-item">
 				<img src="/img/logo.png" alt="medipacs" class="logo-img" id="home">
-				<!-- <button id="home">홈</button> -->
 				<button id="toggle-info-btn">정보</button>
 				<button id="toggle-past-btn">과거 내역</button>
 				<button id="toggle-series-btn">시리즈</button>
 				<button id="toggle-report-btn">리포트</button>
 			</div>
-			<div class="sidebar-down-item">
+			<!-- <div class="sidebar-down-item">
 				<button id="setting">설정</button>
 				<button>로그아웃</button>
-			</div>
+			</div> -->
 		</div>
 
 		<div class="main-content">
@@ -351,24 +410,22 @@ body {
 					<div th:if="${pastStudies != null}">
 						<label>환자 아이디 : <span th:text="${study.pId}"></span></label> <br>
 						<label>환자 이름 : <span th:text="${study.pName}"></span></label>
-						<table class="past-info-table">
-							<thead>
-								<tr>
-									<th>검사 장비</th>
-									<th>검사 설명</th>
-									<th>검사 일시</th>
-									<th>판독 상태</th>
-								</tr>
-							</thead>
-							<tbody th:each="study : ${pastStudies}">
-								<tr>
-									<td th:text="${study.modality}"></td>
-									<td th:text="${study.studyDesc}"></td>
-									<td th:text="${study.studyDate}"></td>
-									<td th:text="${study.reportStatus}"></td>
-								</tr>
-							</tbody>
-						</table>
+						<div class="past-info-table">
+							<div class="past-info-div">
+								<div class="past-info-header">
+									<span>검사 장비</span>
+									<span>검사 설명</span>
+									<span>검사 일시</span>
+									<span>판독 상태</span>
+								</div>
+								<div class="past-info-body" th:each="study : ${pastStudies}">
+									<span th:text="${study.modality}"></span>
+									<span th:text="${study.studyDesc}"></span>
+									<span th:text="${study.studyDate}"></span>
+									<span th:text="${study.reportStatus}"></span>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div th:if="${pastStudies == null}">
 						<p>과거 검사 내역이 없습니다.</p>
@@ -377,8 +434,8 @@ body {
 
 				<div id="series-info" class="series-info">
 					<span>시리즈 정보</span>
-					<div th:if="${seriesList != null && !seriesList.isEmpty()}"
-						th:each="series : ${seriesList}" class="series-item">
+					<div th:if="${seriesList != null && !seriesList.isEmpty()}" th:each="series : ${seriesList}"
+						class="series-item">
 						<div class="series-thumbnail">
 							<img th:src="${series.studyinsuid}" alt="Series Image" />
 						</div>
@@ -403,8 +460,7 @@ body {
 
 
 					<div class="radiologist1">
-						<label for="radiologist1">판독의</label> <input id="radiologist1"
-							type="text">
+						<label for="radiologist1">판독의</label> <input id="radiologist1" type="text">
 					</div>
 
 
@@ -424,120 +480,243 @@ body {
 			</div>
 		</div>
 	</div>
+
 	<script th:inline="javascript">
-	const studyKey = /*[[${study.studyKey}]]*/ '';
+		const studyKey = /*[[${study.studyKey}]]*/ '';
+
 	</script>
 	<script>
-	console.log("studyKey", studyKey);
+		// 각 버튼과 섹션 연결
+		function toggleSection(buttonId, sectionId) {
+			const button = document.getElementById(buttonId);
+			const section = document.getElementById(sectionId);
+			const allSections = document.querySelectorAll('.study-info, .past-info, .series-info, .report-info');
+			const imageViewer = document.getElementById('image-viewer');
 
-    // 홈 버튼 클릭 시 이동
-    document.getElementById('home').addEventListener('click', function() {
-        window.location.href = 'http://localhost:8080/home';
-    });
+			button.addEventListener('click', () => {
+				// 모든 섹션을 숨기고 이미지 뷰어의 'shifted' 클래스를 제거
+				allSections.forEach(sec => {
+					if (sec !== section) {
+						sec.classList.remove('show');
+					}
+				});
 
-    // report 데이터 가져오기
-    axios.get(`/report/${studyKey}`)
-       .then(response => {
-          const data = response.data;
-          if (data) {
-             document.getElementById('comment').value = data.reportComment || '';
-             document.getElementById('radiologist1').value = data.userName || '';
-             document.getElementById('report-date').value = data.reportTime || '날짜 정보 없음';
-          }
-       })
-       .catch(error => console.error('헤헤 에러났다', error));
+				// 현재 섹션 토글
+				section.classList.toggle('show');
 
-    // 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
-    document.getElementById('save-report').addEventListener('click', function () {
-       const now = new Date();
-       const reportTime = now.getFullYear() + "-" +
-          String(now.getMonth() + 1).padStart(2, '0') + "-" +
-          String(now.getDate()).padStart(2, '0') + "T" +
-          String(now.getHours()).padStart(2, '0') + ":" +
-          String(now.getMinutes()).padStart(2, '0') + ":" +
-          String(now.getSeconds()).padStart(2, '0');
+				// 이미지 뷰어도 각 섹션 상태에 따라 이동
+				const anySectionShown = Array.from(allSections).some(sec => sec.classList.contains('show'));
+				if (anySectionShown) {
+					imageViewer.classList.add('shifted');
+				} else {
+					imageViewer.classList.remove('shifted');
+				}
+			});
+		}
 
-       const reportData = {
-          studyKey: studyKey, // 실제 studyKey 값으로 변경하세요.
-          reportComment: document.getElementById('comment').value,
-          userName: document.getElementById('radiologist1').value,
-          reportTime: reportTime // 포맷팅된 문자열
-       };
+		// 홈 버튼 클릭 시 이동
+		document.getElementById('home').addEventListener('click', function () {
+			window.location.href = 'http://localhost:8080/home';
+		});
 
-       axios.post('/report/save', reportData)
-          .then(response => {
-             console.log('Report saved:', response.data);
-             alert('저장되었습니다!');
-          })
-          .catch(error => {
-             console.error('Error:', error);
-             alert('저장에 실패했습니다.');
-          });
-    });
+		toggleSection('toggle-info-btn', 'study-info');
+		toggleSection('toggle-past-btn', 'past-info');
+		toggleSection('toggle-series-btn', 'series-info');
+		toggleSection('toggle-report-btn', 'report-info');
 
-    // study 데이터 가져오기
-    axios.get(`/study/${studyKey}`)
-       .then(response => {
-          const data = response.data;
-          document.getElementById('studyKey').textContent = data.studyKey;
-          document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
-          document.getElementById('accessNum').textContent = data.accessNum;
-          document.getElementById('addedInfo').textContent = data.addedInfo;
-          document.getElementById('aeTitle').textContent = data.aeTitle;
-          document.getElementById('aiFinding').textContent = data.aiFinding;
-          document.getElementById('aiReport').textContent = data.aiReport;
-          document.getElementById('bodyPart').textContent = data.bodyPart;
-          document.getElementById('modality').textContent = data.modality;
-          document.getElementById('operatorsName').textContent = data.operatorsName;
-          document.getElementById('patientKey').textContent = data.patientKey;
-          document.getElementById('pName').textContent = data.pName;
-          document.getElementById('studyDate').textContent = data.studyDate;
-          document.getElementById('studyDesc').textContent = data.studyDesc;
-          document.getElementById('viewPosition').textContent = data.viewPosition;
-       })
-       .catch(error => console.error('Error:', error));
+		// 코멘트 영역에 기본 텍스트 추가
+		document.getElementById('comment').value = "[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n";
 
-    // Toggle 섹션 표시/숨김 함수
-    function toggleSection(buttonId, sectionId) {
-        const button = document.getElementById(buttonId);
-        const section = document.getElementById(sectionId);
-        const allSections = document.querySelectorAll('.study-info, .past-info, .series-info, .report-info');
-        const imageViewer = document.getElementById('image-viewer');
+		// 판독 지우기 버튼
+		document.getElementById('delete-report').addEventListener('click', function () {
+			document.getElementById('comment').value = '[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n';
+		});
 
-        button.addEventListener('click', () => {
-            // 모든 섹션을 숨기고 이미지 뷰어의 'shifted' 클래스 제거
-            allSections.forEach(sec => {
-                if (sec !== section) {
-                    sec.classList.remove('show');
-                }
-            });
+		// 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
+		document.getElementById('save-report').addEventListener('click', function () {
+			const reportData = {
+				studyKey: 1,  // 실제 studyKey 값으로 변경하세요.
+				comment: document.getElementById('comment').value,
+				radiologist1: document.getElementById('radiologist1').value,
+				radiologist2: document.getElementById('radiologist2').value,
+				reportDate: document.getElementById('report-date').value
+			};
 
-            // 클릭한 섹션을 토글
-            section.classList.toggle('show');
+			fetch('/reports/save', { // 실제 API 경로로 변경하세요.
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(reportData)
+			})
+				.then(response => response.json())
+				.then(data => {
+					console.log('Report saved:', data);
+					alert('저장되었습니다!');
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					alert('저장에 실패했습니다.');
+				});
+		});
+		// studyKey 값으로 API에서 데이터 가져오기
+		
+		fetch(`/study/${studyKey}`)
+			.then(response => response.json())
+			.then(data => {
+				document.getElementById('studyKey').textContent = data.studyKey;
+				document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
+				document.getElementById('accessNum').textContent = data.accessNum;
+				document.getElementById('addedInfo').textContent = data.addedInfo;
+				document.getElementById('aeTitle').textContent = data.aeTitle;
+				document.getElementById('aiFinding').textContent = data.aiFinding;
+				document.getElementById('aiReport').textContent = data.aiReport;
+				document.getElementById('bodyPart').textContent = data.bodyPart;
+				document.getElementById('modality').textContent = data.modality;
+				document.getElementById('operatorsName').textContent = data.operatorsName;
+				document.getElementById('patientKey').textContent = data.patientKey;
+				document.getElementById('pName').textContent = data.pName;
+				document.getElementById('studyDate').textContent = data.studyDate;
+				document.getElementById('studyDesc').textContent = data.studyDesc;
+				document.getElementById('viewPosition').textContent = data.viewPosition;
+			})
+			.catch(error => console.error('Error:', error));
 
-            // 이미지 뷰어 위치 조정
-            const anySectionShown = Array.from(allSections).some(sec => sec.classList.contains('show'));
-            if (anySectionShown) {
-                imageViewer.classList.add('shifted');
-            } else {
-                imageViewer.classList.remove('shifted');
-            }
-        });
-    }
+		// 과거내역 span odd 행 색깔 바꾸기
+		document.getElementById('toggle-past-btn').addEventListener('click', function () {
+			const pastInfo = document.getElementById('past-info');
 
-    toggleSection('toggle-info-btn', 'study-info');
-    toggleSection('toggle-past-btn', 'past-info');
-    toggleSection('toggle-series-btn', 'series-info');
-    toggleSection('toggle-report-btn', 'report-info');
+			if (pastInfo.classList.contains('show')) {
+				const rows = document.querySelectorAll('#past-info .past-info-table .past-info-body');
 
-    // 코멘트 영역에 기본 텍스트 추가
-    document.getElementById('comment').value = "[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n";
+				rows.forEach((row, rowIndex) => {
+					const spans = row.querySelectorAll('span');
 
-    // 판독 지우기 버튼
-    document.getElementById('delete-report').addEventListener('click', function () {
-       document.getElementById('comment').value = '[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n';
-    });
-</script>
+					spans.forEach((span, index) => {
+						if (rowIndex % 2 == 0) {
+							span.style.backgroundColor = 'hsl(180, 20%, 28%)';
+						} else {
+							span.style.backgroundColor = '';
+						}
+					});
+				});
+			}
+		});
+
+
+
+
+
+		console.log("studyKey", studyKey);
+
+		// 홈 버튼 클릭 시 이동
+		document.getElementById('home').addEventListener('click', function () {
+			window.location.href = 'http://localhost:8080/home';
+		});
+
+		// report 데이터 가져오기
+		axios.get(`/report/${studyKey}`)
+			.then(response => {
+				const data = response.data;
+				if (data) {
+					document.getElementById('comment').value = data.reportComment || '';
+					document.getElementById('radiologist1').value = data.userName || '';
+					document.getElementById('report-date').value = data.reportTime || '날짜 정보 없음';
+				}
+			})
+			.catch(error => console.error('헤헤 에러났다', error));
+
+		// 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
+		document.getElementById('save-report').addEventListener('click', function () {
+			const now = new Date();
+			const reportTime = now.getFullYear() + "-" +
+				String(now.getMonth() + 1).padStart(2, '0') + "-" +
+				String(now.getDate()).padStart(2, '0') + "T" +
+				String(now.getHours()).padStart(2, '0') + ":" +
+				String(now.getMinutes()).padStart(2, '0') + ":" +
+				String(now.getSeconds()).padStart(2, '0');
+
+			const reportData = {
+				studyKey: studyKey, // 실제 studyKey 값으로 변경하세요.
+				reportComment: document.getElementById('comment').value,
+				userName: document.getElementById('radiologist1').value,
+				reportTime: reportTime // 포맷팅된 문자열
+			};
+
+			axios.post('/report/save', reportData)
+				.then(response => {
+					console.log('Report saved:', response.data);
+					alert('저장되었습니다!');
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					alert('저장에 실패했습니다.');
+				});
+		});
+
+		// study 데이터 가져오기
+		axios.get(`/study/${studyKey}`)
+			.then(response => {
+				const data = response.data;
+				document.getElementById('studyKey').textContent = data.studyKey;
+				document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
+				document.getElementById('accessNum').textContent = data.accessNum;
+				document.getElementById('addedInfo').textContent = data.addedInfo;
+				document.getElementById('aeTitle').textContent = data.aeTitle;
+				document.getElementById('aiFinding').textContent = data.aiFinding;
+				document.getElementById('aiReport').textContent = data.aiReport;
+				document.getElementById('bodyPart').textContent = data.bodyPart;
+				document.getElementById('modality').textContent = data.modality;
+				document.getElementById('operatorsName').textContent = data.operatorsName;
+				document.getElementById('patientKey').textContent = data.patientKey;
+				document.getElementById('pName').textContent = data.pName;
+				document.getElementById('studyDate').textContent = data.studyDate;
+				document.getElementById('studyDesc').textContent = data.studyDesc;
+				document.getElementById('viewPosition').textContent = data.viewPosition;
+			})
+			.catch(error => console.error('Error:', error));
+
+		// Toggle 섹션 표시/숨김 함수
+		function toggleSection(buttonId, sectionId) {
+			const button = document.getElementById(buttonId);
+			const section = document.getElementById(sectionId);
+			const allSections = document.querySelectorAll('.study-info, .past-info, .series-info, .report-info');
+			const imageViewer = document.getElementById('image-viewer');
+
+			button.addEventListener('click', () => {
+				// 모든 섹션을 숨기고 이미지 뷰어의 'shifted' 클래스 제거
+				allSections.forEach(sec => {
+					if (sec !== section) {
+						sec.classList.remove('show');
+					}
+				});
+
+				// 클릭한 섹션을 토글
+				section.classList.toggle('show');
+
+				// 이미지 뷰어 위치 조정
+				const anySectionShown = Array.from(allSections).some(sec => sec.classList.contains('show'));
+				if (anySectionShown) {
+					imageViewer.classList.add('shifted');
+				} else {
+					imageViewer.classList.remove('shifted');
+				}
+			});
+		}
+
+		toggleSection('toggle-info-btn', 'study-info');
+		toggleSection('toggle-past-btn', 'past-info');
+		toggleSection('toggle-series-btn', 'series-info');
+		toggleSection('toggle-report-btn', 'report-info');
+
+		// 코멘트 영역에 기본 텍스트 추가
+		document.getElementById('comment').value = "[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n";
+
+		// 판독 지우기 버튼
+		document.getElementById('delete-report').addEventListener('click', function () {
+			document.getElementById('comment').value = '[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n';
+		});
+	</script>
 
 
 </body>
