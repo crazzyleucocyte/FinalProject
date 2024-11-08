@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.project.FinalProject.domain.StudyTab;
@@ -21,8 +22,8 @@ public class StudyTabService {
 		return studyTabRepository.findAll(page);
 		}
 
-	public List<StudyTab> searchStudies(String pId, String pName, String modality, String startDate, String endDate, Long reportStatus, Long verifyFlag) {
-        return studyTabRepository.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag);
+	public Page<StudyTab> searchStudies(String pId, String pName, String modality, String startDate, String endDate, Long reportStatus, Long verifyFlag, Pageable pageable) {
+        return studyTabRepository.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag, pageable);
         }
 	
 	public StudyTab getStudyByStudyKey(Long studyKey) {

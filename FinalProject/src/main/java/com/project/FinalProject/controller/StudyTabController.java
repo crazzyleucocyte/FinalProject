@@ -3,16 +3,16 @@ package com.project.FinalProject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.FinalProject.domain.StudyTab;
@@ -28,7 +28,7 @@ public class StudyTabController {
 	// 중첩된 검색 가능
 		@PostMapping("/search")
 		@ResponseBody
-		public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
+		public Page<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition, @PageableDefault(size=10, sort = "studyKey", direction = Sort.Direction.DESC)Pageable pageable) {
 			
 			System.out.println("searchCondition : "+searchCondition);
 			String pId = searchCondition.getPId();
@@ -38,8 +38,6 @@ public class StudyTabController {
 			String endDate = searchCondition.getEndDate();
 			Long reportStatus = searchCondition.getReportStatus();
 			Long verifyFlag = searchCondition.getVerifyFlag();
-			List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus,
-					verifyFlag);
 //			model.addAttribute("studyTabs", studies);
 	//
 //			// 검색 후에도 값 유지
@@ -51,7 +49,7 @@ public class StudyTabController {
 //			model.addAttribute("reportStatus", reportStatus);
 //			model.addAttribute("verifyFlag", verifyFlag);
 
-			return studies;
+			return studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag, pageable);
 
 		}
 //	@PostMapping("/search")
