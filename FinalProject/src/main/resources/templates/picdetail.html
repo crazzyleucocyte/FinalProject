@@ -266,6 +266,7 @@
 		}
 
 
+
 		.report-info div.buttons {
 			display: flex;
 			justify-content: space-between;
@@ -484,129 +485,10 @@
 	<script th:inline="javascript">
 		const studyKey = /*[[${study.studyKey}]]*/ '';
 
+
 	</script>
+
 	<script>
-		// 각 버튼과 섹션 연결
-		function toggleSection(buttonId, sectionId) {
-			const button = document.getElementById(buttonId);
-			const section = document.getElementById(sectionId);
-			const allSections = document.querySelectorAll('.study-info, .past-info, .series-info, .report-info');
-			const imageViewer = document.getElementById('image-viewer');
-
-			button.addEventListener('click', () => {
-				// 모든 섹션을 숨기고 이미지 뷰어의 'shifted' 클래스를 제거
-				allSections.forEach(sec => {
-					if (sec !== section) {
-						sec.classList.remove('show');
-					}
-				});
-
-				// 현재 섹션 토글
-				section.classList.toggle('show');
-
-				// 이미지 뷰어도 각 섹션 상태에 따라 이동
-				const anySectionShown = Array.from(allSections).some(sec => sec.classList.contains('show'));
-				if (anySectionShown) {
-					imageViewer.classList.add('shifted');
-				} else {
-					imageViewer.classList.remove('shifted');
-				}
-			});
-		}
-
-		// 홈 버튼 클릭 시 이동
-		document.getElementById('home').addEventListener('click', function () {
-			window.location.href = 'http://localhost:8080/home';
-		});
-
-		toggleSection('toggle-info-btn', 'study-info');
-		toggleSection('toggle-past-btn', 'past-info');
-		toggleSection('toggle-series-btn', 'series-info');
-		toggleSection('toggle-report-btn', 'report-info');
-
-		// 코멘트 영역에 기본 텍스트 추가
-		document.getElementById('comment').value = "[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n";
-
-		// 판독 지우기 버튼
-		document.getElementById('delete-report').addEventListener('click', function () {
-			document.getElementById('comment').value = '[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n';
-		});
-
-		// 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
-		document.getElementById('save-report').addEventListener('click', function () {
-			const reportData = {
-				studyKey: 1,  // 실제 studyKey 값으로 변경하세요.
-				comment: document.getElementById('comment').value,
-				radiologist1: document.getElementById('radiologist1').value,
-				radiologist2: document.getElementById('radiologist2').value,
-				reportDate: document.getElementById('report-date').value
-			};
-
-			fetch('/reports/save', { // 실제 API 경로로 변경하세요.
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(reportData)
-			})
-				.then(response => response.json())
-				.then(data => {
-					console.log('Report saved:', data);
-					alert('저장되었습니다!');
-				})
-				.catch(error => {
-					console.error('Error:', error);
-					alert('저장에 실패했습니다.');
-				});
-		});
-		// studyKey 값으로 API에서 데이터 가져오기
-		
-		fetch(`/study/${studyKey}`)
-			.then(response => response.json())
-			.then(data => {
-				document.getElementById('studyKey').textContent = data.studyKey;
-				document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
-				document.getElementById('accessNum').textContent = data.accessNum;
-				document.getElementById('addedInfo').textContent = data.addedInfo;
-				document.getElementById('aeTitle').textContent = data.aeTitle;
-				document.getElementById('aiFinding').textContent = data.aiFinding;
-				document.getElementById('aiReport').textContent = data.aiReport;
-				document.getElementById('bodyPart').textContent = data.bodyPart;
-				document.getElementById('modality').textContent = data.modality;
-				document.getElementById('operatorsName').textContent = data.operatorsName;
-				document.getElementById('patientKey').textContent = data.patientKey;
-				document.getElementById('pName').textContent = data.pName;
-				document.getElementById('studyDate').textContent = data.studyDate;
-				document.getElementById('studyDesc').textContent = data.studyDesc;
-				document.getElementById('viewPosition').textContent = data.viewPosition;
-			})
-			.catch(error => console.error('Error:', error));
-
-		// 과거내역 span odd 행 색깔 바꾸기
-		document.getElementById('toggle-past-btn').addEventListener('click', function () {
-			const pastInfo = document.getElementById('past-info');
-
-			if (pastInfo.classList.contains('show')) {
-				const rows = document.querySelectorAll('#past-info .past-info-table .past-info-body');
-
-				rows.forEach((row, rowIndex) => {
-					const spans = row.querySelectorAll('span');
-
-					spans.forEach((span, index) => {
-						if (rowIndex % 2 == 0) {
-							span.style.backgroundColor = 'hsl(180, 20%, 28%)';
-						} else {
-							span.style.backgroundColor = '';
-						}
-					});
-				});
-			}
-		});
-
-
-
-
-
 		console.log("studyKey", studyKey);
 
 		// 홈 버튼 클릭 시 이동
@@ -658,21 +540,21 @@
 		axios.get(`/study/${studyKey}`)
 			.then(response => {
 				const data = response.data;
-				document.getElementById('studyKey').innerHTML = data.studyKey;
-				document.getElementById('abnormalPatient').innerHTML = data.abnormalPatient;
-				document.getElementById('accessNum').innerHTML = data.accessNum;
-				document.getElementById('addedInfo').innerHTML = data.addedInfo;
-				document.getElementById('aeTitle').innerHTML = data.aeTitle;
-				document.getElementById('aiFinding').innerHTML = data.aiFinding;
-				document.getElementById('aiReport').innerHTML = data.aiReport;
-				document.getElementById('bodyPart').innerHTML = data.bodyPart;
-				document.getElementById('modality').innerHTML = data.modality;
-				document.getElementById('operatorsName').innerHTML = data.operatorsName;
-				document.getElementById('patientKey').innerHTML = data.patientKey;
-				document.getElementById('pName').innerHTML = data.pName;
-				document.getElementById('studyDate').innerHTML = data.studyDate;
-				document.getElementById('studyDesc').innerHTML = data.studyDesc;
-				document.getElementById('viewPosition').innerHTML = data.viewPosition;
+				document.getElementById('studyKey').textContent = data.studyKey;
+				document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
+				document.getElementById('accessNum').textContent = data.accessNum;
+				document.getElementById('addedInfo').textContent = data.addedInfo;
+				document.getElementById('aeTitle').textContent = data.aeTitle;
+				document.getElementById('aiFinding').textContent = data.aiFinding;
+				document.getElementById('aiReport').textContent = data.aiReport;
+				document.getElementById('bodyPart').textContent = data.bodyPart;
+				document.getElementById('modality').textContent = data.modality;
+				document.getElementById('operatorsName').textContent = data.operatorsName;
+				document.getElementById('patientKey').textContent = data.patientKey;
+				document.getElementById('pName').textContent = data.pName;
+				document.getElementById('studyDate').textContent = data.studyDate;
+				document.getElementById('studyDesc').textContent = data.studyDesc;
+				document.getElementById('viewPosition').textContent = data.viewPosition;
 			})
 			.catch(error => console.error('Error:', error));
 
@@ -712,9 +594,30 @@
 		// 코멘트 영역에 기본 텍스트 추가
 		document.getElementById('comment').value = "[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n";
 
+
 		// 판독 지우기 버튼
 		document.getElementById('delete-report').addEventListener('click', function () {
 			document.getElementById('comment').value = '[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n';
+		});
+		// 과거내역 span odd 행 색깔 바꾸기
+		document.getElementById('toggle-past-btn').addEventListener('click', function () {
+			const pastInfo = document.getElementById('past-info');
+
+			if (pastInfo.classList.contains('show')) {
+				const rows = document.querySelectorAll('#past-info .past-info-table .past-info-body');
+
+				rows.forEach((row, rowIndex) => {
+					const spans = row.querySelectorAll('span');
+
+					spans.forEach((span, index) => {
+						if (rowIndex % 2 == 0) {
+							span.style.backgroundColor = 'hsl(180, 20%, 28%)';
+						} else {
+							span.style.backgroundColor = '';
+						}
+					});
+				});
+			}
 		});
 	</script>
 

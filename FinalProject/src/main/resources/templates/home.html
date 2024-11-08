@@ -433,12 +433,9 @@
 		}
 
 		/* 스크롤이 움직이는 뒷 배경 */
-		.result-table-container::-webkit-scrollbar-track {
-			background: #0303033d;
-			border-radius: 10px;
-		}
 
-		.selected{
+
+		.selected {
 			background-color: #243737 !important;
 		}
 
@@ -965,9 +962,7 @@
 							<div id="aiFinding" class="info-item"></div>
 
 							<label>AI 진단 내용</label>
-
 							<div id="aiReport" class="info-item"></div>
-
 						</div>
 
 						<div class="filming-info">
@@ -1207,7 +1202,7 @@
 		</script>
 
 		<script>
-			let selectIndex=-1;
+			let selectIndex = -1;
 
 
 			// 	검색 기능
@@ -1272,13 +1267,13 @@
 								location.href = `/study/${study.studyKey}`
 							})
 							row.addEventListener('click', function () {
-								if(selectIndex === -1){
+								if (selectIndex === -1) {
 									document.querySelector(`.selected${i}`).classList.add("selected")
-									selectIndex=i;
-								}else if(selectIndex !== i){
+									selectIndex = i;
+								} else if (selectIndex !== i) {
 									document.querySelector(`.selected${selectIndex}`).classList.remove("selected")
 									document.querySelector(`.selected${i}`).classList.add("selected")
-									selectIndex=i;
+									selectIndex = i;
 
 								}
 
@@ -1290,7 +1285,7 @@
 								document.getElementById("viewPosition").innerHTML = study.viewPosition;
 								document.getElementById("bodyPart").innerHTML = study.bodyPart;
 								document.getElementById("studyDesc").innerHTML = study.studyDesc;
-								
+
 								//클릭시 환자 정보 출력
 								document.getElementById("history-patient-id").innerHTML = study.pid;
 								document.getElementById("history-patient-name").innerHTML = study.pname;
