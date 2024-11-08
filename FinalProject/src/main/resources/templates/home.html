@@ -1268,14 +1268,15 @@
 						}
 
 						studies.forEach((study, i) => {
+							
 							const row = document.createElement("div");
 							row.classList.add('result-table-tbody');
-							row.classList.add(`selected${i}`);
+							row.classList.add(`selected${currentPage}${i}`);
 							if (i % 2 === 1) row.classList.add('odd');
-
+							
 							row.innerHTML = `
-                    <span>${study.pid}</span>
-                    <span>${study.pname}</span>
+							<span>${study.pid}</span>
+							<span>${study.pname}</span>
                     <span>${study.modality}</span>
                     <span>${study.studyDesc}</span>
                     <span>${study.studyDate}</span>
@@ -1283,20 +1284,23 @@
                     <span>${study.seriesCnt}</span>
                     <span>${study.imageCnt}</span>
                     <span>${study.verifyFlag === 0 ? '미요청' : (study.verifyFlag === 1 ? '요청완료' : '알 수 없음')}</span>
-                `;
-
-							row.addEventListener('dblclick', function () {
-								location.href = `/study/${study.studyKey}`;
-							});
-
-							row.addEventListener('click', function () {
+					`;
+					
+					row.addEventListener('dblclick', function () {
+						location.href = `/study/${study.studyKey}`;
+					});
+					
+					row.addEventListener('click', function (e) {
+								let number = e.target.parentElement.classList[1].substr(8,2);
+								console.log("number : ", number);
+								
 								if (selectIndex === -1) {
-									document.querySelector(`.selected${i}`).classList.add("selected");
-									selectIndex = i;
+									document.querySelector(`.selected${currentPage}${i}`).classList.add("selected");
+									selectIndex = number;
 								} else if (selectIndex !== i) {
 									document.querySelector(`.selected${selectIndex}`).classList.remove("selected");
-									document.querySelector(`.selected${i}`).classList.add("selected");
-									selectIndex = i;
+									document.querySelector(`.selected${number}`).classList.add("selected");
+									selectIndex = number;
 								}
 
 								document.getElementById("aiFinding").innerHTML = study.aiFinding || '';

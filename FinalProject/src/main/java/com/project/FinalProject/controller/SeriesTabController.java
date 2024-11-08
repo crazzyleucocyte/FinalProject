@@ -19,6 +19,8 @@ import com.project.FinalProject.domain.SeriesTab;
 import com.project.FinalProject.service.ImageTabService;
 import com.project.FinalProject.service.SeriesTabService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 
 @Controller
@@ -63,13 +65,14 @@ public class SeriesTabController {
 	@ResponseBody // JSON 형식으로 반환
 	public List<String> getSeriesImages(
 			@RequestParam(name = "studyKey") Long studyKey,
-			@RequestParam(name = "seriesKey") Long seriesKey) {
-		
+			@RequestParam(name = "seriesKey") Long seriesKey,
+			HttpServletRequest request) {
+		String serverIp = request.getServerName();
 		List<ImageTab> imageList = imageTabService.getAllImagesBySeries(studyKey, seriesKey);
 	    List<String> seriesImagePaths = new ArrayList<>();
 	    
 	    for (ImageTab image : imageList) {
-	    	String imagePath = "wadouri:http://localhost:8080/PACSStorage/" + image.getPath() + image.getFName();
+	    	String imagePath = "wadouri:http://"+serverIp+":8080/PACSStorage/" + image.getPath() + image.getFName();
 	        seriesImagePaths.add(imagePath.replace("\\", "/"));
 	    }
 

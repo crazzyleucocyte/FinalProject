@@ -25,7 +25,7 @@ public class StudyTabService {
 
 	
 	// SearchCondition을 사용한 검색 메서드
-    public List<StudyTab> searchStudies(SearchCondition searchCondition) {
+    public Page<StudyTab> searchStudies(SearchCondition searchCondition, Pageable pageable) {
         return studyTabRepository.searchStudies(
             searchCondition.getPId(),
             searchCondition.getPName(),
@@ -33,7 +33,8 @@ public class StudyTabService {
             searchCondition.getStartDate(),
             searchCondition.getEndDate(),
             searchCondition.getReportStatus(),
-            searchCondition.getVerifyFlag()
+            searchCondition.getVerifyFlag(),
+            pageable
         );
     }
 

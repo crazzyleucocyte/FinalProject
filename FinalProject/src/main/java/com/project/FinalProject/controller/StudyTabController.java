@@ -26,14 +26,24 @@ public class StudyTabController {
 	StudyTabService studyTabService;
 	
 	// 중첩된 검색 가능
-
 	@PostMapping("/search")
 	@ResponseBody
-	public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
-		// searchCondition 객체 자체를 전달합니다.
-		List<StudyTab> studies = studyTabService.searchStudies(searchCondition);
-	    return studies;
+	public Page<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition, @PageableDefault(size=10, sort = "studyKey", direction = Sort.Direction.DESC)Pageable pageable) {
+		
+		System.out.println("searchCondition : "+searchCondition);
+		Page<StudyTab> studies = studyTabService.searchStudies(searchCondition,pageable);
+		
+
+		return studies;
+
 	}
+//	@PostMapping("/search")
+//	@ResponseBody
+//	public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
+//		// searchCondition 객체 자체를 전달합니다.
+//		List<StudyTab> studies = studyTabService.searchStudies(searchCondition);
+//	    return studies;
+//	}
 
 		// 중첩된 검색 가능
 //		@PostMapping("/search")
