@@ -24,61 +24,46 @@ public class StudyTabController {
 
 	@Autowired
 	StudyTabService studyTabService;
-
+	
 	// 중첩된 검색 가능
-		@PostMapping("/search")
-		@ResponseBody
-		public Page<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition, @PageableDefault(size=10, sort = "studyKey", direction = Sort.Direction.DESC)Pageable pageable) {
-			
-			System.out.println("searchCondition : "+searchCondition);
-			String pId = searchCondition.getPId();
-			String pName = searchCondition.getPName();
-			String modality = searchCondition.getModality();
-			String startDate = searchCondition.getStartDate();
-			String endDate = searchCondition.getEndDate();
-			Long reportStatus = searchCondition.getReportStatus();
-			Long verifyFlag = searchCondition.getVerifyFlag();
-//			model.addAttribute("studyTabs", studies);
-	//
-//			// 검색 후에도 값 유지
-//			model.addAttribute("pId", pId);
-//			model.addAttribute("pName", pName);
-//			model.addAttribute("modality", modality);
-//			model.addAttribute("startDate", startDate);
-//			model.addAttribute("endDate", endDate);
-//			model.addAttribute("reportStatus", reportStatus);
-//			model.addAttribute("verifyFlag", verifyFlag);
 
-			return studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus, verifyFlag, pageable);
+	@PostMapping("/search")
+	@ResponseBody
+	public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
+		// searchCondition 객체 자체를 전달합니다.
+		List<StudyTab> studies = studyTabService.searchStudies(searchCondition);
+	    return studies;
+	}
 
-		}
-//	@PostMapping("/search")
-//	@ResponseBody
-//	public String searchStudiesByCondition(SearchCondition searchCondition) {
-//			@RequestParam(value = "pId", required = false) String pId,
-//			@RequestParam(value = "pName", required = false) String pName,
-//			@RequestParam(value = "modality", required = false) String modality,
-//			@RequestParam(value = "startDate", required = false) String startDate,
-//			@RequestParam(value = "endDate", required = false) String endDate,
-//			@RequestParam(value = "reportStatus", required = false) Long reportStatus,
-//			@RequestParam(value = "verifyFlag", required = false) Long verifyFlag {
-//		
-//		List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus,
-//				verifyFlag);
-//		model.addAttribute("studyTabs", studies);
-//		
-//		// 검색 후에도 값 유지
-//		model.addAttribute("pId", pId);
-//		model.addAttribute("pName", pName);
-//		model.addAttribute("modality", modality);
-//		model.addAttribute("startDate", startDate);
-//		model.addAttribute("endDate", endDate);
-//		model.addAttribute("reportStatus", reportStatus);
-//		model.addAttribute("verifyFlag", verifyFlag);
-//		
-//		return "searchResult";
-//		
-//	}
+		// 중첩된 검색 가능
+//		@PostMapping("/search")
+//		@ResponseBody
+//		public List<StudyTab> searchStudies(@RequestBody SearchCondition searchCondition) {
+//			
+//
+//			String pId = searchCondition.getPId();
+//			String pName = searchCondition.getPName();
+//			String modality = searchCondition.getModality();
+//			String startDate = searchCondition.getStartDate();
+//			String endDate = searchCondition.getEndDate();
+//			Long reportStatus = searchCondition.getReportStatus();
+//			Long verifyFlag = searchCondition.getVerifyFlag();
+//			List<StudyTab> studies = studyTabService.searchStudies(pId, pName, modality, startDate, endDate, reportStatus,
+//					verifyFlag);
+////			model.addAttribute("studyTabs", studies);
+//	//
+////			// 검색 후에도 값 유지
+////			model.addAttribute("pId", pId);
+////			model.addAttribute("pName", pName);
+////			model.addAttribute("modality", modality);
+////			model.addAttribute("startDate", startDate);
+////			model.addAttribute("endDate", endDate);
+////			model.addAttribute("reportStatus", reportStatus);
+////			model.addAttribute("verifyFlag", verifyFlag);
+//
+//			return studies;
+//		}
+
 	
 	@GetMapping("/study/{studykey}")
 	public String getStudeyKey(@PathVariable("studykey") Long studyKey, Model model) {

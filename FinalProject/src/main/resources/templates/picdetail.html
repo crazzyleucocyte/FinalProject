@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Study Detail</title>
+
+	<link rel="stylesheet" href="/css/picdetail.css">
+
+<title>Study Detail</title>
+
+<script src="https://unpkg.com/cornerstone-core"></script>
+<script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+<script src="https://unpkg.com/dicom-parser"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	const studyKey = /*[[${studyKey}]]*/ "";
+	const imagePaths = /*[[${imagePaths}]]*/ []; 
+	const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 
+	/*]]>*/
+	console.log("studyKey 초기화 확인:", studyKey);
+	console.log("imagePaths 초기화 확인:", imagePaths);
+	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
+</script>
+<script src="/js/seriesPage.js"></script>
+</head>
+
+	
+
 	<style>
 		body {
 			margin: 0;
@@ -434,18 +460,18 @@
 				</div>
 
 				<div id="series-info" class="series-info">
-					<span>시리즈 정보</span>
-					<div th:if="${seriesList != null && !seriesList.isEmpty()}" th:each="series : ${seriesList}"
-						class="series-item">
-						<div class="series-thumbnail">
-							<img th:src="${series.studyinsuid}" alt="Series Image" />
-						</div>
-						<div class="series-description">
-							<p th:text="${series.serieseDesc}"></p>
-						</div>
-					</div>
-					<div th:if="${seriesList == null || seriesList.isEmpty()}">
-						<p>시리즈 정보가 없습니다.</p>
+
+					<div class="thumbnail-list">
+				    	<div th:each="series : ${seriesList}" 
+				         	th:if="${series.imageCount > 0}" 
+				         	class="thumbnail dicomImage"
+				         
+				         	style="cursor: pointer; margin-bottom: 10px; border: 1px solid #ccc; padding: 5px;"
+				         
+				         	th:data-series-key="${series.seriesKey}">
+				        	<span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
+				    	</div>
+
 					</div>
 				</div>
 
@@ -599,6 +625,7 @@
 		document.getElementById('delete-report').addEventListener('click', function () {
 			document.getElementById('comment').value = '[Finding]\n\n\n[Conclusion]\n\n\n[Recommend]\n\n\n';
 		});
+
 		// 과거내역 span odd 행 색깔 바꾸기
 		document.getElementById('toggle-past-btn').addEventListener('click', function () {
 			const pastInfo = document.getElementById('past-info');

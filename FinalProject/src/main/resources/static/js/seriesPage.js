@@ -9,9 +9,10 @@ cornerstoneWADOImageLoader.configure({
 		}
 	});
 // 이미지를 넣을 요소 가져오기
-    const dicomViewer = document.getElementById('dicomViewer'); 
+    const dicomViewer = document.getElementById('image-viewer'); 
     let currentSeriesImages = []; // 현재 선택된 시리즈의 이미지 경로 배열
     let currentIndex = 0;
+    let autoPlayInterval;
 
 	// 썸네일클릭했을때 뷰어 활성화
 	cornerstone.enable(dicomViewer);
@@ -75,4 +76,19 @@ cornerstoneWADOImageLoader.configure({
         }
         loadAndDisplayImage(currentIndex);
         });
-    });
+        
+    // 자동재생 기능
+    document.getElementById('autoPlayButton').addEventListener('click', () => {
+		if (autoPlayInterval) {
+			clearInterval(autoPlayInterval);
+			autoPlayInterval = null;
+			document.getElementById('autoPlayButton').innerText = "자동재생 시작 ! ";
+		} else {
+			autoPlayInterval = setInterval(() => {
+				currentIndex = (currentIndex + 1) % currentSeriesImages.length;
+				loadAndDisplayImage(currentIndex);
+				}, 100); // 0.5초 간격으로 이미지 재생
+				document.getElementById('autoPlayButton').innerText = "자동재생 중지 ! ";
+				}
+			});
+	});
