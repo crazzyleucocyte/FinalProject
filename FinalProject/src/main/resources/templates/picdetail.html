@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Study Detail</title>
-	<link rel="stylesheet" href="/path/to/your/css/style.css">
+	<link rel="stylesheet" href="/css/picdetail.css">
+
+<title>Study Detail</title>
+
+<script src="https://unpkg.com/cornerstone-core"></script>
+<script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+<script src="https://unpkg.com/dicom-parser"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	const studyKey = /*[[${studyKey}]]*/ "";
+	const imagePaths = /*[[${imagePaths}]]*/ []; 
+	const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 
+	/*]]>*/
+	console.log("studyKey 초기화 확인:", studyKey);
+	console.log("imagePaths 초기화 확인:", imagePaths);
+	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
+</script>
+<script src="/js/seriesPage.js"></script>
+</head>
 	<style>
 		body {
 			margin: 0;
@@ -388,17 +409,16 @@
 				</div>
 
 				<div id="series-info" class="series-info">
-					<span>시리즈 정보</span>
-					<div th:if="${seriesList != null && !seriesList.isEmpty()}" th:each="series : ${seriesList}" class="series-item">
-						<div class="series-thumbnail">
-							<img th:src="${series.studyinsuid}" alt="Series Image" />
-						</div>
-						<div class="series-description">
-							<p th:text="${series.serieseDesc}"></p>
-						</div>
-					</div>
-					<div th:if="${seriesList == null || seriesList.isEmpty()}">
-						<p>시리즈 정보가 없습니다.</p>
+					<div class="thumbnail-list">
+				    	<div th:each="series : ${seriesList}" 
+				         	th:if="${series.imageCount > 0}" 
+				         	class="thumbnail dicomImage"
+				         
+				         	style="cursor: pointer; margin-bottom: 10px; border: 1px solid #ccc; padding: 5px;"
+				         
+				         	th:data-series-key="${series.seriesKey}">
+				        	<span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
+				    	</div>
 					</div>
 				</div>
 
@@ -504,7 +524,6 @@
 		// 저장 버튼 클릭 시 입력된 데이터를 서버로 전송하는 기능
 		document.getElementById('save-report').addEventListener('click', function () {
 			const reportData = {
-				studyKey: 1,  // 실제 studyKey 값으로 변경하세요.
 				comment: document.getElementById('comment').value,
 				radiologist1: document.getElementById('radiologist1').value,
 				radiologist2: document.getElementById('radiologist2').value,
@@ -528,28 +547,6 @@
 					alert('저장에 실패했습니다.');
 				});
 		});
-		// studyKey 값으로 API에서 데이터 가져오기
-		const studyKey = 1; // 실제 studyKey로 변경
-		fetch(`/study/${studyKey}`)
-			.then(response => response.json())
-			.then(data => {
-				document.getElementById('studyKey').textContent = data.studyKey;
-				document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
-				document.getElementById('accessNum').textContent = data.accessNum;
-				document.getElementById('addedInfo').textContent = data.addedInfo;
-				document.getElementById('aeTitle').textContent = data.aeTitle;
-				document.getElementById('aiFinding').textContent = data.aiFinding;
-				document.getElementById('aiReport').textContent = data.aiReport;
-				document.getElementById('bodyPart').textContent = data.bodyPart;
-				document.getElementById('modality').textContent = data.modality;
-				document.getElementById('operatorsName').textContent = data.operatorsName;
-				document.getElementById('patientKey').textContent = data.patientKey;
-				document.getElementById('pName').textContent = data.pName;
-				document.getElementById('studyDate').textContent = data.studyDate;
-				document.getElementById('studyDesc').textContent = data.studyDesc;
-				document.getElementById('viewPosition').textContent = data.viewPosition;
-			})
-			.catch(error => console.error('Error:', error));
 	</script>
 
 </body>

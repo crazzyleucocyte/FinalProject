@@ -58,22 +58,6 @@ public class SeriesTabController {
         return "seriesPage";
 	}
 	
-/*
-	@GetMapping("/series/images")
-    public String getSeriesImagesPage(@RequestParam(name = "studyKey") Long studyKey,
-                                      @RequestParam(name = "seriesKey") Long seriesKey, Model model) {
-        // 선택된 시리즈의 모든 이미지를 가져와 모델에 추가
-        List<ImageTab> imageList = imageTabService.getAllImagesBySeries(studyKey, seriesKey);
-        List<String> seriesImagePaths = new ArrayList<>();
-
-        for (ImageTab image : imageList) {
-        	String imagePath = "wadouri:http://localhost:8080/PACSStorage/" + image.getPath() + image.getFName();
-        	seriesImagePaths.add(imagePath.replace("\\", "/"));
-        }
-        System.out.println("시리즈 이미지: " + seriesImagePaths);
-        model.addAttribute("seriesImagePaths", seriesImagePaths);
-        return "seriesPage";
-    }*/
 	
 	@GetMapping("/series/images")
 	@ResponseBody // JSON 형식으로 반환
