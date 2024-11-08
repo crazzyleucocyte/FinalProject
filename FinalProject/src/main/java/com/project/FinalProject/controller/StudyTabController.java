@@ -93,4 +93,12 @@ public class StudyTabController {
 		}
 		return "Picdetail";
 	}
+
+	@GetMapping("/study/history/{patientKey}")
+	@ResponseBody
+	public List<StudyTab> getPatientHistory(@PathVariable("patientKey") Long patientKey, Model model) {
+	
+			List<StudyTab> pastStudies = studyTabService.getPastStudies(patientKey);
+		return pastStudies;
+	}
 }

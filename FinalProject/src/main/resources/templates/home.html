@@ -404,24 +404,45 @@
 			padding: 15px;
 			border-radius: 10px;
 			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			overflow: auto;
+			/* overflow: auto; */
+			text-shadow: 0px 0px 10px #0000004f;
 		}
 
-		.result-table table {
-			width: 100%;
-			border-collapse: collapse;
-			/* background-color: #3D5C5C; */
-			background-color: #2F4F4F;
-		}
 
-		.result-table th,
-		.result-table td {
-			/* border: 1px solid #ccc; */
-			color: white;
-		}
-		
 		/* 검색 결과 head */
-		.result-table-thead{
+		.result-table-container {
+			overflow-y: scroll;
+			height: 379px;
+		}
+
+		/* 스크롤 바 */
+		.result-table-container::-webkit-scrollbar {
+			width: 15px;
+			/* 세로축 스크롤바 폭 너비 */
+
+		}
+
+		.result-table-container::-webkit-scrollbar-thumb {
+			background: #213939;
+			border: 2px solid #2a3f33;
+			border-radius: 12px 12px 12px 12px;
+		}
+
+		.result-table-container::-webkit-scrollbar-thumb:hover {
+			background-color: #a0a0a5;
+		}
+
+		/* 스크롤이 움직이는 뒷 배경 */
+		.result-table-container::-webkit-scrollbar-track {
+			background: #0303033d;
+			border-radius: 10px;
+		}
+
+		.selected{
+			background-color: #243737 !important;
+		}
+
+		.result-table-thead {
 			background-color: #355050;
 			display: grid;
 			grid-template-columns: minmax(11%, auto) minmax(18%, auto) minmax(9%, auto) minmax(20%, auto) repeat(2, minmax(9%, auto)) repeat(2, minmax(7%, auto)) minmax(10%, auto);
@@ -431,23 +452,27 @@
 			font-size: larger;
 			font-weight: 600;
 		}
-		.result-table-thead span{
+
+		.result-table-thead span {
 			/* border: 1px solid; */
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
 			padding: 10px;
 		}
-		.odd{
-			background-color: hsl(180, 20%, 28%);
+
+		.odd {
+			background-color: #395656;
 		}
-		.result-table-tbody{
+
+		.result-table-tbody {
 			cursor: pointer;
 			border-bottom: 1px solid #2A3F33;
 			display: grid;
 			grid-template-columns: minmax(11%, auto) minmax(18%, auto) minmax(9%, auto) minmax(20%, auto) repeat(2, minmax(9%, auto)) repeat(2, minmax(7%, auto)) minmax(10%, auto);
 		}
-		.result-table-tbody span{
+
+		.result-table-tbody span {
 			/* border: 1px solid #2A3F33; */
 			display: flex;
 			justify-content: space-around;
@@ -455,9 +480,55 @@
 			padding: 10px;
 			/* border: 1px solid; */
 		}
-		.result-table-tbody:hover{
+
+		.result-table-tbody:hover {
 			background-color: #2F4F4F;
-			
+
+		}
+
+		/* 환자 과거 이력 출력  */
+		.history-table-thead {
+			background-color: #355050;
+			display: grid;
+			grid-template-columns: minmax(11%, auto) minmax(18%, auto) minmax(9%, auto) minmax(20%, auto) repeat(2, minmax(9%, auto));
+			border-bottom: 1px solid #2A3F33;
+			border-top: 1px solid #2A3F33;
+			height: 65px;
+			font-size: larger;
+			font-weight: 600;
+		}
+
+		.history-table-thead span {
+			/* border: 1px solid; */
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			padding: 10px;
+		}
+
+		.odd {
+			background-color: hsl(180, 20%, 28%);
+		}
+
+		.history-table-tbody {
+			cursor: pointer;
+			border-bottom: 1px solid #2A3F33;
+			display: grid;
+			grid-template-columns: minmax(11%, auto) minmax(18%, auto) minmax(9%, auto) minmax(20%, auto) repeat(2, minmax(9%, auto));
+		}
+
+		.history-table-tbody span {
+			/* border: 1px solid #2A3F33; */
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			padding: 10px;
+			/* border: 1px solid; */
+		}
+
+		.history-table-tbody:hover {
+			background-color: #2F4F4F;
+
 		}
 
 
@@ -825,19 +896,22 @@
 					<!-- 검색 결과 패널 -->
 					<div class="result-panel">
 						<div class="result-table">
-							<div class="result-table-thead">
-								<span>환자 ID</span>
-								<span>환자 이름</span>
-								<span>검사 장비</span>
-								<span>검사 설명</span>
-								<span>검사 일시</span>
-								<span>판독 상태</span>
-								<span>시리즈</span>
-								<span>이미지</span>
-								<span>Verify</span>
-							</div>
-							<div class="result-table-result">
-								
+							<div class="result-table-container">
+								<div class="result-table-thead">
+									<span>환자 ID</span>
+									<span>환자 이름</span>
+									<span>검사 장비</span>
+									<span>검사 설명</span>
+									<span>검사 일시</span>
+									<span>판독 상태</span>
+									<span>시리즈</span>
+									<span>이미지</span>
+									<span>Verify</span>
+								</div>
+								<div class="result-table-result">
+									<!-- 검색 결과 출력 -->
+								</div>
+								<button> 더보기 </button>
 							</div>
 						</div>
 					</div>
@@ -853,29 +927,32 @@
 					<div class="history-name">
 						<div class="history-id">
 							<label>환자 ID : </label>
-							<span id="history-patient-id">12345</span>
+							<span id="history-patient-id"></span>
 						</div>
 						<div class="history-name-item">
 							<label>환자 이름 : </label>
-							<span id="history-patient-name">홍길동</span>
+							<span id="history-patient-name"></span>
 						</div>
 					</div>
 					<div class="history-info-container">
-						<table>
-							<thead>
-								<tr>
-									<th>검사 장비</th>
-									<th>검사 설명</th>
-									<th>검사 일시</th>
-									<th>판독 상태</th>
-									<th>시리즈</th>
-									<th>Verify</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- 과거 검사 이력 추가 -->
-							</tbody>
-						</table>
+
+						<div class="history-table">
+
+							<div class="history-table-thead">
+								<span>검사 장비</span>
+								<span>검사 설명</span>
+								<span>검사 일시</span>
+								<span>판독 상태</span>
+								<span>시리즈</span>
+								<span>Verify</span>
+							</div>
+							<div class="history-table-result">
+								<!-- 과거 검사 이력 출력 -->
+							</div>
+						</div>
+
+
+
 					</div>
 				</div>
 
@@ -885,27 +962,24 @@
 					<div class="study-info-container">
 						<div class="ai-content">
 							<label>AI 진단 병명</label>
-							<div class="info-item">정상</div>
+							<div id="aiFinding" class="info-item"></div>
 
 							<label>AI 진단 내용</label>
-							<div class="info-item">이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상
-								없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음이상 없음</div>
+							<div id="aiReport" class="info-item"></div>
 						</div>
 
 						<div class="filming-info">
 							<label>수술한 의사</label>
-							<div class="info-item">Dr. Kim</div>
+							<div id="operatorsName" class="info-item"></div>
 
 							<label>촬영 방향</label>
-							<div class="info-item">AP</div>
+							<div id="viewPosition" class="info-item"></div>
 
 							<label>촬영 부위</label>
-							<div class="info-item">복부</div>
+							<div id="bodyPart" class="info-item"></div>
 
 							<label>검사 설명</label>
-							<div class="info-item">복부 CT</div>
+							<div id="studyDesc" class="info-item"></div>
 						</div>
 					</div>
 				</div>
@@ -1131,14 +1205,8 @@
 		</script>
 
 		<script>
+			let selectIndex=-1;
 
-			// 더블클릭시 detail페이지로 이동
-			// 	$(() => {
-			// 	$('.studyTabData').dblclick(function (e) {
-			// 		console.log(e.target.parentElement.id)
-			// 		location.href = "test?studyKey=" + e.target.parentElement.id
-			// 	})
-			// })
 
 			// 	검색 기능
 			document.querySelector(".search-btn").addEventListener("click", function () {
@@ -1149,6 +1217,19 @@
 				const reportStatus = document.getElementById("reportStatus").value;
 				const pId = document.getElementById("pId").value;
 				const pName = document.getElementById("pName").value;
+
+
+
+
+				console.log("searchCondition", {
+					pId: pId,
+					pName: pName,
+					modality: modality,
+					startDate: startDate,
+					endDate: endDate,
+					reportStatus: reportStatus,
+					verifyFlag: verifyFlag
+				})
 
 				axios.post(`/search`, {
 					pId: pId,
@@ -1167,14 +1248,12 @@
 						const studyResultContainer = document.querySelector(".result-table-result");
 						studyResultContainer.innerHTML = ""; // 이전 검색 결과 초기화
 
-						studies.map((study,i) => {
+						studies.map((study, i) => {
 							const row = document.createElement("div");
 							row.classList.add('result-table-tbody');
-							if(i%2==0){
-								row.classList.add('even');
-							}else{
+							row.classList.add(`selected${i}`);
+							if (i % 2 == 1) {
 								row.classList.add('odd');
-
 							}
 							row.innerHTML = `
 							                <span>${study.pid}</span>
@@ -1187,8 +1266,65 @@
 							                <span>${study.imageCnt}</span>
 							                <span>${study.verifyFlag == 0 ? '미요청' : (study.verifyFlag == 1 ? '요청완료' : '알 수 없음')}</span>
 							            `;
-							row.addEventListener('dblclick',function(){
-								location.href=`/series?studyKey=${study.studyKey}`
+							row.addEventListener('dblclick', function () {
+								location.href = `/study/${study.studyKey}`
+							})
+							row.addEventListener('click', function () {
+								if(selectIndex === -1){
+									document.querySelector(`.selected${i}`).classList.add("selected")
+									selectIndex=i;
+								}else if(selectIndex !== i){
+									document.querySelector(`.selected${selectIndex}`).classList.remove("selected")
+									document.querySelector(`.selected${i}`).classList.add("selected")
+									selectIndex=i;
+
+								}
+
+								//클릭 시 study 정보 출력
+								console.log("study", study);
+								document.getElementById("aiFinding").innerHTML = study.aiFinding;
+								document.getElementById("aiReport").innerHTML = study.aiReport;
+								document.getElementById("operatorsName").innerHTML = study.operatorsName;
+								document.getElementById("viewPosition").innerHTML = study.viewPosition;
+								document.getElementById("bodyPart").innerHTML = study.bodyPart;
+								document.getElementById("studyDesc").innerHTML = study.studyDesc;
+								
+								//클릭시 환자 정보 출력
+								document.getElementById("history-patient-id").innerHTML = study.pid;
+								document.getElementById("history-patient-name").innerHTML = study.pname;
+
+
+								//클릭시 과거 검사 이력 출력
+								axios.get(`/study/history/${study.patientKey}`)
+									.then((result) => {
+										console.log("patientHistory", result.data);
+										const patientHistory = result.data;
+										const historyResultContainer = document.querySelector(".history-table-result");
+										historyResultContainer.innerHTML = ""; // 이전 검색 결과 초기화
+
+										patientHistory.map((patient, i) => {
+											// 반복하며 데이터 출력, 이벤트 걸기
+											const row = document.createElement("div");
+											row.classList.add('history-table-tbody');
+											if (i % 2 == 1) {
+												row.classList.add('odd');
+											}
+											row.innerHTML = `
+							                <span>${study.modality}</span>
+							                <span>${study.studyDesc}</span>
+							                <span>${study.studyDate}</span>
+							                <span>${study.reportStatus == 3 ? '읽지않음' : (study.reportStatus == 5 ? '예비판독' : (study.reportStatus == 6 ? '판독' : '알수없음'))}</span>
+							                <span>${study.seriesCnt}</span>
+							                <span>${study.verifyFlag == 0 ? '미요청' : (study.verifyFlag == 1 ? '요청완료' : '알 수 없음')}</span>
+											`;
+											row.addEventListener('click', function () {
+												location.href = `/study/${study.studyKey}`
+											})
+											historyResultContainer.appendChild(row);
+										})
+
+									})
+									.catch(error => console.log(error));
 							})
 							studyResultContainer.appendChild(row);
 						});

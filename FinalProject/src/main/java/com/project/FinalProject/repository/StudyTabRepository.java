@@ -12,8 +12,8 @@ import com.project.FinalProject.domain.StudyTab;
 @Repository
 public interface StudyTabRepository extends JpaRepository<StudyTab, Long> {
 	@Query("SELECT s FROM StudyTab s WHERE " +
-		   "(:pId IS NULL OR s.pId = :pId) AND " +
-		   "(:pName IS NULL OR s.pName = :pName) AND " +
+		   "(:pId IS NULL OR s.pId LIKE CONCAT('%', :pId, '%')) AND " +
+		   "(:pName IS NULL OR s.pName LIKE CONCAT('%', :pName, '%')) AND " +
 		   "(:modality IS NULL OR s.modality = :modality) AND " +
 		   "(:startDate IS NULL OR s.studyDate >= :startDate) AND " +
 		   "(:endDate IS NULL OR s.studyDate <= :endDate) AND " +
