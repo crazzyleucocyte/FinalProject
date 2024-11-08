@@ -658,21 +658,21 @@
 		axios.get(`/study/${studyKey}`)
 			.then(response => {
 				const data = response.data;
-				document.getElementById('studyKey').textContent = data.studyKey;
-				document.getElementById('abnormalPatient').textContent = data.abnormalPatient;
-				document.getElementById('accessNum').textContent = data.accessNum;
-				document.getElementById('addedInfo').textContent = data.addedInfo;
-				document.getElementById('aeTitle').textContent = data.aeTitle;
-				document.getElementById('aiFinding').textContent = data.aiFinding;
-				document.getElementById('aiReport').textContent = data.aiReport;
-				document.getElementById('bodyPart').textContent = data.bodyPart;
-				document.getElementById('modality').textContent = data.modality;
-				document.getElementById('operatorsName').textContent = data.operatorsName;
-				document.getElementById('patientKey').textContent = data.patientKey;
-				document.getElementById('pName').textContent = data.pName;
-				document.getElementById('studyDate').textContent = data.studyDate;
-				document.getElementById('studyDesc').textContent = data.studyDesc;
-				document.getElementById('viewPosition').textContent = data.viewPosition;
+				document.getElementById('studyKey').innerHTML = data.studyKey;
+				document.getElementById('abnormalPatient').innerHTML = data.abnormalPatient;
+				document.getElementById('accessNum').innerHTML = data.accessNum;
+				document.getElementById('addedInfo').innerHTML = data.addedInfo;
+				document.getElementById('aeTitle').innerHTML = data.aeTitle;
+				document.getElementById('aiFinding').innerHTML = data.aiFinding;
+				document.getElementById('aiReport').innerHTML = data.aiReport;
+				document.getElementById('bodyPart').innerHTML = data.bodyPart;
+				document.getElementById('modality').innerHTML = data.modality;
+				document.getElementById('operatorsName').innerHTML = data.operatorsName;
+				document.getElementById('patientKey').innerHTML = data.patientKey;
+				document.getElementById('pName').innerHTML = data.pName;
+				document.getElementById('studyDate').innerHTML = data.studyDate;
+				document.getElementById('studyDesc').innerHTML = data.studyDesc;
+				document.getElementById('viewPosition').innerHTML = data.viewPosition;
 			})
 			.catch(error => console.error('Error:', error));
 
