@@ -33,7 +33,7 @@ cornerstoneWADOImageLoader.configure({
 				} else {
 				console.error("잘못된 이미지 경로 형식 :", imagePath);
 	}});
-				
+	
 	// 썸네일 클릭 시 이미지 로드 및 표시
     document.querySelectorAll(".dicomImage").forEach((element, index) => {
 		element.addEventListener("click", () => {
@@ -53,6 +53,31 @@ cornerstoneWADOImageLoader.configure({
 				.catch(error => console.error("썸네일 클릭시 뷰에 이미지 로드 에러:", error));
 		});
 	});
+	
+	// 토글 섹션 표시/숨김 및 DICOM 이미지 로드
+    function toggleSection(buttonId, sectionId) {
+        const button = document.getElementById(buttonId);
+        const section = document.getElementById(sectionId);
+        const allSections = document.querySelectorAll('.study-info, .past-info, .series-info, .report-info');
+        const imageViewer = document.getElementById('image-viewer');
+
+        button.addEventListener('click', () => {
+            // 섹션을 클릭했을 때 관련된 내용만 show효과로 노출, 나머지는 숨기기
+            allSections.forEach(sec => sec.classList.toggle('show', sec === section));
+
+            // 이미지 뷰어 위치 조정
+            imageViewer.classList.toggle('shifted', Array.from(allSections)
+                .some(sec => sec.classList.contains('show'))
+            );
+        });
+    } 
+    
+    document.addEventListener("DOMContentLoaded", () => {
+    toggleSection('toggle-info-btn', 'study-info');
+    toggleSection('toggle-past-btn', 'past-info');
+    toggleSection('toggle-series-btn', 'series-info');
+    toggleSection('toggle-report-btn', 'report-info');
+});
 
     // 큰 뷰어에서 이미지 로드 및 표시 함수
     function loadAndDisplayImage(index) {
@@ -65,7 +90,13 @@ cornerstoneWADOImageLoader.configure({
             })
         .catch(error => console.error("Image load error:", error));
     }
-
+    
+    // 버튼을 눌렀을 때 토글 호출 (표시/숨김)(각 버튼과 각 섹션을 연결하는 역할)
+    toggleSection('toggle-info-btn', 'study-info');
+    toggleSection('toggle-past-btn', 'past-info');
+    toggleSection('toggle-series-btn', 'series-info');
+    toggleSection('toggle-report-btn', 'report-info');
+    
     // 마우스 스크롤로 이미지 탐색
     dicomViewer.addEventListener('wheel', function(event) {
 		event.preventDefault();
@@ -91,4 +122,6 @@ cornerstoneWADOImageLoader.configure({
 				document.getElementById('autoPlayButton').innerText = "자동재생 중지 ! ";
 				}
 			});
+			
 	});
+	

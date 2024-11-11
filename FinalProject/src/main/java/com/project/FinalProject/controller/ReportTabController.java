@@ -25,10 +25,6 @@ public class ReportTabController {
    public ReportTab getReportByStudyKey(@PathVariable("studyKey") Long studyKey) {
 	   ReportTab report = reportTabService.getReportByStudyKey(studyKey);
 	  System.out.println("report : " + report);
-//       if (report == null) {
-//          throw new RuntimeException("스터디 키 못찾음 : " + studyKey);
-//       }
        return report;
-   }
-
+       }
 }

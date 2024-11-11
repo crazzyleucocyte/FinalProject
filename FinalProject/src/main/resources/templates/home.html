@@ -1287,7 +1287,7 @@
 					`;
 					
 					row.addEventListener('dblclick', function () {
-						location.href = `/study/${study.studyKey}`;
+						location.href = `/series?studyKey=${study.studyKey}`;
 					});
 					
 					row.addEventListener('click', function (e) {
@@ -1333,6 +1333,7 @@
                                 `;
 											row.addEventListener('click', function () {
 												location.href = `/study/${study.studyKey}`;
+												// `/series?studyKey=${study.studyKey}`;
 											});
 											historyResultContainer.appendChild(row);
 										});

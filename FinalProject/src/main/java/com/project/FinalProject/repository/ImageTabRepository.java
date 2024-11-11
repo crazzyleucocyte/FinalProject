@@ -29,6 +29,4 @@ public interface ImageTabRepository extends JpaRepository<ImageTab, Long> {
             @Param("studyKey") Long studyKey, 
             @Param("seriesKey") Long seriesKey
             );
-    
-    
-    }
+}

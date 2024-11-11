@@ -1,0 +1,324 @@
+/* ---------------공통 스타일--------------- */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+	background-color: #2F4F4F;
+	color: #fff;
+	line-height: 1.6;
+	}/* ---------------공통 스타일--------------- */
+	
+.container {
+	display: flex;
+	height: 100vh;
+	width: 93%;
+	margin: 0 auto;
+}
+
+.sidebar {
+	width: 80px;
+	background-color: #3D5C5C;
+	margin: 20px;
+	padding: 20px 15px 10px;
+	box-sizing: border-box;
+	border-right: 1px solid #444;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+	gap: 300px;
+	border-radius: 20px;
+}
+
+.sidebar button {
+	margin: 15px 0;
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 12px;
+	background-color: #406b6b;
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar button:hover {
+	background-color: #25403C;
+	transform: translateY(-3px);
+}
+
+.sidebar button:active {
+	background-color: #1e3330;
+}
+
+.logo-img {
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.main-content {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	background-color: #2F4F4F;
+}
+
+.tool-bar {
+	display: flex;
+	justify-content: flex-start;
+	gap: 10px;
+	background-color: #3D5C5C;
+	padding: 15px;
+	margin: 10px;
+	border-bottom: 1px solid #444;
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tool-bar .prev-next {
+	display: flex;
+	margin-right: auto;
+}
+
+.tool-bar button {
+	background-color: #406b6b;
+	color: #fff;
+	margin: auto 5px;
+	border: none;
+	border-radius: 8px;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tool-bar button:hover {
+	background-color: #25403C;
+	transform: translateY(-3px);
+}
+
+.tool-bar button:active {
+	background-color: #1e3330;
+}
+
+.content {
+	display: flex;
+	flex-grow: 1;
+	background-color: #3D5C5C;
+	padding: 20px;
+	margin: 10px;
+	box-sizing: border-box;
+	transition: all 0.3s ease;
+	overflow: hidden;
+	border-radius: 20px;
+	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+	border: 2px solid aliceblue;
+}
+
+.past-info-table {
+	margin-top: 10px;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: small;
+}
+
+.past-info-table th,
+.past-info-table td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: left;
+}
+
+.past-info-table th {
+	background-color: #3D5C5C;
+	color: #fff;
+}
+
+.study-info,
+.past-info,
+.series-info,
+.report-info {
+	display: none;
+	width: 0;
+	overflow: hidden;
+	flex-direction: column;
+	background-color: #2E4B4B;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	transition: all 1s ease;
+}
+
+.study-info.show,
+.past-info.show,
+.series-info.show,
+.report-info.show {
+	display: flex;
+	width: auto;
+}
+
+.report-info.show {
+	display: flex;
+	width: 500px;
+}
+
+.study-info span,
+.past-info span,
+.series-info span,
+.report-info span {
+	font-weight: bold;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+.study-info div,
+.past-info div,
+.series-info div,
+.report-info div {
+	margin-bottom: 8px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #ccc;
+}
+
+.image-viewer {
+	flex-grow: 1;
+	background-color: #173232;
+	border-radius: 10px;
+	border: 1px solid #444;
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+	transition: all 0.3s ease;
+}
+
+.image-viewer.shifted {
+	margin-left: 30px;
+	transition: margin-left 0.3s ease;
+}
+
+.report-info label {
+	font-weight: bold;
+	color: #fff;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.comment,
+.reading-doc {
+	margin-right: 15px;
+}
+
+.report-info textarea,
+.report-info input {
+	width: 100%;
+	background-color: #1E2F2F;
+	color: #fff;
+	border: 1px solid #444;
+	border-radius: 4px;
+	padding: 8px;
+	margin-bottom: 15px;
+}
+
+.report-info textarea {
+	resize: both;
+	overflow: auto;
+}
+
+.report-info button {
+	background-color: #406b6b;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.report-info button:hover {
+	background-color: #25403C;
+	transform: translateY(-3px);
+}
+
+.report-info button:active {
+	background-color: #1e3330;
+}
+
+#delete-report {
+	background-color: #ff5c5c;
+}
+
+#delete-report:hover {
+	background-color: #ff3c3c;
+}
+
+#delete-report:active {
+	background-color: #fd3636;
+}
+
+
+
+.report-info div.buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+
+
+#delete-report:hover {
+	background-color: #ff3c3c;
+}
+
+#delete-report:active {
+	background-color: #fd3636;
+}
+
+.report-info div.buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.past-info-div {
+	display: table;
+	width: 100%;
+}
+
+.past-info-header {
+	display: table-row;
+	font-weight: bold;
+}
+
+.past-info-header span {
+	display: table-cell;
+	padding: 8px;
+	font-size: 12px;
+	border-bottom: 1px solid #2A3F33;
+	border-top: 1px solid #2A3F33;
+}
+
+.past-info-body {
+	display: table-row;
+}
+
+.past-info-body span {
+	display: table-cell;
+	padding: 8px;
+	font-size: 12px;
+	border-bottom: 1px solid #2A3F33;
+}
+
+/* 과거 검사 짝수 행의 span 요소에만 배경색 바꾸기  */
+#past-info .past-info-table .past-info-body:nth-child(even) span {
+    background-color: hsl(180, 20%, 28%);
+}
+
+.series-info-list {
+			 width: 120px;
+		     float: left;
+		     margin-right: 20px;
+		     }
+	
