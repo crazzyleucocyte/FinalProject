@@ -8,13 +8,16 @@
 
 <title>Study Detail</title>
 
+<!-- cornerstone 라이브러리 -->
 <script src="https://unpkg.com/cornerstone-core"></script>
 <script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+<!-- dicom 라이브러리 -->
 <script src="https://unpkg.com/dicom-parser"></script>
-    
+<!-- Axios 라이브러리 -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <link rel="stylesheet" href="/css/picdetail.css">
+
 </head>
 
 <body>
@@ -108,7 +111,6 @@
 					<div th:each="series : ${seriesList}" 
          			     th:if="${series.imageCount > 0}" 
                          class="thumbnail dicomImage"
-         			 	 style="cursor: pointer; margin-bottom: 10px; border: 1px solid #ccc; padding: 5px;"
          			 	 th:data-series-key="${series.seriesKey}">
         			     <span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
         			</div>
@@ -155,10 +157,12 @@
 	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
 	</script>
 
-	<script src="/js/seriesPage.js"></script>
-	<script src="/js/picdetail.js"></script>
+	<!-- 코너스톤 관련.js 먼저 로드하기 -->
+	<script src="/js/cornerstone-setup.js"></script>
 	
-
+	<script src="/js/seriesPage.js"></script>
+	<!-- 리포트 js -->
+	<script src="/js/report.js"></script>
 	
 </body>
 </html>
