@@ -36,7 +36,6 @@ public class StudyTabController {
 		return studies;
 	}
 
-
 	@GetMapping("/study/history/{patientKey}")
 	@ResponseBody
 	public List<StudyTab> getPatientHistory(@PathVariable("patientKey") Long patientKey, Model model) {
