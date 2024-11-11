@@ -21,7 +21,7 @@ public class StudyTabService {
 	//기존 findAll 메소드
 	public Page<StudyTab> findAll(PageRequest page){
 		return studyTabRepository.findAll(page);
-		}
+	}
 
 	
 	// SearchCondition을 사용한 검색 메서드
@@ -52,4 +52,4 @@ public class StudyTabService {
 		return studyTabRepository.findByPatientKey(patientKey);
 	}
 
-	}
+}

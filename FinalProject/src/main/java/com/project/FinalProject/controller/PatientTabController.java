@@ -11,5 +11,4 @@ public class PatientTabController {
 
 	@Autowired
 	PatientTabService patientTabService;
-
 }

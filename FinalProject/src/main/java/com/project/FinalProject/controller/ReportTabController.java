@@ -29,6 +29,5 @@ public class ReportTabController {
           throw new RuntimeException("스터디 키 못찾음 : " + studyKey);
        }
        return report;
-   }
-
+       }
 }

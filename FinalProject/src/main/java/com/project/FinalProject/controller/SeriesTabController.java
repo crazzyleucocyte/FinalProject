@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.FinalProject.domain.ImageTab;
 import com.project.FinalProject.domain.SeriesTab;
+import com.project.FinalProject.domain.StudyTab;
 import com.project.FinalProject.service.ImageTabService;
 import com.project.FinalProject.service.SeriesTabService;
+import com.project.FinalProject.service.StudyTabService;
+import com.project.FinalProject.dto.SearchCondition;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -27,6 +30,9 @@ import org.springframework.ui.Model;
 public class SeriesTabController {
 
 	@Autowired
+	private StudyTabService studyTabService;
+	
+	@Autowired
 	private SeriesTabService seriesTabService;
 	
 	@Autowired
@@ -35,6 +41,19 @@ public class SeriesTabController {
 	// 스터디키를 기준으로 시리즈 목록을 조회하여 모델에 추가하고 페이지로 전달
 	@GetMapping("/series")
     public String getSeriesPage(@RequestParam(name = "studyKey") Long studyKey, Model model) {
+		
+		// 스터디 키 - StudyTab에서 정보 조회 후 모델에 추가
+	    StudyTab study = studyTabService.getStudyByStudyKey(studyKey);
+	    model.addAttribute("study", study); // 스터디 정보를 모델에 추가
+	    model.addAttribute("studyKey", studyKey); 
+	    
+	    // 스터디 키 - patienKey 과거 검사 내역 가져오기
+	    if (study != null && study.getPatientKey() != null) {
+	        List<StudyTab> pastStudies = studyTabService.getPastStudies(study.getPatientKey());
+	        model.addAttribute("pastStudies", pastStudies); // 과거 검사 내역 모델에 추가
+	        }
+		
+		// SeriesTab 및 ImageTab 정보 조회
         List<SeriesTab> seriesList = seriesTabService.getSeriesByStudyKey(studyKey);
         List<Map<String, String>> imagePaths = new ArrayList<>();
 
@@ -42,7 +61,8 @@ public class SeriesTabController {
         for (SeriesTab series : seriesList) {
             ImageTab firstImage = imageTabService.getFirstImageBySeries(studyKey, series.getSeriesKey());
             if (firstImage != null) {
-                // 경로를 `wadouri` 형식으로 변환하여 사용
+                
+            	// 경로를 `wadouri` 형식으로 변환하여 사용
                 String imagePath = "wadouri:PACSStorage/" + firstImage.getPath() + firstImage.getFName();
                 System.out.println("Generated Image Path: " + imagePath.replace("\\", "/")); // 이미지 경로 확인
 
@@ -53,13 +73,12 @@ public class SeriesTabController {
                 imagePaths.add(imageInfo);
             }
         }
-        model.addAttribute("studyKey", studyKey);
+        
         model.addAttribute("seriesList", seriesList);
         model.addAttribute("imagePaths", imagePaths); // `imagePaths` 모델에 추가
         
-        return "seriesPage";
+        return "picdetail";
 	}
-	
 	
 	@GetMapping("/series/images")
 	@ResponseBody // JSON 형식으로 반환
@@ -75,7 +94,7 @@ public class SeriesTabController {
 	    	String imagePath = "wadouri:http://"+serverIp+":8080/PACSStorage/" + image.getPath() + image.getFName();
 	        seriesImagePaths.add(imagePath.replace("\\", "/"));
 	    }
-
+	    
 	    return seriesImagePaths; // JSON 형식으로 반환됨
-	}
+	    }
 }
