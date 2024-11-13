@@ -906,14 +906,14 @@
 									<button class="download-btn" id="image-download-btn">이미지 다운로드</button>
 									<button class="download-btn" id="delete-btn">검사 삭제</button>
 								</div>
-								<div class="select-panel2">
+								<!-- <div class="select-panel2">
 									<select id="view-select">
 										<option value="all">보기 선택</option>
 										<option value="20">20개씩 보기</option>
 										<option value="50">50개씩 보기</option>
 										<option value="100">100개씩 보기</option>
 									</select>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -1261,7 +1261,11 @@
 					.then(result => {
 						const studies = result.data.content;  // 현재 페이지 데이터
 						const totalPages = result.data.totalPages;
+						const totalElements = result.data.totalElements;	// 총 검사 건수
 						const studyResultContainer = document.querySelector(".result-table-result");
+
+						// 총 검사 건수를 #inspections에 표시
+						document.getElementById("inspections").innerHTML = totalElements;
 
 						if (currentPage === 0) {
 							studyResultContainer.innerHTML = "";  // 첫 페이지일 때 기존 내용 초기화
@@ -1275,22 +1279,28 @@
 							if (i % 2 === 1) row.classList.add('odd');
 							
 							row.innerHTML = `
-							<span>${study.pid}</span>
-							<span>${study.pname}</span>
-                    <span>${study.modality}</span>
-                    <span>${study.studyDesc}</span>
-                    <span>${study.studyDate}</span>
-                    <span>${study.reportStatus === 3 ? '읽지않음' : (study.reportStatus === 5 ? '예비판독' : (study.reportStatus === 6 ? '판독' : '알수없음'))}</span>
-                    <span>${study.seriesCnt}</span>
-                    <span>${study.imageCnt}</span>
-                    <span>${study.verifyFlag === 0 ? '미요청' : (study.verifyFlag === 1 ? '요청완료' : '알 수 없음')}</span>
-					`;
+								<span>${study.pid}</span>
+								<span>${study.pname}</span>
+								<span>${study.modality}</span>
+								<span>${study.studyDesc}</span>
+								<span>${study.studyDate}</span>
+								<span>${study.reportStatus === 3 ? '읽지않음' : (study.reportStatus === 5 ? '예비판독' : (study.reportStatus === 6 ? '판독' : '알수없음'))}</span>
+								<span>${study.seriesCnt}</span>
+								<span>${study.imageCnt}</span>
+								<span>${study.verifyFlag === 0 ? '미요청' : (study.verifyFlag === 1 ? '요청완료' : '알 수 없음')}</span>
+							`;
+
+							// 클릭 시, 환자 ID, 환자 이름 업데이트 이벤트 추가
+							row.addEventListener('click', function () {
+								document.getElementById("patient-id-item").textContent = study.pid;
+								document.getElementById("patient-name-item").textContent = study.pname;
+							});
 					
-					row.addEventListener('dblclick', function () {
-						location.href = `/series?studyKey=${study.studyKey}`;
-					});
-					
-					row.addEventListener('click', function (e) {
+							row.addEventListener('dblclick', function () {
+								location.href = `/series?studyKey=${study.studyKey}`;
+							});
+						
+							row.addEventListener('click', function (e) {
 								let number = e.target.parentElement.classList[1].substr(8,2);
 								console.log("number : ", number);
 								
