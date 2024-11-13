@@ -32,10 +32,10 @@
 				<button id="toggle-series-btn">시리즈</button>
 				<button id="toggle-report-btn">리포트</button>
 			</div>
-			<div class="sidebar-down-item">
+			<!-- <div class="sidebar-down-item">
 				<button id="setting">설정</button>
 				<button>로그아웃</button>
-			</div>
+			</div> -->
 		</div>
 		
 		<div class="main-content">
@@ -48,7 +48,10 @@
 				<div class="equipment">
 					<button>윈도우 레벨</button>
 					<button>확대</button>
-					<button id="autoPlayButton" class="btn btn-default">자동재생 시작</button>
+					<button id="autoPlayButton" class="btn btn-default">
+						<img src="/img/autoplay (1).png" alt="autoplay">
+						<!-- <span>자동재생</span> -->
+					</button>
 					<button>도구2</button>
 					<button>도구3</button>
 					<button>도구4</button>
@@ -86,10 +89,10 @@
 						<div class="past-info-table">
                             <div class="past-info-div">
                                 <div class="past-info-header">
-                                    <span>검사 장비</span>
+                                    <span>검사<br>장비</span>
                                     <span>검사 설명</span>
                                     <span>검사 일시</span>
-                                    <span>판독 상태</span>
+                                    <span>판독<br>상태</span>
                                 </div>
                                 <div class="past-info-body" th:each="study : ${pastStudies}">
                                     <span th:text="${study.modality}"></span>

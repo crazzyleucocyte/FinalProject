@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementById(buttonId).addEventListener('click', function() {
 			const content = document.querySelector('.content');
 
-			content.style.maxHeight = '80vh';
+			content.style.maxHeight = '90vh';
 			content.style.overflow = 'auto';
 			content.style.width = '100%';
 		});
