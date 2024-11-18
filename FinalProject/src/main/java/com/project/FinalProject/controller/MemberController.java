@@ -20,7 +20,7 @@ public class MemberController {
 
 	@GetMapping("/login")
 	public String loginPage() {
-		return "login";
+		return "user/login";
 	}
 
 	@GetMapping("/home")
@@ -30,7 +30,7 @@ public class MemberController {
 
 	@GetMapping("/tosignup")
 	public String toSingup(Member m) {
-		return "signUp";
+		return "user/signUp";
 
 	}
 
@@ -39,7 +39,7 @@ public class MemberController {
 		System.out.println("Member : " + m);
 		m.setPassword(passwordEncoder.encode(m.getPassword())); // 암호화하는 부분
 		memberService.memberInsert(m);
-		return "login";
+		return "user/login";
 	}
 
 }
