@@ -5,9 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentSeriesImages = []; // 현재 선택된 시리즈의 이미지 경로 배열
     let currentIndex = 0;
     let autoPlayInterval;
-
+	
 	// 썸네일클릭했을때 뷰어 활성화
 	cornerstone.enable(dicomViewer);
+
+	// canvas width 조절
+	const canvas = dicomViewer.querySelector('canvas');
+	canvas.style.width = '100%';
 
 	// 토글 섹션 표시/숨김 및 DICOM 이미지 로드
     function toggleSection(buttonId, sectionId) {
@@ -82,6 +86,24 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleSection('toggle-past-btn', 'past-info');
     toggleSection('toggle-series-btn', 'series-info');
     toggleSection('toggle-report-btn', 'report-info');
+
+	// 토글 버튼을 눌렀을 때, 화면이 오버플로우되어 스크롤이 생기는 현상 방지
+	const toggleButtons = [
+		'toggle-info-btn',
+		'toggle-past-btn',
+		'toggle-series-btn',
+		'toggle-report-btn'
+	];
+
+	toggleButtons.forEach(buttonId => {
+		document.getElementById(buttonId).addEventListener('click', function() {
+			const content = document.querySelector('.content');
+
+			content.style.maxHeight = '90vh';
+			content.style.overflow = 'auto';
+			content.style.width = '100%';
+		});
+	});
 
     // 뷰어에서 이미지 로드 및 표시 함수
     function loadAndDisplayImage(index) {

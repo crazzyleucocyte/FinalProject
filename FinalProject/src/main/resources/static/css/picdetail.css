@@ -6,6 +6,7 @@ body {
 	color: #fff;
 	line-height: 1.6;
 }
+
 /* ---------------------------------------- */
 
 /* 전체 */
@@ -13,46 +14,47 @@ body {
 	display: flex;
 	height: 100vh;
 	width: 93%;
-	margin: 0 auto;
+	margin: auto;
 }
-	/* 정보, 과거내역, 시리즈, 리포트, 설정, 로그아웃 세로버튼 */
-	.sidebar {
-		width: 80px;
-		background-color: #3D5C5C;
-		margin: 20px;
-		padding: 20px 15px 10px;
-		box-sizing: border-box;
-		border-right: 1px solid #444;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-		gap: 300px;
-		border-radius: 20px;
-	}
 
-	.sidebar button {
-		margin: 15px 0;
-		width: 60px;
-		height: 60px;
-		border: none;
-		border-radius: 12px;
-		background-color: #406b6b;
-		color: #fff;
-		cursor: pointer;
-		font-size: 14px;
-		transition: background-color 0.3s ease, transform 0.2s ease;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
+/* 정보, 과거내역, 시리즈, 리포트, 설정, 로그아웃 세로버튼 */
+.sidebar {
+	width: 80px;
+	background-color: #3D5C5C;
+	margin: 40px 20px;
+	padding: 20px 15px 10px;
+	box-sizing: border-box;
+	border-right: 1px solid #444;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+	gap: 300px;
+	border-radius: 20px;
+}
 
-	.sidebar button:hover {
-		background-color: #25403C;
-		transform: translateY(-3px);
-	}
+.sidebar button {
+	margin: 15px 0;
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 12px;
+	background-color: #406b6b;
+	color: #fff;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-	.sidebar button:active {
-		background-color: #1e3330;
-	}
+.sidebar button:hover {
+	background-color: #25403C;
+	transform: translateY(-3px);
+}
+
+.sidebar button:active {
+	background-color: #1e3330;
+}
 
 .logo-img {
 	width: 100%;
@@ -69,14 +71,14 @@ body {
 	background-color: #2F4F4F;
 }
 
-	/* main - 툴바 전체 */
+/* main - 툴바 전체 */
 .tool-bar {
 	display: flex;
 	justify-content: flex-start;
 	gap: 10px;
 	background-color: #3D5C5C;
 	padding: 15px;
-	margin: 10px;
+	margin: 40px 10px 10px;
 	border-bottom: 1px solid #444;
 	border-radius: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -112,13 +114,14 @@ body {
 /* 세부 전체 (스터디, 과거내역, 시리즈, 리포트, 이미지) */
 .content {
 	display: flex;
+	width: 100%;
 	flex-grow: 1;
 	background-color: #3D5C5C;
 	padding: 20px;
 	margin: 10px;
 	box-sizing: border-box;
 	transition: all 0.3s ease;
-	overflow: hidden;
+	overflow-x: hidden;
 	border-radius: 20px;
 	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 	border: 2px solid aliceblue;
@@ -131,7 +134,8 @@ body {
 	font-size: small;
 }
 
-.past-info-table th, .past-info-table td {
+.past-info-table th,
+.past-info-table td {
 	border: 1px solid #ccc;
 	padding: 8px;
 	text-align: left;
@@ -142,7 +146,10 @@ body {
 	color: #fff;
 }
 
-.study-info, .past-info, .series-info, .report-info {
+.study-info,
+.past-info,
+.series-info,
+.report-info {
 	display: none;
 	width: 400px;
 	min-height: 300px;
@@ -155,22 +162,29 @@ body {
 	transition: all 1s ease;
 }
 
-.study-info.show, .past-info.show, .series-info.show, .report-info.show
-	{
+.study-info.show,
+.past-info.show,
+.series-info.show,
+.report-info.show {
 	display: flex;
 	width: 400px;
 	min-height: 300px;
 	overflow: auto;
 }
 
-.study-info span, .past-info span, .series-info span, .report-info span
-	{
+.study-info span,
+.past-info span,
+.series-info span,
+.report-info span {
 	font-weight: bold;
 	margin-bottom: 10px;
 	font-size: 18px;
 }
 
-.study-info div, .past-info div, .series-info div, .report-info div {
+.study-info div,
+.past-info div,
+.series-info div,
+.report-info div {
 	margin-bottom: 8px;
 	font-size: 14px;
 	line-height: 1.5;
@@ -184,11 +198,21 @@ body {
 	border: 1px solid #444;
 	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 	transition: all 0.3s ease;
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .image-viewer.shifted {
 	margin-left: 30px;
 	transition: margin-left 0.3s ease;
+}
+
+.image-viewer canvas {
+	width: 100%;
+	height: auto;
 }
 
 .report-info label {
@@ -199,13 +223,15 @@ body {
 	font-size: 14px;
 }
 
-.comment, .reading-doc {
+.comment,
+.reading-doc {
 	margin-right: 15px;
 }
 
-.study-info textarea, .past-info textarea, .series-info textarea,
-	.report-info textarea, .study-info input, .past-info input,
-	.series-info input, .report-info input {
+.study-info textarea,
+.past-info textarea,
+.series-info textarea,
+.report-info textarea {
 	width: 100%;
 	background-color: #1E2F2F;
 	color: #fff;
@@ -216,15 +242,36 @@ body {
 	font-size: 14px;
 }
 
-.study-info textarea, .past-info textarea, .series-info textarea,
-	.report-info textarea {
-	height: 80px;
-	resize: none;
-	overflow: auto;
+.study-info input,
+.past-info input,
+.series-info input,
+.report-info input {
+	width: 100%;
+	background-color: #1E2F2F;
+	color: #fff;
+	border: 1px solid #444;
+	border-radius: 4px;
+	padding: 8px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	box-sizing: border-box;
 }
 
-.study-info button, .past-info button, .series-info button, .report-info button
-	{
+
+.study-info textarea,
+.past-info textarea,
+.series-info textarea,
+.report-info textarea {
+	height: 200px;
+	resize: both;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.study-info button,
+.past-info button,
+.series-info button,
+.report-info button {
 	background-color: #406b6b;
 	color: #fff;
 	border: none;
@@ -236,14 +283,18 @@ body {
 	margin-top: 10px;
 }
 
-.study-info button:hover, .past-info button:hover, .series-info button:hover,
-	.report-info button:hover {
+.study-info button:hover,
+.past-info button:hover,
+.series-info button:hover,
+.report-info button:hover {
 	background-color: #25403C;
 	transform: translateY(-3px);
 }
 
-.study-info button:active, .past-info button:active, .series-info button:active,
-	.report-info button:active {
+.study-info button:active,
+.past-info button:active,
+.series-info button:active,
+.report-info button:active {
 	background-color: #1e3330;
 }
 
@@ -262,7 +313,7 @@ body {
 .report-info div.buttons {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .past-info-div {
@@ -273,35 +324,58 @@ body {
 .past-info-header {
 	display: table-row;
 	font-weight: bold;
+	text-align: center;
 }
 
 .past-info-header span {
 	display: table-cell;
 	padding: 8px;
-	font-size: 12px;
+	font-size: 11px;
 	border-bottom: 1px solid #2A3F33;
 	border-top: 1px solid #2A3F33;
 }
 
 .past-info-body {
 	display: table-row;
+	text-align: center;
 }
 
 .past-info-body span {
 	display: table-cell;
 	padding: 8px;
-	font-size: 12px;
+	font-size: 11px;
 	border-bottom: 1px solid #2A3F33;
 }
 
 /* 과거 검사 짝수 행의 span 요소에만 배경색 바꾸기  */
 #past-info .past-info-table .past-info-body:nth-child(even) span {
-    background-color: hsl(180, 20%, 28%);
+	background-color: hsl(180, 20%, 28%);
 }
 
 .series-info-list {
-			 width: 120px;
-		     float: left;
-		     margin-right: 20px;
-		     }
-	
+	width: 120px;
+	float: left;
+	margin-right: 20px;
+}
+
+
+.content {
+	overflow: hidden !important;
+}
+
+/* 스크롤 바 */
+.series-info::-webkit-scrollbar {
+	width: 15px;
+	/* 세로축 스크롤바 폭 너비 */
+
+}
+
+.series-info::-webkit-scrollbar-thumb {
+	background: #213939;
+	border: 2px solid #2a3f33;
+	border-radius: 12px 12px 12px 12px;
+}
+
+.series-info::-webkit-scrollbar-thumb:hover {
+	background-color: #a0a0a5;
+}

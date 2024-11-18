@@ -45,10 +45,11 @@ public class SecurityConfig {
                 		.requestMatchers("/search/**").permitAll()
                 		.requestMatchers("/series").permitAll()
                 		.requestMatchers("/search").permitAll()
+                		.requestMatchers("/css/**","/js/**","/img/**").permitAll()
 						.requestMatchers(
 								"/tosignup").permitAll()
                 		.requestMatchers("/signup").permitAll()
-                		.requestMatchers("/home").hasRole("ADMIN")
+                		.requestMatchers("/home").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
