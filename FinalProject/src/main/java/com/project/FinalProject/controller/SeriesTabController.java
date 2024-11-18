@@ -77,7 +77,7 @@ public class SeriesTabController {
         model.addAttribute("seriesList", seriesList);
         model.addAttribute("imagePaths", imagePaths); // `imagePaths` 모델에 추가
         
-        return "picdetail";
+        return "fragments/picdetail";
 	}
 	
 	@GetMapping("/series/images")
