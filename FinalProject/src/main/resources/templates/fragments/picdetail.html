@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko">
 <html xmlns:th="http://www.thymeleaf.org">
-
+	
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Study Detail</title>
+	<title>Study Detail</title>
 
-<!-- cornerstone 라이브러리 -->
-<script src="https://unpkg.com/cornerstone-core"></script>
-<script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
-<!-- dicom 라이브러리 -->
-<script src="https://unpkg.com/dicom-parser"></script>
-<!-- Axios 라이브러리 -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- cornerstone 라이브러리 -->
+	<script src="https://unpkg.com/cornerstone-core"></script>
+	<script src="https://unpkg.com/cornerstone-wado-image-loader"></script>
+	<script src="https://unpkg.com/cornerstone-tools"></script>
+	<script src="https://unpkg.com/cornerstone-tools/dist/cornerstoneTools.js"></script>
+	<script src="https://unpkg.com/cornerstone-math"></script>
+	<script src="https://unpkg.com/hammerjs"></script>
+	<!-- dicom 라이브러리 -->
+	<script src="https://unpkg.com/dicom-parser"></script>
+	<!-- Axios 라이브러리 -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<link rel="stylesheet" href="/css/picdetail.css">
-
+	<link rel="stylesheet" href="/css/picdetail.css">
 </head>
 
 <body>
@@ -40,24 +42,7 @@
 		
 		<div class="main-content">
 			<!-- 이전, 다음, 윈도우 레벨 등 가로 툴바 버튼 -->
-			<div class="tool-bar">
-				<div class="prev-next">
-					<button>이전</button>
-					<button>다음</button>
-				</div>
-				<div class="equipment">
-					<button>윈도우 레벨</button>
-					<button>확대</button>
-					<button id="autoPlayButton" class="btn btn-default">
-						<img src="/img/autoplay (1).png" alt="autoplay">
-						<!-- <span>자동재생</span> -->
-					</button>
-					<button>도구2</button>
-					<button>도구3</button>
-					<button>도구4</button>
-					<button>도구5</button>
-				</div>
-			</div>
+			<div th:replace="~{fragments/toolBar :: tool-bar}"></div>
 
 			<div class="content">
 				<!-- 스터디 정보 -->
@@ -160,12 +145,15 @@
 	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
 	</script>
 
-	<!-- 코너스톤 관련.js 먼저 로드하기 -->
-	<script src="/js/cornerstone-setup.js"></script>
-	
 	<script src="/js/seriesPage.js"></script>
+	<script src="/js/ImageView.js"></script>
 	<!-- 리포트 js -->
 	<script src="/js/report.js"></script>
+	
+	<!-- 툴바 js -->
+	<script src="/js/tools/zoom.js"></script>
+	<script src="/js/tools/windowLevel.js"></script>
+	<script src="/js/tools/invert.js"></script>
 	
 </body>
 </html>
