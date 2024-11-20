@@ -20,6 +20,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 	<link rel="stylesheet" href="/css/picdetail.css">
+	<link rel="stylesheet" href="/css/toolBar.css">
+	<link rel="stylesheet" href="/css/content.css">
 </head>
 
 <body>
@@ -144,16 +146,20 @@
 	console.log("imagePaths 초기화 확인:", imagePaths);
 	console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
 	</script>
-
+	
+	<!-- 썸네일 js -->
 	<script src="/js/seriesPage.js"></script>
+	<!-- 이미지 뷰 js -->
 	<script src="/js/ImageView.js"></script>
 	<!-- 리포트 js -->
 	<script src="/js/report.js"></script>
 	
-	<!-- 툴바 js -->
+	<!-- 툴바 js, 메인툴전부 부터  -->
+	<script src="/js/mainTools.js"></script>	
 	<script src="/js/tools/zoom.js"></script>
 	<script src="/js/tools/windowLevel.js"></script>
 	<script src="/js/tools/invert.js"></script>
+	<script src="/js/tools/seriesLayout.js"></script	
 	
 </body>
 </html>
