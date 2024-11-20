@@ -1,0 +1,79 @@
+/* mainToolBar - 가로 툴바 전체 */
+.tool-bar {
+	display: flex;
+	width: 1630px;	/* 토글 효과 시 위치 고정 */
+	justify-content: flex-start;
+	gap: 10px;
+	background-color: #3D5C5C;
+	padding: 15px;
+	margin: 40px 10px 10px;
+	border-bottom: 1px solid #444;
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	position: relative; /* 자식 요소의 위치를 기준점으로 설정 */
+}
+
+	.tool-bar .prev-next {
+		display: flex;
+	}
+
+	.tool-bar button {
+		background-color: #406b6b;
+		color: #fff;
+		margin: auto 5px;
+		border: none;
+		border-radius: 8px;
+		padding: 10px 20px;
+		cursor: pointer;
+		font-size: 14px;
+		transition: background-color 0.3s ease, transform 0.2s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.tool-bar button:hover {
+		background-color: #25403C;
+		transform: translateY(-3px);
+	}
+
+	.tool-bar button:active {
+		background-color: #1e3330;
+	}
+
+
+/* 시리즈 레이아웃 컨테이너 스타일 */
+#seriesLayoutContainer {
+	display: flex;
+	position: absolute; /* 레이아웃에서 독립적으로 동작 */
+    width: 200px; /* 컨테이너 너비 */
+    height: auto; /* 높이는 버튼 수에 따라 조정 */
+    background-color: #2e4b4b;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border-radius: 8px;
+}
+
+	/* 버튼(셀) 스타일 */
+	.grid-cell {
+	    width: 35px;
+	    height: 35px;
+	    margin: 2px;
+	    background-color: #3d5c5c;
+	    display: inline-flex;
+	    justify-content: center;
+	    align-items: center;
+	    font-size: 13px;
+	    cursor: pointer;
+	    transition: background-color 0.2s;
+	    border-radius: 8px; /* 셀 모양 둥글게 */
+	}
+
+	/* 버튼(셀) hover 효과 */
+	.grid-cell:hover {
+	    background-color: #add8e6; /* 호버 시 색상 변경 */
+	    border-color: #0078d4; /* 테두리 색상 */
+	}
+	
+	.grid-cell.selected {
+	    background-color: #90ee90 !important; /* 연한 초록색 */
+	}

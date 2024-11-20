@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cornerstone.loadImage(imageId)
         .then(image => {
 			cornerstone.displayImage(dicomViewer, image);
+			mainTools(dicomViewer); //mainTools.js 호출
 			console.log("큰화면에 썸네일 로드 성공 !:", imageId);
         })
         .catch(error => console.error("Image load error:", error));
@@ -98,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         loadAndDisplayImage(currentIndex);
     });
-        
+
 	// 뷰 자동재생 기능
     document.getElementById('playClip').addEventListener('click', () => {		
 		if (autoPlayInterval) {
@@ -112,27 +113,5 @@ document.addEventListener("DOMContentLoaded", () => {
 			}, 100); // 0.5초 간격으로 이미지 재생
 				document.getElementById('playClip').innerText = "자동재생 중지 ! ";
 		}
-	});
-	
-	// 뷰 줌 인
-	document.getElementById('zoomIn').addEventListener('click', function () {
-	    zoomIn(dicomViewer);
-	    
-	});
-	
-	// 뷰 줌 아웃
-	document.getElementById('zoomOut').addEventListener('click', function () {
-	    zoomOut(dicomViewer);
-	    
-	});
-	
-	//밝기 조절
-	document.getElementById('windowLevel').addEventListener('click', function () {
-		enableWwwcTool(dicomViewer);
-	});
-	
-	//흑백 전환
-	document.getElementById('invert').addEventListener('click', function () {
-		invert(dicomViewer);
 	});
 });
