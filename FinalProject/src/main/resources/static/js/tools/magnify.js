@@ -1,26 +1,50 @@
-let magnifyEnabled = false;  // 이미지 이동(드래그) 기능이 활성화되었는지 여부
+let magnifyEnabled = false;
 
-function enableMagnify(dicomElement) {
-	deactivateAllTools(dicomElement);
-	magnifyEnabled = !magnifyEnabled;
-	
-	if (magnifyEnabled) {
-        // 길이 측정 도구 활성화 및 상태 저장
-        cornerstoneTools.setToolActiveForElement(dicomElement, 'Magnify', { mouseButtonMask: 1 });
-        cornerstoneTools.addToolState(dicomElement, 'Magnify', {});  // 도구 상태 저장
-        document.getElementById('magnify').classList.add('active'); // 버튼 활성화 표시
-		
-        // 도구 상태 즉시 확인 - Length 기능이 활성화 됐는지 확인
-        const toolState = cornerstoneTools.getToolState(dicomElement, 'Magnify');
-        if (toolState && toolState.data && toolState.data.length > 0) {
-            console.log('도구 "Magnify" 활성화 상태 확인:', toolState.data);
-        } else {
-            console.log('도구 "Magnify" 상태: 비활성화 또는 데이터 없음');
-        }
-    } else {
-        // 길이 측정 도구 비활성화
-        cornerstoneTools.setToolDisabledForElement(dicomElement, 'Magnify');
-        document.getElementById('magnify').classList.remove('active'); // 버튼 비활성화 표시
-        console.log('도구 "Magnify" 상태 비활성화됨');
+function enableMagnify() {
+    const dicomElement = document.getElementById('image-viewer');
+    
+    if (!cornerstone.getEnabledElement(dicomElement)) {
+        cornerstone.enable(dicomElement);
+        console.log("DICOM Viewer 활성화 완료");
     }
+
+    deactivateAllTools(dicomElement);
+    magnifyEnabled = !magnifyEnabled;
+
+    if (magnifyEnabled) {
+        const magnifySize = 200; // 렌즈 크기 증가
+        const magnificationLevel = 3; // 확대 배율 증가
+
+        cornerstoneTools.addTool(cornerstoneTools.MagnifyTool, {
+            configuration: {
+                magnifySize,
+                magnificationLevel,
+            }
+        });
+
+        cornerstoneTools.setToolActiveForElement(dicomElement, 'Magnify', { mouseButtonMask: 1 });
+        document.getElementById('magnify').classList.add('active');
+        
+        dicomElement.addEventListener('mousemove', (event) => moveMagnify(event, dicomElement, magnifySize));
+        console.log("도구 'Magnify' 활성화됨");
+    } else {
+        cornerstoneTools.setToolDisabledForElement(dicomElement, 'Magnify');
+        document.getElementById('magnify').classList.remove('active');
+        
+        dicomElement.removeEventListener('mousemove', moveMagnify);
+        console.log("도구 'Magnify' 상태 비활성화됨");
+    }
+}
+
+function moveMagnify(event, dicomElement, magnifySize) {
+    const boundingRect = dicomElement.getBoundingClientRect();
+    const mouseX = event.clientX - boundingRect.left;
+    const mouseY = event.clientY - boundingRect.top;
+
+    cornerstoneTools.setToolState(dicomElement, 'magnify', {
+        center: { x: mouseX, y: mouseY },
+        magnifySize,
+    });
+
+    cornerstone.updateImage(dicomElement);
 }
