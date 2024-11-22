@@ -5,22 +5,54 @@
             <button id="nextButton">다음</button>
         </div>
         <div class="equipment">
-            <button id="playClip" class="btn btn-default">자동재생 시작</button>
-            <button id="zoomIn" type="button" class="btn btn-default">확대</button>
-            <button id="zoomOut" type="button" class="btn btn-default">축소</button>
-        	<button id="windowLevel" type="button" class="btn btn-default">밝기조절</button>
-			<button id="invert" type="button" class="btn btn-default">흑백전환</button>
-			<button id="angle" type="button" class="btn btn-default">각도</button>
-			<button id="drag" type="button" class="btn btn-default">드래그</button>
-			<button id="eraser" type="button" class="btn btn-default">지우개</button>
-		    <button id="hFlip" type="button" class="btn btn-default">수평 플립</button>
-    		<button id="vFlip" type="button" class="btn btn-default">수직 플립</button>
-    	    <button id="length" type="button" class="btn btn-default">길이 측정</button>
-    		<button id="magnify" type="button" class="btn btn-default">돋보기</button>
-    		<button id="reset" type="button" class="btn btn-default">초기화</button>
-    		<button id="lRotate" type="button" class="btn btn-default">왼쪽 회전</button>
-            <button id="rRotate" type="button" class="btn btn-default">오른쪽 회전</button>
-            <button class="BTN" id="imgLayoutBtn">시리즈 레이아웃</button>
+            <div class="tool-bar">
+                <!-- 확대/축소 그룹 -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle">확대/축소</button>
+                    <div class="dropdown-menu">
+                        <button id="zoomIn" type="button" class="btn btn-default">확대</button>
+                        <button id="zoomOut" type="button" class="btn btn-default">축소</button>
+                    </div>
+                </div>
+            
+                <button id="invert" type="button" class="btn btn-default">흑백전환</button>
+                
+                <!-- 툴 그룹 -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle">툴</button>
+                    <div class="dropdown-menu">
+                        <button id="angle" type="button" class="btn btn-default">각도</button>
+                        <button id="drag" type="button" class="btn btn-default">드래그</button>
+                        <button id="eraser" type="button" class="btn btn-default">지우개</button>
+                        <button id="windowLevel" type="button" class="btn btn-default">밝기조절</button>
+                        <button id="length" type="button" class="btn btn-default">길이 측정</button>
+                        <button id="magnify" type="button" class="btn btn-default">돋보기</button>
+                    </div>
+                </div>
+            
+                <!-- 플립 그룹 -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle">플립</button>
+                    <div class="dropdown-menu">
+                        <button id="hFlip" type="button" class="btn btn-default">수평 플립</button>
+    		            <button id="vFlip" type="button" class="btn btn-default">수직 플립</button>
+                    </div>
+                </div>
+            
+                <!-- 회전 그룹 -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle">회전</button>
+                    <div class="dropdown-menu">
+                        <button id="lRotate" type="button" class="btn btn-default">왼쪽 회전</button>
+                        <button id="rRotate" type="button" class="btn btn-default">오른쪽 회전</button>
+                    </div>
+                </div>
+                <button id="playClip" class="btn btn-default">자동재생 시작</button>
+                <button class="BTN" id="imgLayoutBtn">시리즈 레이아웃</button>
+                <button id="reset" type="button" class="btn btn-default">초기화</button>
+            </div>
+            
+    		
             <!-- 이미지 레이아웃 드롭다운 -->
             <div id="dropdown" class="dropdown" style="display: none;">
                 <div id="grid-selector" class="grid-selector-container"></div>
