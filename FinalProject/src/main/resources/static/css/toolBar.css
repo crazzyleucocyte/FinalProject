@@ -1,7 +1,7 @@
 /* mainToolBar - 가로 툴바 전체 */
 .tool-bar {
     display: flex;
-    width: 1630px; /* 툴바 고정 너비 */
+    width: auto;
     justify-content: flex-start; /* 왼쪽 정렬 */
     align-items: center; /* 세로 가운데 정렬 */
     flex-wrap: nowrap; /* 버튼이 한 줄에 표시되도록 */
