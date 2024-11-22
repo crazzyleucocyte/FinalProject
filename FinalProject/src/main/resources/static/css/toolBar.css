@@ -1,144 +1,123 @@
 /* mainToolBar - 가로 툴바 전체 */
 .tool-bar {
-	display: flex;
-	width: 1630px;	/* 토글 효과 시 위치 고정 */
-	justify-content: flex-start;
-	align-items: center;
-	flex-wrap: nowrap;
-	gap: 10px;
-	background-color: #3D5C5C;
-	padding: 15px;
-	margin: 10px !important;
-	border-bottom: 1px solid #444;
-	border-radius: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	position: relative; /* 자식 요소의 위치를 기준점으로 설정 */
+    display: flex;
+    width: 1630px; /* 툴바 고정 너비 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    flex-wrap: nowrap; /* 버튼이 한 줄에 표시되도록 */
+    gap: 10px; /* 버튼 간 간격 */
+    background-color: #3D5C5C; /* 배경 색상 */
+    padding: 15px; /* 안쪽 여백 */
+    margin: 10px !important; /* 바깥 여백 */
+    border-bottom: 1px solid #444; /* 하단 테두리 */
+    border-radius: 20px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+    position: relative; /* 자식 요소 기준 */
 }
 
-.tool-bar .equipment {
-	display: flex;
-	gap: 10px;
-}
-
-.tool-bar .equipment > div {
-	display: flex;
-	gap: 5px;
-	align-items: center;
-	margin: auto;
-	width: auto;
-}
-
+/* 이전/다음 버튼 그룹 */
 .tool-bar .prev-next {
-	display: flex;
+    display: flex; /* 가로 정렬 */
+    gap: 10px; /* 버튼 간 간격 */
 }
 
+/* 장비 버튼 그룹 */
+.tool-bar .equipment {
+    display: flex; /* 가로 정렬 */
+    gap: 10px; /* 버튼 간 간격 */
+}
+
+/* 공통 버튼 스타일 */
 .tool-bar button {
-	background-color: #406b6b;
-	color: #fff;
-	margin: auto 5px;
-	border: none;
-	border-radius: 8px;
-	padding: 10px 20px;
-	cursor: pointer;
-	font-size: 14px;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* 플렉스 박스 */
+    flex-direction: column; /* 이미지를 위, 텍스트를 아래로 */
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 세로 가운데 정렬 */
+    gap: 5px; /* 이미지와 텍스트 간 간격 */
+    background-color: #406b6b; /* 버튼 배경 색상 */
+    color: #fff; /* 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    border-radius: 8px; /* 둥근 모서리 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    cursor: pointer; /* 클릭 가능 */
+    font-size: 14px; /* 텍스트 크기 */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 애니메이션 효과 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }
 
+/* 버튼 호버 효과 */
 .tool-bar button:hover {
-	background-color: #25403C;
-	transform: translateY(-3px);
+    background-color: #25403C; /* 호버 시 배경 색상 */
+    transform: translateY(-3px); /* 살짝 위로 이동 */
 }
 
+/* 버튼 클릭 효과 */
 .tool-bar button:active {
-	background-color: #1e3330;
+    background-color: #1e3330; /* 클릭 시 배경 색상 */
 }
 
+/* 이미지 스타일 */
+.tool-bar button img {
+    width: 24px; /* 이미지 너비 */
+    height: 24px; /* 이미지 높이 */
+    object-fit: contain; /* 비율 유지 */
+}
 
-/* 시리즈 레이아웃 컨테이너 스타일 */
+/* 텍스트 스타일 */
+.tool-bar button span {
+    font-size: 12px; /* 텍스트 크기 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* 시리즈 레이아웃 컨테이너 */
 #seriesLayoutContainer {
-	display: flex;
-	position: absolute; /* 레이아웃에서 독립적으로 동작 */
+    display: flex;
+    position: absolute; /* 독립적인 위치 */
     width: 200px; /* 컨테이너 너비 */
-    height: auto; /* 높이는 버튼 수에 따라 조정 */
-    background-color: #2e4b4b;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    border-radius: 8px;
+    height: auto; /* 높이는 내용에 따라 */
+    background-color: #2e4b4b; /* 배경 색상 */
+    margin-top: 20px; /* 상단 여백 */
+    flex-wrap: wrap; /* 여러 줄 정렬 */
+    justify-content: space-evenly; /* 버튼 간 간격 균등 */
+    border-radius: 8px; /* 둥근 모서리 */
 }
 
-	/* 버튼(셀) 스타일 */
-	.grid-cell {
-	    width: 35px;
-	    height: 35px;
-	    margin: 2px;
-	    background-color: #3d5c5c;
-	    display: inline-flex;
-	    justify-content: center;
-	    align-items: center;
-	    font-size: 13px;
-	    cursor: pointer;
-	    transition: background-color 0.2s;
-	    border-radius: 8px; /* 셀 모양 둥글게 */
-	}
+/* 시리즈 레이아웃 버튼 스타일 */
+.grid-cell {
+    width: 35px; /* 셀 너비 */
+    height: 35px; /* 셀 높이 */
+    margin: 2px; /* 셀 간 간격 */
+    background-color: #3d5c5c; /* 셀 배경 색상 */
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    font-size: 13px; /* 텍스트 크기 */
+    cursor: pointer; /* 클릭 가능 */
+    transition: background-color 0.2s ease; /* 호버 애니메이션 */
+    border-radius: 8px; /* 둥근 모서리 */
+}
 
-	/* 버튼(셀) hover 효과 */
-	.grid-cell:hover {
-	    background-color: #add8e6; /* 호버 시 색상 변경 */
-	    border-color: #0078d4; /* 테두리 색상 */
-	}
-	
-	.grid-cell.selected {
-	    background-color: #90ee90 !important; /* 연한 초록색 */
-	}
-	
+/* 시리즈 레이아웃 셀 호버 효과 */
+.grid-cell:hover {
+    background-color: #add8e6; /* 호버 시 색상 변경 */
+    border-color: #0078d4; /* 테두리 색상 */
+}
+
+/* 시리즈 레이아웃 선택된 셀 */
+.grid-cell.selected {
+    background-color: #90ee90 !important; /* 선택된 상태 색상 */
+}
+
 /* 돋보기 */
 .magnify-lens {
-    border: 2px solid #ffffff; /* 확대 렌즈 테두리 */
-    border-radius: 50%; /* 원형 확대 렌즈 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 2px solid #ffffff; /* 렌즈 테두리 */
+    border-radius: 50%; /* 원형 렌즈 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 그림자 */
     background-color: rgba(0, 0, 0, 0.1); /* 약간 어두운 배경 */
-    pointer-events: none; /* 렌즈 위에서 마우스 이벤트 차단 */
+    pointer-events: none; /* 마우스 이벤트 차단 */
 }
 
-/* 시리즈 그리드 컨테이너 */
-.grid-selector-container {
-    display: grid;
-    grid-template-columns: repeat(5, 30px); /* 5열 고정, 각 셀 30px */
-    grid-template-rows: repeat(5, 30px);   /* 5행 고정, 각 셀 30px */
-    gap: 5px; /* 셀 간 간격 */
-    justify-content: center; /* 가운데 정렬 */
-    align-items: center;    /* 세로 가운데 정렬 */
-}
-
-    /* 그리드 셀 스타일 */
-    .grid-option {
-        width: 30px;
-        height: 30px;
-        background-color: #eee;
-        border: 1px solid #ccc;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* 선택된 셀 강조 */
-    .grid-option.selected {
-        background-color: #007BFF;
-        border-color: #0056b3;
-    }
-
-    /* 호버 스타일 */
-    .grid-option:hover {
-        background-color: #ddd;
-    }
-
-
-
-
-	/* 드롭다운 컨테이너 */
+/* 드롭다운 컨테이너 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -156,25 +135,25 @@
 
 /* 드롭다운 메뉴 */
 .dropdown-menu {
-    display: none; /* 기본적으로 숨김 */
+    display: none; /* 기본 숨김 */
     position: absolute;
-    top: 100%; /* 버튼 아래에 배치 */
+    top: 100%; /* 버튼 아래 */
     left: 0;
     background-color: #3D5C5C;
     min-width: 150px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 */
+    z-index: 1000; /* 상위에 표시 */
     padding: 10px;
 }
 
-/* 드롭다운 버튼에 마우스를 올리면 메뉴 표시 */
+/* 드롭다운 메뉴 표시 */
 .dropdown:hover .dropdown-menu {
     display: block;
 }
 
-/* 드롭다운 메뉴 내 버튼 스타일 */
+/* 드롭다운 메뉴 버튼 스타일 */
 .dropdown-menu .btn {
     display: block;
     width: 100%;

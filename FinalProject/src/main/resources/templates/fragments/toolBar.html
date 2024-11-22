@@ -1,4 +1,5 @@
 <div th:fragment="tool-bar">
+<!--<<<<<<< Updated upstream
     <div class="tool-bar">
         <div class="prev-next">
             <button id="prevButton">이전</button>
@@ -6,7 +7,7 @@
         </div>
         <div class="equipment">
             <div class="tool-bar">
-                <!-- 확대/축소 그룹 -->
+                 확대/축소 그룹 
                 <div class="dropdown">
                     <button class="dropdown-toggle">확대/축소</button>
                     <div class="dropdown-menu">
@@ -17,7 +18,7 @@
             
                 <button id="invert" type="button" class="btn btn-default">흑백전환</button>
                 
-                <!-- 툴 그룹 -->
+                 툴 그룹 
                 <div class="dropdown">
                     <button class="dropdown-toggle">툴</button>
                     <div class="dropdown-menu">
@@ -30,7 +31,7 @@
                     </div>
                 </div>
             
-                <!-- 플립 그룹 -->
+                 플립 그룹 
                 <div class="dropdown">
                     <button class="dropdown-toggle">플립</button>
                     <div class="dropdown-menu">
@@ -39,7 +40,7 @@
                     </div>
                 </div>
             
-                <!-- 회전 그룹 -->
+                 회전 그룹 
                 <div class="dropdown">
                     <button class="dropdown-toggle">회전</button>
                     <div class="dropdown-menu">
@@ -53,10 +54,140 @@
             </div>
             
     		x
-            <!-- 이미지 레이아웃 드롭다운 -->
+             이미지 레이아웃 드롭다운 
             <div id="dropdown" class="dropdown" style="display: none;">
                 <div id="grid-selector" class="grid-selector-container"></div>
             </div>
         </div>
     </div>
+</div>
+=======-->
+	<div class="tool-bar">
+		<div class="prev-next">
+			<button id="prevButton">
+				<img src="/img/before.png" alt="이전" class="icon-image">
+				<span>이전</span>
+			</button>
+
+			<button id="nextButton">
+				<img src="/img/next.png" alt="다음" class="icon-image">
+				<span>다음</span>
+			</button>
+
+		</div>
+		<div class="equipment">
+			<div class="tool-bar">
+				<!-- 확대/축소 그룹 -->
+				<div class="dropdown">
+					<button class="dropdown-toggle">
+						<img src="/img/zoom.png" alt="확대" class="icon-image">
+						<span>확대/축소</span>
+					</button>
+					<div class="dropdown-menu">
+						<button id="zoomIn" type="button" class="btn btn-default">
+							<img src="/img/zoom.png" alt="확대" class="icon-image">
+							<span>확대</span>
+						</button>
+						<button id="zoomOut" type="button" class="btn btn-default">
+							<img src="/img/zoomout.png" alt="축소" class="icon-image">
+							<span>축소</span>
+						</button>
+					</div>
+				</div>
+
+				<button id="invert" type="button" class="btn btn-default">
+					<img src="/img/invert.png" alt="흑백전환" class="icon-image">
+					<span>흑백전환</span>
+				</button>
+
+				<!-- 툴 그룹 -->
+				<div class="dropdown">
+					<button class="dropdown-toggle">
+						<img src="/img/tools.png" alt="툴" class="icon-image">
+						<span>툴</span>
+					</button>
+					<div class="dropdown-menu">
+						<button id="angle" type="button" class="btn btn-default">
+							<img src="/img/angle.png" alt="각도" class="icon-image">
+							<span>각도</span>
+						</button>
+						<button id="drag" type="button" class="btn btn-default">
+							<img src="/img/pan.png" alt="드래그" class="icon-image">
+							<span>드래그</span>
+						</button>
+						<button id="eraser" type="button" class="btn btn-default">
+							<img src="/img/eraser.png" alt="지우개" class="icon-image">
+							<span>지우개</span>
+						</button>
+						<button id="windowLevel" type="button" class="btn btn-default">
+							<img src="/img/bright.png" alt="밝기" class="icon-image">
+							<span>밝기조절</span>
+						</button>
+						<button id="length" type="button" class="btn btn-default">
+							<img src="/img/length.png" alt="길이" class="icon-image">
+							<span>길이 측정</span>
+						</button>
+						<button id="magnify" type="button" class="btn btn-default">
+							<img src="/img/magnify.png" alt="돋보기" class="icon-image">
+							<span>돋보기</span>
+						</button>
+					</div>
+				</div>
+
+				<!-- 플립 그룹 -->
+				<div class="dropdown">
+					<button class="dropdown-toggle">
+						<img src="/img/hflip.png" alt="수평 플립" class="icon-image">
+						<span>플립</span>
+					</button>
+					<div class="dropdown-menu">
+						<button id="hFlip" type="button" class="btn btn-default">
+							<img src="/img/hflip.png" alt="수평 플립" class="icon-image">
+							<span>수평 플립</span>
+						</button>
+						<button id="vFlip" type="button" class="btn btn-default">
+							<img src="/img/vflip.png" alt="수직 플립" class="icon-image">
+							<span>수직 플립</span>
+						</button>
+					</div>
+				</div>
+
+				<!-- 회전 그룹 -->
+				<div class="dropdown">
+					<button class="dropdown-toggle">
+						<img src="/img/rightrotate.png" alt="오른쪽 회전" class="icon-image">
+						<span>회전</span>
+					</button>
+					<div class="dropdown-menu">
+						<button id="lRotate" type="button" class="btn btn-default">
+							<img src="/img/leftrotate.png" alt="왼쪽 회전" class="icon-image">
+							<span>왼쪽 회전</span>
+						</button>
+						<button id="rRotate" type="button" class="btn btn-default">
+							<img src="/img/rightrotate.png" alt="오른쪽 회전" class="icon-image">
+							<span>오른쪽 회전</span>
+						</button>
+					</div>
+				</div>
+				<button id="playClip" class="btn btn-default">
+					<img src="/img/play.png" alt="자동재생" class="icon-image">
+					<span>자동재생</span>
+				</button>
+				<button class="BTN" id="imgLayoutBtn">
+					<img src="/img/serieslayout.png" alt="시리즈 레이아웃" class="icon-image">
+					<span>시리즈 레이아웃</span>
+				</button>
+				<button id="reset" type="button" class="btn btn-default">
+					<img src="/img/refresh.png" alt="초기화" class="icon-image">
+					<span>초기화</span>
+				</button>
+			</div>
+
+
+			<!-- 이미지 레이아웃 드롭다운 -->
+			<div id="dropdown" class="dropdown" style="display: none;">
+				<div id="grid-selector" class="grid-selector-container"></div>
+			</div>
+		</div>
+	</div>
 </div>
