@@ -154,7 +154,54 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	// 뷰 줌 인
 	document.getElementById('zoomIn').addEventListener('click', function () {
-		mode='zoom';
+		 if (mode === 'zoom') {
+        mode = 'default'; // 기본 모드로 전환
+        console.log('Zoom mode disabled');
+    } else {
+        mode = 'zoom'; // Zoom 모드 활성화
+        console.log('Zoom mode enabled');
+    }
 	});
+
+	
+		// "이전" 버튼 이벤트 리스너
+    document.getElementById('prevButton').addEventListener('click', () => {
+		mode = "navigation"
+        if (currentIndex > 0) {
+            currentIndex -= 1;
+            loadAndDisplayImage(currentIndex);
+        }
+    });
+    
+    // "다음" 버튼 이벤트 리스너
+    document.getElementById('nextButton').addEventListener('click', () => {
+		mode = "navigation"
+        if (currentIndex < currentSeriesImages.length - 1) {
+            currentIndex += 1;
+            loadAndDisplayImage(currentIndex);
+        }
+    });
+
+	
+	// 뷰 줌 아웃
+	//document.getElementById('zoomOut').addEventListener('click', function () {
+	//	mode='zoom';
+	   
+	//});
+	
+	
+/*
+    // 뷰 마우스 스크롤로 이미지 탐색
+    dicomViewer.addEventListener('wheel', function(event) {
+		event.preventDefault();
+        if (event.deltaY > 0) {
+			currentIndex = Math.min(currentIndex + 1, currentSeriesImages.length - 1);
+        } else {
+			currentIndex = Math.max(currentIndex - 1, 0);
+        }
+        loadAndDisplayImage(currentIndex);
+    });
+*/
+
 
 });
