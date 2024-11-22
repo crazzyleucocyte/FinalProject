@@ -29,9 +29,9 @@ function mainTools() {
 	});
 	
 	//시리즈 레이아웃
-	document.getElementById('seriesLayout').addEventListener('click', function () {
-		seriesLayout(dicomViewer);
-	});
+	//document.getElementById('seriesLayout').addEventListener('click', function () {
+	//	seriesLayout(dicomViewer);
+	//});
 	
 	// "이전" 버튼 이벤트 리스너
     document.getElementById('prevButton').addEventListener('click', () => {
