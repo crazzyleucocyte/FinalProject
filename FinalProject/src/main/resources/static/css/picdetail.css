@@ -110,7 +110,7 @@ body {
 .report-info.show {
 	display: flex;
 	width: 400px;
-	height: 681px;
+	height: 732px;
 	min-height: 300px;
 	overflow: auto;
 	position: absolute;
