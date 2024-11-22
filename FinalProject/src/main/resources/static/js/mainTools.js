@@ -24,23 +24,6 @@ function mainTools() {
 	//	seriesLayout(dicomViewer);
 	//});
 	
-	// "이전" 버튼 이벤트 리스너
-    document.getElementById('prevButton').addEventListener('click', () => {
-		mode = "navigation"
-        if (currentIndex > 0) {
-            currentIndex -= 1;
-            loadAndDisplayImage(currentIndex);
-        }
-    });
-    
-    // "다음" 버튼 이벤트 리스너
-    document.getElementById('nextButton').addEventListener('click', () => {
-		mode = "navigation"
-        if (currentIndex < currentSeriesImages.length - 1) {
-            currentIndex += 1;
-            loadAndDisplayImage(currentIndex);
-        }
-    });
 	
     document.getElementById('angle').addEventListener('click', function () {
 		console.log("mainTools_enableAngle : ",'mainTools_enableAngle')
