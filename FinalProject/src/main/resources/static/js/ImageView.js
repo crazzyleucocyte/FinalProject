@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 */
 
     // 뷰어에서 이미지 로드 및 표시 함수
+			mainTools(dicomViewer); //mainTools.js 호출
     function loadAndDisplayImage(index) {
 		if (index < 0 || index >= currentSeriesImages.length) return;
 		const imageId = currentSeriesImages[index];
@@ -102,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
         .then(image => {
 			cornerstone.displayImage(dicomViewer, image);
-			mainTools(dicomViewer); //mainTools.js 호출
 			console.log("큰화면에 썸네일 로드 성공 !:", imageId);
         })
         .catch(error => console.error("Image load error:", error));
@@ -146,6 +146,19 @@ document.addEventListener("DOMContentLoaded", () => {
 				document.getElementById('playClip').innerText = "자동재생 중지 ! ";
 		}
 	});	
+	
+	// 뷰 줌 인
+	document.getElementById('zoomIn').addEventListener('click', function () {
+		mode='zoom';
+	});
+	
+	// 뷰 줌 아웃
+	//document.getElementById('zoomOut').addEventListener('click', function () {
+	//	mode='zoom';
+	   
+	//});
+	
+	
 /*
     // 뷰 마우스 스크롤로 이미지 탐색
     dicomViewer.addEventListener('wheel', function(event) {

@@ -8,15 +8,6 @@ function mainTools() {
 	cornerstoneTools.external.Hammer = Hammer;
 	cornerstoneTools.init({ showSVGCursors: true }); // cornerstoneTools 초기화(활성화시 커서 변경 true)
 
-	// 뷰 줌 인
-	document.getElementById('zoomIn').addEventListener('click', function () {
-	    zoomIn(dicomViewer);
-	});
-	
-	// 뷰 줌 아웃
-	document.getElementById('zoomOut').addEventListener('click', function () {
-	    zoomOut(dicomViewer);
-	});
 	
 	//밝기 조절
 	document.getElementById('windowLevel').addEventListener('click', function () {
@@ -52,6 +43,7 @@ function mainTools() {
     });
 	
     document.getElementById('angle').addEventListener('click', function () {
+		console.log("mainTools_enableAngle : ",'mainTools_enableAngle')
     	enableAngle(dicomViewer); // enableAngle 호출
     	});
 
