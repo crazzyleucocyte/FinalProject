@@ -19,6 +19,7 @@ function enableMagnify() {
             configuration: {
                 magnifySize,
                 magnificationLevel,
+                
             }
         });
 
@@ -38,13 +39,21 @@ function enableMagnify() {
 
 function moveMagnify(event, dicomElement, magnifySize) {
     const boundingRect = dicomElement.getBoundingClientRect();
-    const mouseX = event.clientX - boundingRect.left;
+    console.log("event.clientX : ",event.clientX)
+    console.log("boundingRect.left : ", boundingRect.left)
+    const mouseX = event.clientX - boundingRect.left - 150;
     const mouseY = event.clientY - boundingRect.top;
+    console.log("mouseX : ",mouseX)
+    console.log("mouseY : ",mouseY)
 
-    cornerstoneTools.setToolState(dicomElement, 'magnify', {
-        center: { x: mouseX, y: mouseY },
-        magnifySize,
-    });
+     cornerstoneTools.addToolState(dicomElement, 'Magnify', {
+            configuration: {
+                magnifySize: magnifySize,
+                magnificationLevel: 2,
+                magnifyPosition: { mouseX, mouseY } // 돋보기 위치 수동 설정
+            }
+        });
+
 
     cornerstone.updateImage(dicomElement);
 }

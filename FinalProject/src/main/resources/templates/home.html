@@ -1310,15 +1310,15 @@
 											if (i % 2 === 1) row.classList.add('odd');
 
 											row.innerHTML = `
-                                    <span>${study.modality}</span>
-                                    <span>${study.studyDesc}</span>
-                                    <span>${study.studyDate}</span>
-                                    <span>${study.reportStatus === 3 ? '읽지않음' : (study.reportStatus === 5 ? '예비판독' : (study.reportStatus === 6 ? '판독' : '알수없음'))}</span>
-                                    <span>${study.seriesCnt}</span>
-                                    <span>${study.verifyFlag === 0 ? '미요청' : (study.verifyFlag === 1 ? '요청완료' : '알 수 없음')}</span>
-                                `;
+							                                    <span>${patient.modality}</span>
+																<span>${patient.studyDesc}</span>
+																<span>${patient.studyDate}</span>
+																<span>${patient.reportStatus === 3 ? '읽지않음' : (patient.reportStatus === 5 ? '예비판독' : (patient.reportStatus === 6 ? '판독' : '알수없음'))}</span>
+																<span>${patient.seriesCnt}</span>
+																<span>${patient.verifyFlag === 0 ? '미요청' : (patient.verifyFlag === 1 ? '요청완료' : '알 수 없음')}</span>
+															`;
 											row.addEventListener('click', function () {
-												location.href = `/study/${study.studyKey}`;
+												location.href = `/series?studyKey=${patient.studyKey}`;
 												// `/series?studyKey=${study.studyKey}`;
 											});
 											historyResultContainer.appendChild(row);
