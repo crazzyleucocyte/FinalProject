@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// 홈 로고 클릭 시 홈으로 이동
 	document.getElementById('home').addEventListener('click', function () {
-		window.location.href = 'http://localhost:8080/home';
+		window.location.href = `http://${serverIp}:8080/home`;
 	});
 
 	axios.get(`/report/${studyKey}`)

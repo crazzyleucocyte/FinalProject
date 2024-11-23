@@ -40,7 +40,7 @@ public class SeriesTabController {
 
 	// 스터디키를 기준으로 시리즈 목록을 조회하여 모델에 추가하고 페이지로 전달
 	@GetMapping("/series")
-    public String getSeriesPage(@RequestParam(name = "studyKey") Long studyKey, Model model) {
+    public String getSeriesPage(@RequestParam(name = "studyKey") Long studyKey,HttpServletRequest request,  Model model) {
 		
 		// 스터디 키 - StudyTab에서 정보 조회 후 모델에 추가
 	    StudyTab study = studyTabService.getStudyByStudyKey(studyKey);
@@ -74,6 +74,10 @@ public class SeriesTabController {
             }
         }
         
+        //메인페이지 이동을 위한 서버의 ip를 가져옴
+        String serverIp = request.getServerName();
+        
+        model.addAttribute("serverIp", serverIp);
         model.addAttribute("seriesList", seriesList);
         model.addAttribute("imagePaths", imagePaths); // `imagePaths` 모델에 추가
         
