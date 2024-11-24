@@ -22,9 +22,6 @@ public class MemberDetail implements UserDetails {
 		// 권한정보 제공
 	    @Override
 	    public Collection<? extends GrantedAuthority> getAuthorities() {
-	        // 특별한 권한 시스템을 사용하지 않을경우
-	        // return Collections.EMPTY_LIST;
-	        // 를 사용하면 된다.
 	    	return Collections.singletonList(new SimpleGrantedAuthority(member.getRole()));
 	    }
 		// 비밀번호 정보 제공

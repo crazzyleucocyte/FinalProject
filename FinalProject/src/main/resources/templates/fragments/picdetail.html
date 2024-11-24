@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,10 +38,10 @@
 			</div>
 			<div class="sidebar-down-item">
 				<!--<button id="setting">설정</button>-->
-				<button type="button", id="logout">로그아웃</button>
+				<button type="button" , id="logout">로그아웃</button>
 			</div>
 		</div>
-		
+
 		<div class="main-content">
 			<!-- 이전, 다음, 윈도우 레벨 등 가로 툴바 버튼 -->
 			<div th:replace="~{fragments/toolBar :: tool-bar}"></div>
@@ -66,7 +66,7 @@
 					<div>Study Description: <span th:text="${study.studyDesc}"></span></div>
 					<div>View Position: <span th:text="${study.viewPosition}"></span></div>
 				</div>
-				
+
 				<!-- 과거 내역 정보 -->
 				<div id="past-info" class="past-info">
 					<span>과거 검사 내역</span>
@@ -74,92 +74,95 @@
 						<label>환자 아이디 : <span th:text="${study.pId}"></span></label> <br>
 						<label>환자 이름 : <span th:text="${study.pName}"> </span></label>
 						<div class="past-info-table">
-                            <div class="past-info-div">
-                                <div class="past-info-header">
-                                    <span>검사<br>장비</span>
-                                    <span>검사 설명</span>
-                                    <span>검사 일시</span>
-                                    <span>판독<br>상태</span>
-                                </div>
-                                <div class="past-info-body" th:each="study : ${pastStudies}">
-                                    <span th:text="${study.modality}"></span>
-                                    <span th:text="${study.studyDesc}"></span>
-                                    <span th:text="${study.studyDate}"></span>
-                                    <span th:text="${study.reportStatus}"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div th:if="${pastStudies == null}">
+							<div class="past-info-div">
+								<div class="past-info-header ">
+									<div>
+										
+									<span>검사<br>장비</span>
+									<span>검사 설명</span>
+									<span>검사 일시</span>
+									<span>판독<br>상태</span>
+									</div>
+								</div>
+								<div class="past-info-body" th:each="study : ${pastStudies}">
+									<a th:href="@{/series(studyKey=${study.studyKey})}">
+										<span th:text="${study.modality}"></span>
+										<span th:text="${study.studyDesc}"></span>
+										<span th:text="${study.studyDate}"></span>
+										<span th:text="${study.reportStatus}"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div th:if="${pastStudies == null}">
 						<p>과거 검사 내역이 없습니다.</p>
-				    </div>
-		        </div>
+					</div>
+				</div>
 
 				<!-- 시리즈 정보 -->
 				<div id="series-info" class="series-info">
 					<span>시리즈 정보</span>
-					<div th:each="series : ${seriesList}" 
-         			     th:if="${series.imageCount > 0}" 
-                         class="thumbnail dicomImage"
-         			 	 th:data-series-key="${series.seriesKey}">
-        			     <span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
-        			</div>
+					<div th:each="series : ${seriesList}" th:if="${series.imageCount > 0}" class="thumbnail dicomImage"
+						th:data-series-key="${series.seriesKey}">
+						<span th:text="${series.seriesKey + '번 시리즈 (' + series.imageCount + '개)'}"></span>
+					</div>
 					<div th:if="${seriesList == null || seriesList.isEmpty()}">
 						<p>시리즈 정보가 없습니다.</p>
 					</div>
 				</div>
-                
-                <!-- 리포트 정보 -->
+
+				<!-- 리포트 정보 -->
 				<div id="report-info" class="report-info">
 					<span>리포트</span>
-						<!-- 코멘트  -->
-						<div class="comment">
-							<label for="comment">[코멘트]</label>
-							<textarea id="comment" rows="10"></textarea>
-						</div>
-						<div class="radiologist1">
-							<label for="radiologist1">판독의</label> <input id="radiologist1"type="text">
-						</div>
-						<div class="report-date">
-							<label for="report-date">판독 날짜 : <input id="report-date">
-							</label>
-						</div>
-						<div class="buttons">
-							<button id="save-report">저장</button>
-							<button id="delete-report">판독 지우기</button>
-						</div>
-				</div>  
-                
-                <!-- 이미지 뷰 -->
+					<!-- 코멘트  -->
+					<div class="comment">
+						<label for="comment">[코멘트]</label>
+						<textarea id="comment" rows="10"></textarea>
+					</div>
+					<div class="radiologist1">
+						<label for="radiologist1">판독의</label> <input id="radiologist1" type="text">
+					</div>
+					<div class="report-date">
+						<label for="report-date">판독 날짜 : <input id="report-date">
+						</label>
+					</div>
+					<div class="buttons">
+						<button id="save-report">저장</button>
+						<button id="delete-report">판독 지우기</button>
+					</div>
+				</div>
+
+				<!-- 이미지 뷰 -->
 				<div id="image-viewer" class="image-viewer"></div>
 			</div>
 		</div>
 	</div>
-	
+
 	<script th:inline="javascript">
-	/*<![CDATA[*/
-	const studyKey = /*[[${studyKey}]]*/ "";
-	const serverIp = /*[[${serverIp}]]*/ "";
-	const imagePaths = /*[[${imagePaths}]]*/ []; 
-	const imageUid=""; 
-	
-	//seriesImagePaths 안써서 지움
-	//const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 
-	/*]]>*/
-	console.log("studyKey 초기화 확인:", studyKey);
-	console.log("imagePaths 초기화 확인:", imagePaths);
+		/*<![CDATA[*/
+		const studyKey = /*[[${studyKey}]]*/ "";
+		const serverIp = /*[[${serverIp}]]*/ "";
+		const imagePaths = /*[[${imagePaths}]]*/[];
+		const imageUid = "";
+
+		//seriesImagePaths 안써서 지움
+		//const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 
+		/*]]>*/
+		console.log("studyKey 초기화 확인:", studyKey);
+		console.log("imagePaths 초기화 확인:", imagePaths);
 	//console.log("seriesImagePaths 초기화 확인:", seriesImagePaths);
 	</script>
-	
+
 	<!-- 썸네일 js -->
 	<script src="/js/seriesPage.js"></script>
 	<!-- 이미지 뷰 js -->
 	<script src="/js/ImageView.js"></script>
 	<!-- 리포트 js -->
 	<script src="/js/report.js"></script>
-	
+
 	<!-- 툴바 js, 메인툴전부 부터  -->
-	<script src="/js/mainTools.js"></script>	
+	<script src="/js/mainTools.js"></script>
 	<script src="/js/tools/zoom.js"></script>
 	<script src="/js/tools/windowLevel.js"></script>
 	<script src="/js/tools/invert.js"></script>
@@ -173,6 +176,7 @@
 	<script src="/js/tools/rotate.js"></script>
 	<script src="/js/tools/compare.js"></script>
 	<script src="/js/tools/deactivateAllTools.js"></script>
-	
+
 </body>
+
 </html>

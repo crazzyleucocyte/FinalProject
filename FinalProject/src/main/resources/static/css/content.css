@@ -37,14 +37,11 @@
 	border-bottom: 1px solid #2A3F33;
 }
 
-/* 과거 검사 짝수 행의 span 요소에만 배경색 바꾸기  */
-#past-info .past-info-table .past-info-body:nth-child(even) span {
-    background-color: hsl(180, 20%, 28%);
-}
+
 
 .series-info.show {
     width: 120px;
-    height: 732px;
+    height: 792px;
 }
 
 .series-info-list {
