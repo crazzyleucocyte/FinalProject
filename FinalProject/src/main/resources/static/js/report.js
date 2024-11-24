@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById('home').addEventListener('click', function () {
 		window.location.href = `http://${serverIp}:8080/home`;
 	});
+	document.getElementById('logout').addEventListener('click', function () {
+		window.location.href = `http://${serverIp}:8080/logout`;
+	});
 
 	axios.get(`/report/${studyKey}`)
 	.then(response => {

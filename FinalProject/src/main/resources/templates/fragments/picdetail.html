@@ -36,10 +36,10 @@
 				<button id="toggle-series-btn">시리즈</button>
 				<button id="toggle-report-btn">리포트</button>
 			</div>
-			<!-- <div class="sidebar-down-item">
-				<button id="setting">설정</button>
-				<button>로그아웃</button>
-			</div> -->
+			<div class="sidebar-down-item">
+				<!--<button id="setting">설정</button>-->
+				<button type="button", id="logout">로그아웃</button>
+			</div>
 		</div>
 		
 		<div class="main-content">
@@ -139,7 +139,9 @@
 	<script th:inline="javascript">
 	/*<![CDATA[*/
 	const studyKey = /*[[${studyKey}]]*/ "";
+	const serverIp = /*[[${serverIp}]]*/ "";
 	const imagePaths = /*[[${imagePaths}]]*/ []; 
+	const imageUid=""; 
 	
 	//seriesImagePaths 안써서 지움
 	//const seriesImagePaths = /*[[${seriesImagePaths}]]*/ []; 

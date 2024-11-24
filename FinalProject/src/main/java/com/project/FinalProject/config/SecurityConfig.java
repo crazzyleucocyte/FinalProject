@@ -41,15 +41,14 @@ public class SecurityConfig {
 				.cors((cors) -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
                 		.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                		.requestMatchers("/series/**").permitAll()
-                		.requestMatchers("/search/**").permitAll()
-                		.requestMatchers("/series").permitAll()
-                		.requestMatchers("/search").permitAll()
+//                		.requestMatchers("/series/**").permitAll()
+//                		.requestMatchers("/search/**").permitAll()
+//                		.requestMatchers("/series").permitAll()
+//                		.requestMatchers("/search").permitAll()
                 		.requestMatchers("/css/**","/js/**","/img/**").permitAll()
-						.requestMatchers(
-								"/tosignup").permitAll()
+						.requestMatchers("/tosignup").permitAll()
                 		.requestMatchers("/signup").permitAll()
-                		.requestMatchers("/home").permitAll()
+//                		.requestMatchers("/home").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
