@@ -29,11 +29,12 @@ function setupImageGridSelector(gridSelector) {
             gridOption.classList.add('grid-option');
             gridOption.dataset.row = row;
             gridOption.dataset.col = col;
-            gridOption.style.background = '#ccc';
-            gridOption.style.border = '1px solid #000';
+            gridOption.style.background = '#3D5C5C';
+            gridOption.style.boxShadow='0px 0px 3px 0px black';
             gridOption.style.width = '20px';
             gridOption.style.height = '20px';
             gridOption.style.cursor = 'pointer';
+            gridOption.style.margin = '5px';
 
             // 호버 시 강조
             gridOption.addEventListener('mouseover', () => highlightGridSelection(row, col));
@@ -109,6 +110,6 @@ function highlightGridSelection(rows, cols) {
     gridItems.forEach(item => {
         const itemRow = parseInt(item.dataset.row);
         const itemCol = parseInt(item.dataset.col);
-        item.style.background = (itemRow <= rows && itemCol <= cols) ? '#007BFF' : '#ccc';
+        item.style.background = (itemRow <= rows && itemCol <= cols) ? '#25403C' : '#3D5C5C';
     });
 }
