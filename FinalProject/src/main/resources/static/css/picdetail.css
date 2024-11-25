@@ -22,7 +22,7 @@ body {
 	display: flex;
 	height: 100vh;
 	width: 85%;
-	margin: auto;
+	margin: 0 40px;
 }
 
 /* 정보, 과거내역, 시리즈, 리포트, 설정, 로그아웃 세로버튼 */
