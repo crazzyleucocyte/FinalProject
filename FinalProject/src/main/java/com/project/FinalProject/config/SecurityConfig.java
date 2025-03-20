@@ -37,9 +37,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-        		.csrf((csrf) -> csrf.disable())
-				.cors((cors) -> cors.disable())
-                .authorizeHttpRequests(auth -> auth
+        		.csrf((csrf) -> csrf.disable()) //웹보안
+				.cors((cors) -> cors.disable()) //웹보안
+                .authorizeHttpRequests(auth -> auth //권한설정
                 		.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 		.requestMatchers("/css/**","/js/**","/img/**").permitAll()
 						.requestMatchers("/tosignup").permitAll()
