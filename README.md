@@ -77,8 +77,13 @@ Medipacs는 의료진이 환자의 검사 기록과 DICOM 시리즈 이미지를
 
 
 > 📄 검사 리스트 및 검색 기능  
-> ![main](./assets/search1.gif)
-> ![main](./assets/search2.gif)
+> ![main](./assets/search1.gif)  
+> ☑️ **날짜 기반 검색**  
+> 사용자는 원하는 날짜 또는 기간을 달력 UI를 통해 지정하여, 해당 기간 내의 모든 검사 기록을 빠르게 조회할 수 있습니다.
+
+> ![main](./assets/search2.gif)  
+> ☑️ **조건 기반 검색**  
+> 환자 ID, 이름, 검사 장비, 판독 상태, Verify 여부 등 다양한 조건을 조합해 **정밀한 필터링**이 가능합니다.
 
 ---
 
